@@ -1,0 +1,118 @@
+@using InternProject.Web.Models.Common.Modals
+@model InternProject.Web.Models.Products.ProductListViewModel
+@{
+    Layout = null;
+}
+<div class="modal fade" id="ProductCreateModal" tabindex="-1" role="dialog" aria-labelledby="ProductCreateModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateProduct")))
+            <form name="productCreateForm" role="form" class="form-horizontal">
+                <div class="modal-body">
+                    <!-- Row 1: Product Name & SKU -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row required mb-3">
+                                <label class="col-md-12 col-form-label font-weight-bold" for="product-name">@L("Name")</label>
+                                <div class="col-md-12">
+                                    <input id="product-name" type="text" name="Name" class="form-control font-weight-bold" required maxlength="200" placeholder="@L("Name")">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row mb-3">
+                                <label class="col-md-12 col-form-label" for="product-sku">@L("Sku")</label>
+                                <div class="col-md-12">
+                                    <input id="product-sku" type="text" name="Sku" class="form-control" maxlength="50" placeholder="SKU001">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Category & Unit -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row mb-3">
+                                <label class="col-md-12 col-form-label" for="product-category">@L("Category")</label>
+                                <div class="col-md-12">
+                                    <select id="product-category" name="CategoryId" class="form-select custom-select-filter">
+                                        <option value="">@L("SelectCategory")</option>
+                                        @foreach (var cat in Model.Categories)
+                                        {
+                                            <option value="@cat.Id">@cat.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row mb-3">
+                                <label class="col-md-12 col-form-label" for="product-unit">@L("Unit")</label>
+                                <div class="col-md-12">
+                                    <input id="product-unit" type="text" name="Unit" class="form-control" maxlength="20" placeholder="Cái, Chai, Lon, Hộp...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Cost Price & Sale Price -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row mb-3">
+                                <label class="col-md-12 col-form-label" for="product-cost-price">@L("CostPrice")</label>
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <input id="product-cost-price" type="number" name="CostPrice" class="form-control" min="0" value="0" step="any">
+                                        <span class="input-group-text">đ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row mb-3">
+                                <label class="col-md-12 col-form-label" for="product-sale-price">@L("SalePrice")</label>
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <input id="product-sale-price" type="number" name="SalePrice" class="form-control" min="0" value="0" step="any">
+                                        <span class="input-group-text">đ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Stock Quantity & Min Stock -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row mb-3">
+                                <label class="col-md-12 col-form-label" for="product-stock-qty">@L("StockQuantity")</label>
+                                <div class="col-md-12">
+                                    <input id="product-stock-qty" type="number" name="StockQuantity" class="form-control" min="0" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row mb-3">
+                                <label class="col-md-12 col-form-label" for="product-min-stock">@L("MinStock")</label>
+                                <div class="col-md-12">
+                                    <input id="product-min-stock" type="number" name="MinStock" class="form-control" min="0" value="10">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 5: Status -->
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <div class="form-check">
+                                <input id="product-is-active" type="checkbox" name="IsActive" class="form-check-input" value="true" checked>
+                                <label class="form-check-label" for="product-is-active">@L("ActiveProducts")</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+    </div>
+</div>

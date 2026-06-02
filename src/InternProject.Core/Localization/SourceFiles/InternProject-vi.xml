@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="vi">
+  <texts>
+    <text name="AppName" value="Quản lý tạp hóa" />
+    <text name="HomePage" value="Trang chủ" />
+    <text name="About" value="Giới thiệu" />
+    <text name="WelcomeMessage" value="Chào mừng bạn đến với Cửa hàng Tạp Hóa!" />
+
+    <text name="FormIsNotValidMessage" value="Biểu mẫu không hợp lệ. Vui lòng kiểm tra và sửa lỗi." />
+    <text name="TenantNameCanNotBeEmpty" value="Tên chi nhánh không được để trống" />
+
+    <text name="InvalidUserNameOrPassword" value="Tên tài khoản hoặc mật khẩu không chính xác" />
+    <text name="ThereIsNoTenantDefinedWithName{0}" value="Không có chi nhánh nào được định nghĩa với tên {0}" />
+    <text name="TenantIsNotActive" value="Chi nhánh {0} chưa được kích hoạt." />
+    <text name="UserIsNotActiveAndCanNotLogin" value="Người dùng {0} chưa được kích hoạt và không thể đăng nhập." />
+    <text name="UserEmailIsNotConfirmedAndCanNotLogin">Địa chỉ email của bạn chưa được xác nhận. Bạn không thể đăng nhập.</text>
+    <text name="UserLockedOutMessage">Tài khoản này tạm thời đã bị khóa. Vui lòng thử lại sau.</text>
+    <text name="PleaseEnterLoginInformation" value="Vui lòng nhập thông tin đăng nhập" />
+    <text name="TenancyName" value="Tên chi nhánh (Tenancy)" />
+    <text name="UserNameOrEmail" value="Tên đăng nhập hoặc Email" />
+    <text name="Password" value="Mật khẩu" />
+    <text name="RememberMe" value="Ghi nhớ đăng nhập" />
+    <text name="LogIn" value="Đăng nhập" />
+
+    <text name="LoginFailed" value="Đăng nhập thất bại!" />
+
+    <text name="NameSurname" value="Họ và tên" />
+    <text name="UserName" value="Tên tài khoản" />
+    <text name="Name" value="Tên" />
+    <text name="Surname" value="Họ" />
+    <text name="EmailAddress" value="Địa chỉ Email" />
+
+    <text name="Tenants" value="Chi nhánh" />
+    <text name="SavedSuccessfully" value="Lưu thành công" />
+    <text name="CreateNewTenant" value="Tạo chi nhánh mới" />
+    <text name="AdminEmailAddress" value="Email quản trị" />
+    <text name="Save" value="Lưu lại" />
+    <text name="Cancel" value="Hủy bỏ" />
+    <text name="TenantName_Regex_Description" value="Tên chi nhánh phải từ 2 ký tự, bắt đầu bằng chữ cái và chỉ chứa chữ cái, số, gạch ngang hoặc gạch dưới." />
+    <text name="DefaultPasswordIs" value="Mật khẩu mặc định là {0}" />
+    <text name="CanBeEmptyToLoginAsHost" value="Để trống để đăng nhập với tư cách Host." />
+    <text name="Register" value="Đăng ký" />
+    <text name="OrLoginWith" value="Hoặc đăng nhập bằng" />
+    <text name="WaitingForActivationMessage" value="Tài khoản của bạn đang chờ quản trị viên kích hoạt." />
+    <text name="TenantSelection" value="Chọn chi nhánh" />
+    <text name="TenantSelection_Detail" value="Vui lòng chọn một trong các chi nhánh sau." />
+    <text name="Logout" value="Đăng xuất" />
+
+    <text name="RegisterFormUserNameInvalidMessage">Vui lòng không sử dụng định dạng email làm tên tài khoản.</text>
+
+    <text name="DatabaseConnectionString" value="Chuỗi kết nối Cơ sở dữ liệu" />
+    <text name="Users" value="Người dùng" />
+    <text name="IsActive" value="Trạng thái kích hoạt" />
+    <text name="FullName" value="Họ tên đầy đủ" />
+    <text name="CreateNewUser" value="Thêm người dùng mới" />
+    <text name="Yes" value="Có" />
+    <text name="No" value="Không" />
+    <text name="Optional" value="Không bắt buộc" />
+    <text name="LeaveEmptyToSwitchToHost">Để trống để chuyển sang quản lý Host</text>
+
+    <text name="CurrentTenant">Chi nhánh hiện tại</text>
+    <text name="NotSelected">Chưa chọn</text>
+    <text name="Change">Thay đổi</text>
+    <text name="ChangeTenant">Đổi chi nhánh</text>
+
+    <text name="MultiLevelMenu">Menu nhiều cấp</text>
+    <text name="Back" value="Quay lại" />
+    <text name="SuccessfullyRegistered">Đăng ký thành công</text>
+    <text name="WaitingForEmailActivation">Địa chỉ email của bạn cần được xác nhận.</text>
+    <text name="Roles" value="Vai trò" />
+    <text name="DisplayName" value="Tên hiển thị" />
+
+    <text name="Edit" value="Sửa" />
+    <text name="Delete" value="Xóa" />
+
+    <text name="CreateNewRole" value="Tạo vai trò mới" />
+    <text name="RoleName" value="Tên vai trò" />
+    <text name="Actions" value="Hành động" />
+
+    <text name="CouldNotCompleteLoginOperation" value="Không thể hoàn tất đăng nhập. Vui lòng thử lại sau." />
+
+    <text name="CouldNotValidateExternalUser" value="Không thể xác thực người dùng ngoài" />
+    <text name="EditRole" value="Chỉnh sửa vai trò" />
+    <text name="EditTenant" value="Chỉnh sửa chi nhánh" />
+    <text name="EditUser" value="Chỉnh sửa người dùng" />
+    <text name="TenantIdIsNotActive{0}" value="Chi nhánh Id {0} chưa được kích hoạt" />
+    <text name="UnknownTenantId{0}" value="Không xác định được chi nhánh Id {0}" />
+	
+    <text name="ThisFieldIsRequired" value="Trường này là bắt buộc" />
+    <text name="PleaseWait" value="Vui lòng đợi..." />
+    <text name="Administration" value="Quản trị hệ thống" />
+    <text name="ClearAll" value="Xóa tất cả" />
+    <text name="ClearOthers" value="Xóa phần khác" />
+    <text name="LabelOptions" value="Cài đặt nhãn" />
+    <text name="Permissions" value="Quyền hạn" />
+    <text name="RoleDescription" value="Mô tả vai trò" />
+    <text name="Refresh" value="Tải lại" />
+    <text name="Create" value="Thêm mới" />
+    <text name="UserDetails" value="Chi tiết người dùng" />
+    <text name="UserRoles" value="Vai trò người dùng" />
+    <text name="ConfirmPassword" value="Xác nhận mật khẩu" />
+    <text name="Version" value="Phiên bản" />
+    <text name="On" value="Bật" />
+    <text name="Off" value="Tắt" />
+    <text name="AreYouSureWantToDelete" value="Bạn có chắc chắn muốn xóa {0}?" />
+    <text name="StartTyping" value="Bắt đầu nhập" />
+    <text name="Skins" value="Giao diện" />
+    <text name="Settings" value="Cài đặt" />
+    <text name="Filter" value="Bộ lọc" />
+    <text name="CurrentPassword" value="Mật khẩu hiện tại" />
+    <text name="NewPassword" value="Mật khẩu mới" />
+    <text name="ConfirmNewPassword" value="Xác nhận mật khẩu mới" />
+    <text name="PasswordsDoNotMatch" value="Mật khẩu xác nhận không khớp" />
+    <text name="PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber" value="Mật khẩu phải tối thiểu 8 ký tự, bao gồm chữ thường, chữ hoa và số" />
+    <text name="UserDeleteWarningMessage" value="Người dùng {0} sẽ bị xóa khỏi hệ thống." />
+    <text name="RoleDeleteWarningMessage" value="Vai trò {0} sẽ bị xóa và hủy gán cho tất cả tài khoản liên quan." />
+    <text name="TenantDeleteWarningMessage" value="Chi nhánh {0} sẽ bị gỡ bỏ." />
+    <text name="SearchWithThreeDot" value="Tìm kiếm..." />
+    <text name="PleaseEnterAtLeastNCharacter" value="Vui lòng nhập tối thiểu {0} ký tự" />
+    <text name="PleaseEnterNoMoreThanNCharacter" value="Vui lòng nhập không quá {0} ký tự" />
+    <text name="InvalidEmailAddress" value="Địa chỉ email không đúng định dạng" />
+    <text name="InvalidPattern" value="Giá trị không hợp lệ" />
+    <text name="PairsDoNotMatch" value="Dữ liệu không khớp" />
+    <text name="All" value="Tất cả" />
+    <text name="TotalRecordsCount" value="Tổng cộng: {0}" />
+    <text name="Search" value="Tìm kiếm" />
+    <text name="Clear" value="Xóa bộ lọc" />
+    <text name="ResetPasswordStepOneInfo" value="1. Nhập mật khẩu quản trị của bạn" />
+    <text name="ResetPasswordStepTwoInfo" value="2. Sao chép mật khẩu ngẫu nhiên này để gửi cho người dùng" />
+    <text name="UsersActivation" value="Kích hoạt tài khoản" />
+
+    <!-- Khách hàng -->
+    <text name="Customers" value="Khách hàng" />
+    <text name="Code" value="Mã" />
+    <text name="Phone" value="Số điện thoại" />
+    <text name="Address" value="Địa chỉ" />
+    <text name="QuickAddCustomer" value="Thêm nhanh khách hàng" />
+    <text name="CustomerDirectory" value="Danh bạ khách hàng" />
+    <text name="SearchCustomers" value="Tìm kiếm khách hàng" />
+    <text name="CreateCustomer" value="Thêm khách hàng" />
+    <text name="EditCustomer" value="Sửa thông tin khách hàng" />
+    <text name="DeleteCustomer" value="Xóa khách hàng" />
+    <text name="Suppliers" value="Nhà cung cấp" />
+    <text name="CreateSupplier" value="Thêm nhà cung cấp" />
+    <text name="DeleteSupplier" value="Xóa nhà cung cấp" />
+    <text name="EditSupplier" value="Sửa thông tin nhà cung cấp" />
+    <text name="SuccessfullyDeleted" value="Đã xóa thành công" />
+
+    <!-- Customer Dashboard -->
+    <text name="ManageCustomers" value="Quản lý khách hàng" />
+    <text name="ManageCustomersSubtitle" value="Quản lý danh sách và trạng thái hoạt động của khách hàng" />
+    <text name="TotalCustomers" value="Tổng khách hàng" />
+    <text name="ActiveCustomers" value="Đang hoạt động" />
+    <text name="InactiveCustomers" value="Tạm khóa" />
+    <text name="AllStatuses" value="Tất cả trạng thái" />
+    <text name="SearchPlaceholder" value="Tìm kiếm theo tên, số điện thoại, mã KH..." />
+    <text name="CustomerCode" value="Mã KH" />
+    <text name="CustomerName" value="Tên khách hàng" />
+    <!-- Categories -->
+    <text name="Categories" value="Danh mục" />
+    <text name="ManageCategories" value="Quản lý danh mục" />
+    <text name="ManageCategoriesSubtitle" value="Quản lý phân loại danh mục và trạng thái hoạt động" />
+    <text name="CreateCategory" value="Thêm danh mục" />
+    <text name="EditCategory" value="Sửa danh mục" />
+    <text name="DeleteCategory" value="Xóa danh mục" />
+    <text name="TotalCategories" value="Tổng danh mục" />
+
+    <!-- Products -->
+    <text name="Products" value="Sản phẩm" />
+    <text name="ManageProducts" value="Quản lý sản phẩm" />
+    <text name="ManageProductsSubtitle" value="Quản lý danh sách, số lượng tồn kho và giá bán sản phẩm" />
+    <text name="CreateProduct" value="Thêm sản phẩm" />
+    <text name="EditProduct" value="Sửa sản phẩm" />
+    <text name="DeleteProduct" value="Xóa sản phẩm" />
+    <text name="TotalProducts" value="Tổng sản phẩm" />
+    <text name="LowStockWarning" value="Sắp hết hàng" />
+    <text name="ActiveProducts" value="Đang kinh doanh" />
+    <text name="InactiveProducts" value="Ngừng kinh doanh" />
+    <text name="Sku" value="Mã SP / SKU" />
+    <text name="CostPrice" value="Giá vốn" />
+    <text name="SalePrice" value="Giá bán" />
+    <text name="StockQuantity" value="Tồn kho" />
+    <text name="MinStock" value="Tồn tối thiểu" />
+    <text name="Unit" value="Đơn vị tính" />
+    <text name="Category" value="Danh mục" />
+    <text name="SelectCategory" value="Chọn danh mục" />
+    <text name="SearchProductsPlaceholder" value="Tìm kiếm theo tên sản phẩm, SKU..." />
+    <text name="ProductDetails" value="Chi tiết sản phẩm" />
+    <text name="Description" value="Mô tả" />
+    <text name="Status" value="Trạng thái" />
+    <text name="SearchCategoriesPlaceholder" value="Tìm kiếm theo tên danh mục, mô tả..." />
+    <text name="AllCategories" value="Tất cả danh mục" />
+    <text name="OutOfStock" value="Hết hàng" />
+  </texts>
+</localizationDictionary>
+

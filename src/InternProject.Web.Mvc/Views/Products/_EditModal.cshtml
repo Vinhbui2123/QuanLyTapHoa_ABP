@@ -1,0 +1,123 @@
+@using InternProject.Web.Models.Common.Modals
+@using InternProject.Web.Models.Products
+@model EditProductModalViewModel
+@{
+    Layout = null;
+}
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditProduct")))
+<form name="ProductEditForm" role="form" class="form-horizontal">
+    <input type="hidden" name="Id" value="@Model.Product.Id" />
+    <div class="modal-body">
+        <!-- Row 1: Product Name & SKU -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row required mb-3">
+                    <label class="col-md-12 col-form-label font-weight-bold" for="ProductEditName">@L("Name")</label>
+                    <div class="col-md-12">
+                        <input id="ProductEditName" type="text" class="form-control font-weight-bold" name="Name" value="@Model.Product.Name" required maxlength="200">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row mb-3">
+                    <label class="col-md-12 col-form-label" for="ProductEditSku">@L("Sku")</label>
+                    <div class="col-md-12">
+                        <input id="ProductEditSku" type="text" class="form-control" name="Sku" value="@Model.Product.Sku" maxlength="50">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2: Category & Unit -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row mb-3">
+                    <label class="col-md-12 col-form-label" for="ProductEditCategory">@L("Category")</label>
+                    <div class="col-md-12">
+                        <select id="ProductEditCategory" name="CategoryId" class="form-select custom-select-filter">
+                            <option value="">@L("SelectCategory")</option>
+                            @foreach (var cat in Model.Categories)
+                            {
+                                if (Model.Product.CategoryId == cat.Id)
+                                {
+                                    <option value="@cat.Id" selected="selected">@cat.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@cat.Id">@cat.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row mb-3">
+                    <label class="col-md-12 col-form-label" for="ProductEditUnit">@L("Unit")</label>
+                    <div class="col-md-12">
+                        <input id="ProductEditUnit" type="text" class="form-control" name="Unit" value="@Model.Product.Unit" maxlength="20">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 3: Cost Price & Sale Price -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row mb-3">
+                    <label class="col-md-12 col-form-label" for="ProductEditCostPrice">@L("CostPrice")</label>
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <input id="ProductEditCostPrice" type="number" class="form-control" name="CostPrice" value="@Model.Product.CostPrice" min="0" step="any">
+                            <span class="input-group-text">đ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row mb-3">
+                    <label class="col-md-12 col-form-label" for="ProductEditSalePrice">@L("SalePrice")</label>
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <input id="ProductEditSalePrice" type="number" class="form-control" name="SalePrice" value="@Model.Product.SalePrice" min="0" step="any">
+                            <span class="input-group-text">đ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 4: Stock Quantity & Min Stock -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row mb-3">
+                    <label class="col-md-12 col-form-label" for="ProductEditStockQuantity">@L("StockQuantity")</label>
+                    <div class="col-md-12">
+                        <input id="ProductEditStockQuantity" type="number" class="form-control" name="StockQuantity" value="@Model.Product.StockQuantity" min="0">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row mb-3">
+                    <label class="col-md-12 col-form-label" for="ProductEditMinStock">@L("MinStock")</label>
+                    <div class="col-md-12">
+                        <input id="ProductEditMinStock" type="number" class="form-control" name="MinStock" value="@Model.Product.MinStock" min="0">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 5: Status -->
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <div class="form-check">
+                    <input id="ProductEditIsActive" type="checkbox" name="IsActive" class="form-check-input" value="true" @(Model.Product.IsActive ? "checked" : "") />
+                    <label class="form-check-label" for="ProductEditIsActive">@L("ActiveProducts")</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+</form>
+
+<script src="~/view-resources/Views/Products/_EditModal.js" asp-append-version="true"></script>

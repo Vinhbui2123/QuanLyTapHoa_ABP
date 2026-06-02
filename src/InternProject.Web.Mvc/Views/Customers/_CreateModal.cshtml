@@ -1,0 +1,50 @@
+@using InternProject.Web.Models.Common.Modals
+@model InternProject.Web.Models.Customers.CustomerListViewModel
+@{
+    Layout = null;
+}
+<div class="modal fade" id="CustomerCreateModal" tabindex="-1" role="dialog" aria-labelledby="CustomerCreateModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateNewCustomer")))
+            <form name="customerCreateForm" role="form" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="customer-code">@L("Code")</label>
+                        <div class="col-md-9">
+                            <input id="customer-code" type="text" name="Code" class="form-control" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="customer-name">@L("Name")</label>
+                        <div class="col-md-9">
+                            <input id="customer-name" type="text" name="Name" class="form-control" required maxlength="128">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="customer-phone">@L("Phone")</label>
+                        <div class="col-md-9">
+                            <input id="customer-phone" type="text" name="Phone" class="form-control" maxlength="32">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="customer-address">@L("Address")</label>
+                        <div class="col-md-9">
+                            <textarea id="customer-address" name="Address" class="form-control" maxlength="512"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">@L("IsActive")</label>
+                        <div class="col-md-9">
+                            <div class="form-check mt-2">
+                                <input id="customer-is-active" type="checkbox" name="IsActive" class="form-check-input" value="true" checked>
+                                <label class="form-check-label" for="customer-is-active">@L("Active")</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+    </div>
+</div>
