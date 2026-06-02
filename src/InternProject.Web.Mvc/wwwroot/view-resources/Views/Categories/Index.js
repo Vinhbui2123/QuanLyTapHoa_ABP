@@ -29,7 +29,10 @@
         targets: 0,
         data: "name",
         render: (data, type, row) => {
-          return `<a href="javascript:;" class="category-name-link edit-category" data-category-id="${row.id}" data-bs-toggle="modal" data-bs-target="#CategoryEditModal"><strong>${data}</strong></a>`;
+          if (abp.auth.hasPermission('Pages.Categories.Edit')) {
+            return `<a href="javascript:;" class="category-name-link edit-category" data-category-id="${row.id}" data-bs-toggle="modal" data-bs-target="#CategoryEditModal"><strong>${data}</strong></a>`;
+          }
+          return `<strong>${data}</strong>`;
         }
       },
       {
@@ -53,11 +56,17 @@
         data: null,
         orderable: false,
         render: (data, type, row) => {
-          return [
-            `<a href="javascript:;" class="category-action-detail edit-category mr-2" data-category-id="${row.id}" data-bs-toggle="modal" data-bs-target="#CategoryEditModal">${l("Edit")}</a>`,
-            `<span class="text-muted">|</span>`,
-            `<a href="javascript:;" class="text-danger ml-2 delete-category" data-category-id="${row.id}" data-category-name="${row.name}">${l("Delete")}</a>`
-          ].join(" ");
+          var actions = [];
+          if (abp.auth.hasPermission('Pages.Categories.Edit')) {
+            actions.push(`<a href="javascript:;" class="category-action-detail edit-category mr-2" data-category-id="${row.id}" data-bs-toggle="modal" data-bs-target="#CategoryEditModal">${l("Edit")}</a>`);
+          }
+          if (abp.auth.hasPermission('Pages.Categories.Delete')) {
+            if (actions.length > 0) {
+              actions.push(`<span class="text-muted">|</span>`);
+            }
+            actions.push(`<a href="javascript:;" class="text-danger ml-2 delete-category" data-category-id="${row.id}" data-category-name="${row.name}">${l("Delete")}</a>`);
+          }
+          return actions.join(" ");
         }
       }
     ],

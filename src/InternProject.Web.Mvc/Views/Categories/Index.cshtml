@@ -1,4 +1,5 @@
 @using InternProject.Web.Startup
+@using InternProject.Authorization
 @model InternProject.Web.Models.Categories.CategoryListViewModel
 @{
     ViewBag.Title = L("Categories");
@@ -341,10 +342,13 @@
             <p class="categories-subtitle m-0">@L("ManageCategoriesSubtitle")</p>
         </div>
         <div>
-            <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#CategoryCreateModal" class="btn btn-add-category">
-                <i class="fas fa-plus mr-2"></i>
-                @L("CreateCategory")
-            </a>
+            @if (IsGranted(PermissionNames.Pages_Categories_Create))
+            {
+                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#CategoryCreateModal" class="btn btn-add-category">
+                    <i class="fas fa-plus mr-2"></i>
+                    @L("CreateCategory")
+                </a>
+            }
         </div>
     </div>
 

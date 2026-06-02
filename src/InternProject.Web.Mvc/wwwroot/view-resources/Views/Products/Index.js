@@ -34,7 +34,10 @@
         targets: 1,
         data: "name",
         render: (data, type, row) => {
-          return `<a href="javascript:;" class="product-name-link edit-product" data-product-id="${row.id}" data-bs-toggle="modal" data-bs-target="#ProductEditModal"><strong>${data}</strong></a>`;
+          if (abp.auth.hasPermission('Pages.Products.Edit')) {
+            return `<a href="javascript:;" class="product-name-link edit-product" data-product-id="${row.id}" data-bs-toggle="modal" data-bs-target="#ProductEditModal"><strong>${data}</strong></a>`;
+          }
+          return `<strong>${data}</strong>`;
         }
       },
       {
@@ -97,11 +100,17 @@
         data: null,
         orderable: false,
         render: (data, type, row) => {
-          return [
-            `<a href="javascript:;" class="product-action-detail edit-product mr-2" data-product-id="${row.id}" data-bs-toggle="modal" data-bs-target="#ProductEditModal">${l("Edit")}</a>`,
-            `<span class="text-muted">|</span>`,
-            `<a href="javascript:;" class="text-danger ml-2 delete-product" data-product-id="${row.id}" data-product-name="${row.name}">${l("Delete")}</a>`
-          ].join(" ");
+          var actions = [];
+          if (abp.auth.hasPermission('Pages.Products.Edit')) {
+            actions.push(`<a href="javascript:;" class="product-action-detail edit-product mr-2" data-product-id="${row.id}" data-bs-toggle="modal" data-bs-target="#ProductEditModal">${l("Edit")}</a>`);
+          }
+          if (abp.auth.hasPermission('Pages.Products.Delete')) {
+            if (actions.length > 0) {
+              actions.push(`<span class="text-muted">|</span>`);
+            }
+            actions.push(`<a href="javascript:;" class="text-danger ml-2 delete-product" data-product-id="${row.id}" data-product-name="${row.name}">${l("Delete")}</a>`);
+          }
+          return actions.join(" ");
         }
       }
     ],

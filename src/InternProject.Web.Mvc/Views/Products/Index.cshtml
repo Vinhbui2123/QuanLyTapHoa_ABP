@@ -1,4 +1,5 @@
 @using InternProject.Web.Startup
+@using InternProject.Authorization
 @model InternProject.Web.Models.Products.ProductListViewModel
 @{
     ViewBag.Title = L("Products");
@@ -364,10 +365,13 @@
             <p class="products-subtitle m-0">@L("ManageProductsSubtitle")</p>
         </div>
         <div>
-            <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#ProductCreateModal" class="btn btn-add-product">
-                <i class="fas fa-plus mr-2"></i>
-                @L("CreateProduct")
-            </a>
+            @if (IsGranted(PermissionNames.Pages_Products_Create))
+            {
+                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#ProductCreateModal" class="btn btn-add-product">
+                    <i class="fas fa-plus mr-2"></i>
+                    @L("CreateProduct")
+                </a>
+            }
         </div>
     </div>
 
