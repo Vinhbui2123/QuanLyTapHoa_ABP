@@ -2820,3 +2820,141 @@ DEBUG 2026-06-02 10:32:11,400 [15   ] Abp.BackgroundJobs.BackgroundJobManager  -
 DEBUG 2026-06-02 10:32:11,400 [15   ] , Culture=neutral, PublicKeyToken=null]] - WaitToStop background worker: Abp.Authorization.Users.UserTokenExpirationWorker`2[[InternProject.MultiTenancy.Tenant, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[InternProject.Authorization.Users.User, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
 DEBUG 2026-06-02 10:32:11,400 [15   ] Abp.Modules.AbpModuleManager             - Shutting down completed.
 INFO  2026-06-02 10:32:11,400 [15   ] Microsoft.Hosting.Lifetime               - Application is shutting down...
+DEBUG 2026-06-02 15:50:51,266 [2    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2026-06-02 15:50:51,277 [2    ] Abp.Modules.AbpModuleManager             - Found 15 ABP modules in total.
+DEBUG 2026-06-02 15:50:51,289 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.Web.Host.Startup.InternProjectWebHostModule, InternProject.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-02 15:50:51,290 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectWebCoreModule, InternProject.Web.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-02 15:50:51,291 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectApplicationModule, InternProject.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-02 15:50:51,291 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectCoreModule, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-02 15:50:51,291 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-02 15:50:51,291 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-02 15:50:51,291 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-02 15:50:51,292 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-02 15:50:51,292 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.EntityFrameworkCore.InternProjectEntityFrameworkModule, InternProject.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-02 15:50:51,292 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-02 15:50:51,293 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-02 15:50:51,293 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-02 15:50:51,293 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-02 15:50:51,293 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-02 15:50:51,293 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-02 15:50:51,294 [2    ] Abp.Modules.AbpModuleManager             - 15 modules loaded.
+DEBUG 2026-06-02 15:50:51,335 [2    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-02 15:50:51,335 [2    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-02 15:50:51,335 [2    ] o.Configuration.LanguageManagementConfig - Converted InternProject (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-02 15:50:51,335 [2    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-02 15:50:51,565 [2    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: InternProject.EntityFrameworkCore.InternProjectDbContext, InternProject.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-02 15:50:51,713 [2    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2026-06-02 15:50:51,740 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2026-06-02 15:50:51,745 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2026-06-02 15:50:51,749 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: InternProject
+DEBUG 2026-06-02 15:50:51,751 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2026-06-02 15:50:51,756 [2    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2026-06-02 15:50:51,758 [2    ] , Culture=neutral, PublicKeyToken=null]] - Start background worker: Abp.Authorization.Users.UserTokenExpirationWorker`2[[InternProject.MultiTenancy.Tenant, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[InternProject.Authorization.Users.User, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+DEBUG 2026-06-02 15:50:51,770 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 20 classes define auto mapping attributes
+DEBUG 2026-06-02 15:50:51,770 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Users.Dto.CreateUserDto
+DEBUG 2026-06-02 15:50:51,772 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Users.Dto.UserDto
+DEBUG 2026-06-02 15:50:51,772 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2026-06-02 15:50:51,772 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Sessions.Dto.UserLoginInfoDto
+DEBUG 2026-06-02 15:50:51,772 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Roles.Dto.PermissionDto
+DEBUG 2026-06-02 15:50:51,772 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.MultiTenancy.Dto.CreateTenantDto
+DEBUG 2026-06-02 15:50:51,772 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.MultiTenancy.Dto.TenantDto
+DEBUG 2026-06-02 15:50:51,773 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Suppliers.Dto.CreateUpdateSupplierDto
+DEBUG 2026-06-02 15:50:51,773 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Suppliers.Dto.SupplierDto
+DEBUG 2026-06-02 15:50:51,773 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Suppliers.Dto.UpdateSupplierDto
+DEBUG 2026-06-02 15:50:51,773 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Products.Dto.CategoryLookupDto
+DEBUG 2026-06-02 15:50:51,773 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Products.Dto.CreateUpdateProductDto
+DEBUG 2026-06-02 15:50:51,773 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Products.Dto.ProductDto
+DEBUG 2026-06-02 15:50:51,773 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Products.Dto.UpdateProductDto
+DEBUG 2026-06-02 15:50:51,773 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Customers.Dto.CreateUpdateCustomerDto
+DEBUG 2026-06-02 15:50:51,773 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Customers.Dto.CustomerDto
+DEBUG 2026-06-02 15:50:51,773 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Customers.Dto.UpdateCustomerDto
+DEBUG 2026-06-02 15:50:51,773 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Categories.Dto.CategoryDto
+DEBUG 2026-06-02 15:50:51,773 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Categories.Dto.CreateUpdateCategoryDto
+DEBUG 2026-06-02 15:50:51,773 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Categories.Dto.UpdateCategoryDto
+INFO  2026-06-02 15:50:53,764 [2    ] tCore.Builder.RequestLocalizationOptions - Supported Request Localization Cultures: en,vi
+WARN  2026-06-02 15:50:53,936 [2    ] Microsoft.AspNetCore.Server.Kestrel      - Overriding address(es) 'https://localhost:44311/'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+INFO  2026-06-02 15:50:53,958 [2    ] Microsoft.Hosting.Lifetime               - Now listening on: https://localhost:44311
+INFO  2026-06-02 15:50:53,960 [2    ] Microsoft.Hosting.Lifetime               - Application started. Press Ctrl+C to shut down.
+INFO  2026-06-02 15:50:53,960 [2    ] Microsoft.Hosting.Lifetime               - Hosting environment: Development
+INFO  2026-06-02 15:50:53,960 [2    ] Microsoft.Hosting.Lifetime               - Content root path: D:\Thuctap\InternProject\QuanLyTapHoa\src\InternProject.Web.Host
+INFO  2026-06-02 15:50:54,446 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/ - - -
+INFO  2026-06-02 15:50:54,541 [5    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Web.Host.Controllers.HomeController.Index (InternProject.Web.Host)'
+INFO  2026-06-02 15:50:54,580 [5    ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller InternProject.Web.Host.Controllers.HomeController (InternProject.Web.Host).
+INFO  2026-06-02 15:50:54,732 [5    ] vc.Infrastructure.RedirectResultExecutor - Executing RedirectResult, redirecting to /swagger.
+INFO  2026-06-02 15:50:54,744 [5    ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Web.Host.Controllers.HomeController.Index (InternProject.Web.Host) in 153.019ms
+INFO  2026-06-02 15:50:54,744 [5    ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Web.Host.Controllers.HomeController.Index (InternProject.Web.Host)'
+INFO  2026-06-02 15:50:54,752 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/ - 302 0 - 304.2920ms
+INFO  2026-06-02 15:50:54,821 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - - -
+INFO  2026-06-02 15:50:54,826 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - 200 16481 application/javascript;+charset=utf-8 5.2936ms
+INFO  2026-06-02 15:50:54,929 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - - -
+INFO  2026-06-02 15:50:54,949 [13   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - - -
+INFO  2026-06-02 15:50:55,030 [13   ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-02 15:50:55,044 [13   ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "SetCookie", controller = "AntiForgery", area = ""}. Executing controller action with signature Void SetCookie() on controller InternProject.Web.Host.Controllers.AntiForgeryController (InternProject.Web.Host).
+INFO  2026-06-02 15:50:55,072 [13   ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-02 15:50:55,094 [13   ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host) in 49.5168ms
+INFO  2026-06-02 15:50:55,094 [13   ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-02 15:50:55,094 [13   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - 200 - application/json;+charset=utf-8 164.7478ms
+INFO  2026-06-02 15:50:55,207 [13   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - 200 - application/json;charset=utf-8 258.3501ms
+INFO  2026-06-02 15:50:57,501 [13   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/index.html - - -
+INFO  2026-06-02 15:50:57,547 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/index.html - 200 - text/html;charset=utf-8 45.9342ms
+INFO  2026-06-02 15:50:57,588 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - - -
+INFO  2026-06-02 15:50:57,590 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - 200 16481 application/javascript;+charset=utf-8 2.2311ms
+INFO  2026-06-02 15:50:57,613 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - - -
+INFO  2026-06-02 15:50:57,614 [8    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-02 15:50:57,615 [8    ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "SetCookie", controller = "AntiForgery", area = ""}. Executing controller action with signature Void SetCookie() on controller InternProject.Web.Host.Controllers.AntiForgeryController (InternProject.Web.Host).
+INFO  2026-06-02 15:50:57,628 [13   ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-02 15:50:57,628 [13   ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host) in 13.5517ms
+INFO  2026-06-02 15:50:57,629 [13   ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-02 15:50:57,629 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - - -
+INFO  2026-06-02 15:50:57,629 [13   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - 200 - application/json;+charset=utf-8 16.1018ms
+INFO  2026-06-02 15:50:57,658 [13   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - 200 - application/json;charset=utf-8 28.5045ms
+INFO  2026-06-02 15:51:04,765 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 POST https://localhost:44311/api/TokenAuth/Authenticate - application/json 54
+INFO  2026-06-02 15:51:04,768 [8    ] pNetCore.Cors.Infrastructure.CorsService - CORS policy execution failed.
+INFO  2026-06-02 15:51:04,768 [8    ] pNetCore.Cors.Infrastructure.CorsService - Request origin https://localhost:44311 does not have permission to access the resource.
+INFO  2026-06-02 15:51:04,769 [8    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Controllers.TokenAuthController.Authenticate (InternProject.Web.Core)'
+INFO  2026-06-02 15:51:04,775 [8    ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "Authenticate", controller = "TokenAuth", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[InternProject.Models.TokenAuth.AuthenticateResultModel] Authenticate(InternProject.Models.TokenAuth.AuthenticateModel) on controller InternProject.Controllers.TokenAuthController (InternProject.Web.Core).
+INFO  2026-06-02 15:51:05,102 [13   ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-02 15:51:05,103 [13   ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Controllers.TokenAuthController.Authenticate (InternProject.Web.Core) in 328.2589ms
+INFO  2026-06-02 15:51:05,103 [13   ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Controllers.TokenAuthController.Authenticate (InternProject.Web.Core)'
+INFO  2026-06-02 15:51:05,103 [13   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 POST https://localhost:44311/api/TokenAuth/Authenticate - 200 - application/json;+charset=utf-8 338.1050ms
+INFO  2026-06-02 15:51:05,135 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/index.html - - -
+INFO  2026-06-02 15:51:05,137 [13   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/index.html - 200 - text/html;charset=utf-8 1.8738ms
+INFO  2026-06-02 15:51:05,183 [13   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - - -
+INFO  2026-06-02 15:51:05,187 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - 200 16481 application/javascript;+charset=utf-8 3.2398ms
+INFO  2026-06-02 15:51:05,202 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - - -
+INFO  2026-06-02 15:51:05,202 [7    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-02 15:51:05,204 [7    ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "SetCookie", controller = "AntiForgery", area = ""}. Executing controller action with signature Void SetCookie() on controller InternProject.Web.Host.Controllers.AntiForgeryController (InternProject.Web.Host).
+INFO  2026-06-02 15:51:05,210 [7    ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-02 15:51:05,210 [7    ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host) in 5.9769ms
+INFO  2026-06-02 15:51:05,210 [7    ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-02 15:51:05,210 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - 200 - application/json;+charset=utf-8 8.4566ms
+INFO  2026-06-02 15:51:05,216 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - - -
+INFO  2026-06-02 15:51:05,236 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - 200 - application/json;charset=utf-8 19.5067ms
+INFO  2026-06-02 15:51:15,027 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/api/services/app/Product/GetDashboardStats - - -
+INFO  2026-06-02 15:51:15,028 [7    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Grocery.Products.ProductAppService.GetDashboardStatsAsync (InternProject.Application)'
+INFO  2026-06-02 15:51:15,035 [7    ] c.Infrastructure.ControllerActionInvoker - Route matched with {area = "app", action = "GetDashboardStats", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[InternProject.Grocery.Products.Dto.ProductDashboardStatsDto] GetDashboardStatsAsync() on controller InternProject.Grocery.Products.ProductAppService (InternProject.Application).
+INFO  2026-06-02 15:51:15,231 [7    ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-02 15:51:15,232 [7    ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Grocery.Products.ProductAppService.GetDashboardStatsAsync (InternProject.Application) in 196.8225ms
+INFO  2026-06-02 15:51:15,232 [7    ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Grocery.Products.ProductAppService.GetDashboardStatsAsync (InternProject.Application)'
+INFO  2026-06-02 15:51:15,232 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/api/services/app/Product/GetDashboardStats - 200 - application/json;+charset=utf-8 204.8981ms
+INFO  2026-06-02 15:51:29,508 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/api/services/app/Product/GetCategoryLookup - - -
+INFO  2026-06-02 15:51:29,510 [7    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Grocery.Products.ProductAppService.GetCategoryLookupAsync (InternProject.Application)'
+INFO  2026-06-02 15:51:29,513 [7    ] c.Infrastructure.ControllerActionInvoker - Route matched with {area = "app", action = "GetCategoryLookup", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Abp.Application.Services.Dto.ListResultDto`1[InternProject.Grocery.Products.Dto.CategoryLookupDto]] GetCategoryLookupAsync() on controller InternProject.Grocery.Products.ProductAppService (InternProject.Application).
+INFO  2026-06-02 15:51:29,544 [7    ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-02 15:51:29,548 [7    ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Grocery.Products.ProductAppService.GetCategoryLookupAsync (InternProject.Application) in 34.6389ms
+INFO  2026-06-02 15:51:29,548 [7    ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Grocery.Products.ProductAppService.GetCategoryLookupAsync (InternProject.Application)'
+INFO  2026-06-02 15:51:29,549 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/api/services/app/Product/GetCategoryLookup - 200 - application/json;+charset=utf-8 40.7343ms
+INFO  2026-06-02 15:51:44,856 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/api/services/app/Product/GetList - - -
+INFO  2026-06-02 15:51:44,856 [7    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Grocery.Products.ProductAppService.GetListAsync (InternProject.Application)'
+INFO  2026-06-02 15:51:44,861 [7    ] c.Infrastructure.ControllerActionInvoker - Route matched with {area = "app", action = "GetList", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Abp.Application.Services.Dto.PagedResultDto`1[InternProject.Grocery.Products.Dto.ProductDto]] GetListAsync(InternProject.Grocery.Products.Dto.PagedProductResultRequestDto) on controller InternProject.Grocery.Products.ProductAppService (InternProject.Application).
+INFO  2026-06-02 15:51:44,920 [7    ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-02 15:51:44,944 [16   ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Grocery.Products.ProductAppService.GetListAsync (InternProject.Application) in 83.1275ms
+INFO  2026-06-02 15:51:44,944 [16   ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Grocery.Products.ProductAppService.GetListAsync (InternProject.Application)'
+INFO  2026-06-02 15:51:44,944 [16   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/api/services/app/Product/GetList - 200 - application/json;+charset=utf-8 88.6885ms
+DEBUG 2026-06-02 15:55:33,818 [16   ] Abp.Modules.AbpModuleManager             - Shutting down has been started
+DEBUG 2026-06-02 15:55:33,819 [16   ] Abp.BackgroundJobs.BackgroundJobManager  - Stop background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2026-06-02 15:55:33,819 [16   ] , Culture=neutral, PublicKeyToken=null]] - Stop background worker: Abp.Authorization.Users.UserTokenExpirationWorker`2[[InternProject.MultiTenancy.Tenant, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[InternProject.Authorization.Users.User, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+DEBUG 2026-06-02 15:55:33,819 [16   ] Abp.BackgroundJobs.BackgroundJobManager  - WaitToStop background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2026-06-02 15:55:33,819 [16   ] , Culture=neutral, PublicKeyToken=null]] - WaitToStop background worker: Abp.Authorization.Users.UserTokenExpirationWorker`2[[InternProject.MultiTenancy.Tenant, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[InternProject.Authorization.Users.User, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+DEBUG 2026-06-02 15:55:33,820 [16   ] Abp.Modules.AbpModuleManager             - Shutting down completed.
+INFO  2026-06-02 15:55:33,820 [16   ] Microsoft.Hosting.Lifetime               - Application is shutting down...

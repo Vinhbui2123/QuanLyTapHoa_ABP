@@ -3,7 +3,9 @@ using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Abp.Linq.Extensions;
+using Abp.UI;
 using InternProject.Authorization;
+using InternProject.Grocery;
 using InternProject.Grocery.Categories.Dto;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,10 +20,14 @@ namespace InternProject.Grocery.Categories;
 public class CategoryAppService : InternProjectAppServiceBase, ICategoryAppService
 {
     private readonly IRepository<Category, Guid> _categoryRepository;
+    private readonly IRepository<Product, Guid> _productRepository;
 
-    public CategoryAppService(IRepository<Category, Guid> categoryRepository)
+    public CategoryAppService(
+        IRepository<Category, Guid> categoryRepository,
+        IRepository<Product, Guid> productRepository)
     {
         _categoryRepository = categoryRepository;
+        _productRepository = productRepository;
     }
 
     public async Task<CategoryDto> GetAsync(EntityDto<Guid> input)
@@ -80,6 +86,11 @@ public class CategoryAppService : InternProjectAppServiceBase, ICategoryAppServi
     [AbpAuthorize(PermissionNames.Pages_Categories_Delete)]
     public async Task DeleteAsync(EntityDto<Guid> input)
     {
+        var hasProduct = await _productRepository.GetAll().AnyAsync(x=>x.CategoryId == input.Id);
+        if (hasProduct)
+        {
+            throw new UserFriendlyException("Không thể xoá danh mục vì đang có sản phẩm thuộc danh mục");
+        }
         await _categoryRepository.DeleteAsync(input.Id);
     }
 
