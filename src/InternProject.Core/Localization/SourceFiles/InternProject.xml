@@ -181,6 +181,64 @@
     <text name="SearchCategoriesPlaceholder" value="Search by category name, description..." />
     <text name="AllCategories" value="All Categories" />
     <text name="OutOfStock" value="Out of Stock" />
+    <text name="Invoices" value="Invoices" />
+    <text name="CreateInvoice" value="Create Invoice" />
+    <text name="CancelInvoice" value="Cancel Invoice" />
+    <text name="InvoiceNumber" value="Invoice Number" />
+    <text name="PaymentMethod" value="Payment Method" />
+    <text name="TotalAmount" value="Total Amount" />
+    <text name="AmountPaid" value="Amount Paid" />
+    <text name="ChangeAmount" value="Change Amount" />
+    <text name="CancelReason" value="Cancel Reason" />
+    <text name="ManageInvoices" value="Manage Invoices" />
+    <text name="ManageInvoicesSubtitle" value="Manage history, billing details, and invoice cancellations" />
+    <text name="TotalRevenue" value="Total Revenue" />
+    <text name="CompletedInvoices" value="Completed" />
+    <text name="CancelledInvoices" value="Cancelled" />
+    <text name="SearchInvoicesPlaceholder" value="Search by invoice code, customer name..." />
+    <text name="CashPayment" value="Cash" />
+    <text name="BankTransfer" value="Bank Transfer" />
+    <text name="MomoWallet" value="MoMo Wallet" />
+    <text name="ZaloPayWallet" value="ZaloPay Wallet" />
+    <text name="InvoiceDate" value="Created Date" />
+    <text name="InvoiceStatus" value="Status" />
+    <text name="Action" value="Action" />
+    <text name="CancelInvoiceConfirmText" value="Are you sure you want to cancel invoice {0}?\nThis action will refund all items back to stock." />
+    <text name="CancelInvoiceReasonPrompt" value="Please enter the reason for cancellation:" />
+    <text name="CancelInvoiceReasonEmpty" value="Cancellation reason cannot be empty!" />
+    <text name="InvoiceCancelledSuccessfully" value="Invoice cancelled successfully." />
+    <text name="CancelInvoiceFailed" value="Failed to cancel invoice." />
+    <text name="Cashier" value="Cashier" />
+    <text name="Customer" value="Customer" />
+    <text name="Guest" value="Guest Customer" />
+    <text name="Note" value="Note" />
+    <text name="POS" value="Point of Sale (POS)" />
+    <text name="Catalog" value="Product Catalog" />
+    <text name="Cart" value="Shopping Cart" />
+    <text name="EmptyCartPlaceholder" value="Cart is empty. Click products on the left to add." />
+    <text name="Checkout" value="CHECKOUT (F10)" />
+    <text name="AmountPaidPlaceholder" value="Enter paid amount" />
+    <text name="StockFormat" value="Stock: {0} {1}" />
+    <text name="LowStockFormat" value="Low Stock: {0}" />
+    <text name="CheckoutSuccess" value="Checkout Completed" />
+    <text name="CheckoutSuccessDetail" value="Invoice {0} created. Change amount: {1}" />
+    <text name="PrintConfirm" value="Checkout complete. Do you want to print the receipt?" />
+    <text name="CancelCartConfirm" value="Are you sure you want to clear all items in the current cart?" />
+    <text name="ClearCart" value="Clear Cart" />
+    <text name="CartCleared" value="Cart has been cleared." />
+    <text name="PaidAmountInvalid" value="Amount paid is insufficient!" />
+    <text name="EnterPaidAmountWarning" value="Please enter sufficient payment amount" />
+    <text name="NoProductFound" value="No products found matching the filters." />
+    <text name="BarcodeScanNotFound" value='No product code matched "{0}"' />
+    <text name="QuantityExceededStock" value="Product '{0}' only has {1} remaining in stock." />
+    <text name="BarcodeScanSuccess" value="Scanned barcode successfully: {0}" />
+    <text name="PaidCashAmount" value="Cash Received" />
+    <text name="ReturnChange" value="Change to Return" />
+    <text name="InsufficientAmount" value="Insufficient amount" />
+    <text name="QuickSelect" value="Quick Select" />
+    <text name="ExactPayment" value="Exact Payment" />
+    <text name="InvoiceDetails" value="Invoice Details" />
+    <text name="PrintInvoice" value="Print Invoice" />
   </texts>
 </localizationDictionary>
 

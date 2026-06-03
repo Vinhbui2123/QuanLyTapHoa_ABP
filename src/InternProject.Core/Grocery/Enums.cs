@@ -10,9 +10,8 @@ namespace InternProject.Grocery
 
     public enum InvoiceStatus
     {
-        Pending = 1,
-        Completed = 2,
-        Cancelled = 3
+        Completed = 1,
+        Cancelled = 2
     }
 
     public enum PurchaseOrderStatus

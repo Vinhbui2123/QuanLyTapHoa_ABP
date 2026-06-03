@@ -1,4 +1,4 @@
-﻿using Abp;
+using Abp;
 using Abp.AspNetCore.Mvc.Authorization;
 using Abp.Authorization;
 using Abp.Authorization.Users;
@@ -385,7 +385,7 @@ public class AccountController : InternProjectControllerBase
 
     public string GetAppHomeUrl()
     {
-        return Url.Action("Index", "About");
+        return Url.Action("Index", "Home");
     }
 
     #endregion

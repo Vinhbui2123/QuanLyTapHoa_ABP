@@ -21,9 +21,20 @@ namespace InternProject.Grocery
 
         public InventoryLogType Type { get; set; }
 
+        /// <summary>
+        /// Số lượng thay đổi tuyệt đối (luôn dương).
+        /// Hướng tăng/giảm xác định bởi Type:
+        /// - Import: Cộng vào kho
+        /// - Export: Trừ khỏi kho
+        /// - Dispose: Trừ khỏi kho
+        /// - Adjust: Tùy thuộc hướng điều chỉnh
+        /// </summary>
         public int Quantity { get; set; }
 
-        public int? RemainingQuantity { get; set; }
+        /// <summary>
+        /// Tồn kho sau khi log này được ghi (running balance)
+        /// </summary>
+        public int RemainingQuantity { get; set; }
 
         public decimal? UnitCostAtTime { get; set; }
 

@@ -32,6 +32,10 @@ public class InternProjectAuthorizationProvider : AuthorizationProvider
         categories.CreateChildPermission(PermissionNames.Pages_Categories_Edit, L("EditCategory"));
         categories.CreateChildPermission(PermissionNames.Pages_Categories_Delete, L("DeleteCategory"));
 
+        var invoices = context.CreatePermission(PermissionNames.Pages_Invoices, L("Invoices"));
+        invoices.CreateChildPermission(PermissionNames.Pages_Invoices_Create, L("CreateInvoice"));
+        invoices.CreateChildPermission(PermissionNames.Pages_Invoices_Cancel, L("CancelInvoice"));
+        
         context.CreatePermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
     }
 

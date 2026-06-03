@@ -1,0 +1,616 @@
+@using InternProject.Web.Startup
+@{
+    ViewBag.Title = "Bán hàng (POS)";
+    ViewBag.CurrentPageName = PageNames.Invoices;
+}
+@section scripts
+{
+    <environment names="Development">
+        <script src="~/view-resources/Views/Invoices/Create.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Invoices/Create.min.js" asp-append-version="true"></script>
+    </environment>
+}
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+    .content-wrapper {
+        background-color: #f1f5f9 !important;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .content {
+        padding: 0 !important;
+    }
+
+    .pos-container {
+        display: flex;
+        height: calc(100vh - 65px);
+        overflow: hidden;
+    }
+
+    /* Left Side: Products Catalog */
+    .pos-catalog {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        overflow: hidden;
+        border-right: 1px solid #e2e8f0;
+    }
+
+    .pos-search-wrapper {
+        position: relative;
+        margin-bottom: 16px;
+    }
+
+    .pos-search-wrapper .search-icon {
+        position: absolute;
+        left: 16px;
+        top: 15px;
+        color: #94a3b8;
+        font-size: 16px;
+    }
+
+    .pos-search-wrapper input {
+        padding-left: 48px;
+        height: 48px;
+        border-radius: 12px;
+        border: 1px solid #cbd5e1;
+        font-size: 14px;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        transition: all 0.15s ease-in-out;
+    }
+
+    .pos-search-wrapper input:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    /* Category Tabs */
+    .category-tabs-container {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 6px;
+        margin-bottom: 16px;
+        white-space: nowrap;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE 10+ */
+    }
+
+    .category-tabs-container::-webkit-scrollbar {
+        display: none; /* Safari/Chrome */
+    }
+
+    .category-tab {
+        background-color: #ffffff;
+        color: #475569;
+        border: 1px solid #e2e8f0;
+        border-radius: 9999px;
+        padding: 6px 16px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+    }
+
+    .category-tab:hover {
+        border-color: #cbd5e1;
+        color: #0f172a;
+        background-color: #f8fafc;
+    }
+
+    .category-tab.active {
+        background-color: #2563eb;
+        color: #ffffff;
+        border-color: #2563eb;
+        box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+    }
+
+    /* Products Grid */
+    .products-grid {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 12px;
+        overflow-y: auto;
+        padding-bottom: 20px;
+        scrollbar-width: thin;
+    }
+
+    .product-card {
+        background-color: #ffffff;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        display: grid;
+        grid-template-rows: 120px 1fr;
+        position: relative;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+        user-select: none;
+        height: 220px; /* Cố định chiều cao toàn card */
+    }
+
+    .product-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 12px -3px rgba(0, 0, 0, 0.05);
+        border-color: #cbd5e1;
+    }
+
+    .product-card-img-wrapper {
+        width: 100%;
+        height: 120px;
+        background-color: #f8fafc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        border-bottom: 1px solid #f1f5f9;
+        aspect-ratio: 1/1;
+    }
+
+    .product-card-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .product-card-img-placeholder {
+        font-size: 32px;
+        color: #cbd5e1;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8fafc;
+    }
+
+    .product-card-stock-badge {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        padding: 2px 6px;
+        border-radius: 5px;
+        font-size: 10px;
+        font-weight: 700;
+        z-index: 10;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .stock-badge-normal {
+        background-color: rgba(241, 245, 249, 0.95);
+        color: #475569;
+        border: 1px solid #e2e8f0;
+    }
+
+    .stock-badge-low {
+        background-color: rgba(254, 243, 199, 0.95);
+        color: #d97706;
+        border: 1px solid #fde68a;
+    }
+
+    .stock-badge-out {
+        background-color: rgba(254, 226, 226, 0.95);
+        color: #dc2626;
+        border: 1px solid #fca5a5;
+    }
+
+    .product-card-body {
+        padding: 8px 10px 10px 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+
+    .product-card-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: #1e293b;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        height: 34px; /* Chiều cao cố định 2 dòng */
+        word-break: break-word;
+        margin-bottom: 2px;
+    }
+
+    .product-card-price {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #2563eb;
+        margin-top: auto;
+    }
+
+    /* Right Side: Cart Panel */
+    .pos-sidebar {
+        width: 380px;
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        box-shadow: -4px 0 15px -3px rgba(0, 0, 0, 0.02);
+        overflow: hidden;
+        height: 100%;
+    }
+
+    /* Sidebar - Cart Items list */
+    .pos-cart-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid #e2e8f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8fafc;
+    }
+
+    .pos-cart-header h6 {
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0;
+    }
+
+    .pos-cart-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .pos-cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #f1f5f9;
+        position: relative;
+    }
+
+    .pos-cart-item-info {
+        flex: 1;
+        margin-right: 12px;
+    }
+
+    .pos-cart-item-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: #0f172a;
+        margin-bottom: 3px;
+        line-height: 1.4;
+    }
+
+    .pos-cart-item-price {
+        font-size: 12px;
+        color: #64748b;
+    }
+
+    .pos-cart-item-actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .cart-qty-btn {
+        width: 26px;
+        height: 26px;
+        border-radius: 6px;
+        border: 1px solid #cbd5e1;
+        background-color: #ffffff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 12px;
+        color: #475569;
+        cursor: pointer;
+    }
+
+    .cart-qty-btn:hover {
+        border-color: #2563eb;
+        background-color: #f8fafc;
+        color: #2563eb;
+    }
+
+    .cart-qty-input {
+        width: 36px;
+        height: 26px;
+        text-align: center;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #0f172a;
+    }
+
+    .cart-item-total {
+        font-size: 13px;
+        font-weight: 700;
+        color: #0f172a;
+        min-width: 75px;
+        text-align: right;
+        margin-left: 8px;
+    }
+
+    .cart-item-del-btn {
+        color: #94a3b8;
+        background: none;
+        border: none;
+        padding: 4px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+    }
+
+    .cart-item-del-btn:hover {
+        color: #ef4444;
+        background-color: #fee2e2;
+    }
+
+    /* Sidebar - Checkout Panel */
+    .pos-checkout-panel {
+        padding: 20px;
+        background-color: #f8fafc;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .summary-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .summary-row .label {
+        font-size: 13px;
+        color: #64748b;
+        font-weight: 600;
+    }
+
+    .summary-row .val {
+        font-size: 15px;
+        font-weight: 700;
+        color: #0f172a;
+    }
+
+    .summary-row.total {
+        border-top: 1px dashed #cbd5e1;
+        padding-top: 12px;
+    }
+
+    .summary-row.total .val {
+        font-size: 22px;
+        color: #2563eb;
+    }
+
+    .payment-method-container {
+        display: flex;
+        gap: 8px;
+    }
+
+    .payment-method-btn {
+        flex: 1;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        padding: 8px 4px;
+        font-weight: 600;
+        font-size: 12px;
+        color: #475569;
+        background-color: #ffffff;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        transition: all 0.15s ease;
+    }
+
+    .payment-method-btn i {
+        font-size: 14px;
+    }
+
+    .payment-method-btn.active {
+        border-color: #2563eb;
+        color: #2563eb;
+        background-color: rgba(37, 99, 235, 0.05);
+    }
+
+    .cash-option-btn {
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        padding: 4px 8px;
+        font-size: 11px;
+        font-weight: 600;
+        color: #475569;
+        background-color: #ffffff;
+        cursor: pointer;
+        transition: all 0.15s ease;
+    }
+
+    .cash-option-btn:hover {
+        border-color: #2563eb;
+        color: #2563eb;
+        background-color: rgba(37, 99, 235, 0.03);
+    }
+
+    .btn-pay {
+        background-color: #2563eb !important;
+        color: #ffffff !important;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        padding: 12px;
+        width: 100%;
+        box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .btn-pay:hover:not(:disabled) {
+        background-color: #1d4ed8 !important;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 12px -1px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-pay:disabled {
+        background-color: #94a3b8 !important;
+        cursor: not-allowed;
+        box-shadow: none;
+    }
+
+    .validation-hint {
+        font-size: 11px;
+        font-weight: 600;
+        color: #ef4444;
+        text-align: center;
+        margin-top: -8px;
+        display: none;
+    }
+</style>
+
+<div class="pos-container">
+    <!-- Left Side: Catalog -->
+    <div class="pos-catalog">
+        <!-- Search bar -->
+        <div class="pos-search-wrapper">
+            <i class="fas fa-search search-icon"></i>
+            <input id="PosSearchInput" type="text" class="form-control" placeholder="@L("SearchProductsPlaceholder")" autocomplete="off" />
+        </div>
+
+        <!-- Category tabs -->
+        <div id="PosCategoryTabs" class="category-tabs-container">
+            <div class="category-tab active" data-category-id="">@L("All")</div>
+            <!-- Populated via AJAX -->
+        </div>
+
+        <!-- Catalog Product cards grid -->
+        <div id="PosProductGrid" class="products-grid">
+            <!-- Populated dynamically via JS -->
+            <div class="text-center w-100 py-5 text-muted grid-loading">
+                <div class="spinner-border text-primary mb-3" role="status"></div>
+                <div>@L("PleaseWait")</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Side: Cart panel -->
+    <div class="pos-sidebar">
+        <!-- Header -->
+        <div class="pos-cart-header">
+            <h6><i class="fas fa-shopping-cart text-primary mr-1"></i> @L("Cart")</h6>
+            <a asp-action="Index" class="btn btn-sm btn-outline-secondary font-weight-bold py-1">
+                <i class="fas fa-history mr-1"></i> @L("Invoices")
+            </a>
+        </div>
+
+        <!-- Cart Items list -->
+        <div id="PosCartList" class="pos-cart-list">
+            <div id="CartEmptyPlaceholder" class="text-center py-5 text-muted my-auto">
+                <div class="mb-3"><i class="fas fa-shopping-basket fs-1 text-light-emphasis"></i></div>
+                @L("EmptyCartPlaceholder")
+            </div>
+        </div>
+
+        <!-- Checkout forms -->
+        <div class="pos-checkout-panel">
+            <!-- Customer -->
+            <div class="row g-2 align-items-center">
+                <div class="col-4">
+                    <span class="label text-muted font-weight-bold" style="font-size: 12px;">@L("Customer"):</span>
+                </div>
+                <div class="col-8">
+                    <select id="CustomerSelect" class="form-select form-select-sm" style="border-radius: 8px; font-size: 13px; font-weight: 500;">
+                        <option value="">-- @L("Guest") --</option>
+                        @foreach (var cust in ViewBag.Customers)
+                        {
+                            <option value="@cust.Id">@cust.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <!-- Payment Method selection -->
+            <div class="payment-method-container">
+                <div class="payment-method-btn active" data-method="1">
+                    <i class="fas fa-money-bill-wave text-success"></i>
+                    <span>@L("CashPayment")</span>
+                </div>
+                <div class="payment-method-btn" data-method="2">
+                    <i class="fas fa-university text-info"></i>
+                    <span>@L("BankTransfer")</span>
+                </div>
+                <div class="payment-method-btn" data-method="3">
+                    <i class="fas fa-mobile-alt" style="color: #d24d80;"></i>
+                    <span>MoMo</span>
+                </div>
+            </div>
+
+            <!-- Financial math -->
+            <div class="summary-row">
+                <span class="label">@L("TotalAmount"):</span>
+                <span class="val font-weight-bold" id="PosTotalDisplay">0 đ</span>
+            </div>
+
+            <!-- Cash inputs -->
+            <div id="CashPaymentFields" class="d-flex flex-column gap-2">
+                <div class="row g-2 align-items-center">
+                    <div class="col-4">
+                        <span class="label text-muted font-weight-bold" style="font-size: 12px;">@L("AmountPaid"):</span>
+                    </div>
+                    <div class="col-8">
+                        <input id="PosAmountPaid" type="text" class="form-control form-control-sm text-end font-weight-bold text-success" style="border-radius: 8px; font-size: 14px;" placeholder="0" />
+                    </div>
+                </div>
+
+                <!-- Fast cash buttons -->
+                <div class="d-flex flex-wrap gap-1 justify-content-end">
+                    <button class="cash-option-btn" type="button" data-val="exact">@L("ExactPayment")</button>
+                    <button class="cash-option-btn" type="button" data-val="10000">10k</button>
+                    <button class="cash-option-btn" type="button" data-val="20000">20k</button>
+                    <button class="cash-option-btn" type="button" data-val="50000">50k</button>
+                    <button class="cash-option-btn" type="button" data-val="100000">100k</button>
+                    <button class="cash-option-btn" type="button" data-val="200000">200k</button>
+                    <button class="cash-option-btn" type="button" data-val="500000">500k</button>
+                </div>
+
+                <div class="summary-row">
+                    <span class="label">@L("ReturnChange"):</span>
+                    <span class="val font-weight-bold text-primary" id="PosChangeDisplay">0 đ</span>
+                </div>
+            </div>
+
+            <div class="row g-2 align-items-center">
+                <div class="col-4">
+                    <span class="label text-muted font-weight-bold" style="font-size: 12px;">@L("Note"):</span>
+                </div>
+                <div class="col-8">
+                    <input id="PosNote" type="text" class="form-control form-control-sm" style="border-radius: 8px; font-size: 12px;" placeholder="@L("Note")..." />
+                </div>
+            </div>
+
+            <!-- Validation Error Hint -->
+            <div id="CheckoutValidationHint" class="validation-hint">@L("EnterPaidAmountWarning")</div>
+
+            <!-- Button pay -->
+            <button id="BtnCheckout" class="btn btn-pay" type="button" disabled>
+                <i class="fas fa-money-bill-wave"></i> @L("Checkout")
+            </button>
+        </div>
+    </div>
+</div>

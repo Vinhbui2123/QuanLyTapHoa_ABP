@@ -2958,3 +2958,680 @@ DEBUG 2026-06-02 15:55:33,819 [16   ] Abp.BackgroundJobs.BackgroundJobManager  -
 DEBUG 2026-06-02 15:55:33,819 [16   ] , Culture=neutral, PublicKeyToken=null]] - WaitToStop background worker: Abp.Authorization.Users.UserTokenExpirationWorker`2[[InternProject.MultiTenancy.Tenant, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[InternProject.Authorization.Users.User, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
 DEBUG 2026-06-02 15:55:33,820 [16   ] Abp.Modules.AbpModuleManager             - Shutting down completed.
 INFO  2026-06-02 15:55:33,820 [16   ] Microsoft.Hosting.Lifetime               - Application is shutting down...
+DEBUG 2026-06-03 09:34:28,616 [2    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2026-06-03 09:34:28,692 [2    ] Abp.Modules.AbpModuleManager             - Found 15 ABP modules in total.
+DEBUG 2026-06-03 09:34:28,702 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.Web.Host.Startup.InternProjectWebHostModule, InternProject.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 09:34:28,703 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectWebCoreModule, InternProject.Web.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 09:34:28,704 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectApplicationModule, InternProject.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 09:34:28,704 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectCoreModule, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 09:34:28,704 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 09:34:28,704 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 09:34:28,705 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 09:34:28,705 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 09:34:28,706 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.EntityFrameworkCore.InternProjectEntityFrameworkModule, InternProject.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 09:34:28,706 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 09:34:28,706 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 09:34:28,706 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 09:34:28,706 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 09:34:28,707 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 09:34:28,707 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 09:34:28,708 [2    ] Abp.Modules.AbpModuleManager             - 15 modules loaded.
+DEBUG 2026-06-03 09:34:28,748 [2    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 09:34:28,748 [2    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 09:34:28,748 [2    ] o.Configuration.LanguageManagementConfig - Converted InternProject (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 09:34:28,748 [2    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 09:34:28,964 [2    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: InternProject.EntityFrameworkCore.InternProjectDbContext, InternProject.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 09:34:29,105 [2    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2026-06-03 09:34:29,141 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2026-06-03 09:34:29,147 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2026-06-03 09:34:29,151 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: InternProject
+DEBUG 2026-06-03 09:34:29,153 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2026-06-03 09:34:29,158 [2    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2026-06-03 09:34:29,160 [2    ] , Culture=neutral, PublicKeyToken=null]] - Start background worker: Abp.Authorization.Users.UserTokenExpirationWorker`2[[InternProject.MultiTenancy.Tenant, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[InternProject.Authorization.Users.User, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+DEBUG 2026-06-03 09:34:29,176 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 20 classes define auto mapping attributes
+DEBUG 2026-06-03 09:34:29,176 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Users.Dto.CreateUserDto
+DEBUG 2026-06-03 09:34:29,178 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Users.Dto.UserDto
+DEBUG 2026-06-03 09:34:29,178 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2026-06-03 09:34:29,178 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Sessions.Dto.UserLoginInfoDto
+DEBUG 2026-06-03 09:34:29,178 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Roles.Dto.PermissionDto
+DEBUG 2026-06-03 09:34:29,178 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.MultiTenancy.Dto.CreateTenantDto
+DEBUG 2026-06-03 09:34:29,178 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.MultiTenancy.Dto.TenantDto
+DEBUG 2026-06-03 09:34:29,178 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Suppliers.Dto.CreateUpdateSupplierDto
+DEBUG 2026-06-03 09:34:29,179 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Suppliers.Dto.SupplierDto
+DEBUG 2026-06-03 09:34:29,179 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Suppliers.Dto.UpdateSupplierDto
+DEBUG 2026-06-03 09:34:29,179 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Products.Dto.CategoryLookupDto
+DEBUG 2026-06-03 09:34:29,179 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Products.Dto.CreateUpdateProductDto
+DEBUG 2026-06-03 09:34:29,179 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Products.Dto.ProductDto
+DEBUG 2026-06-03 09:34:29,179 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Products.Dto.UpdateProductDto
+DEBUG 2026-06-03 09:34:29,179 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Customers.Dto.CreateUpdateCustomerDto
+DEBUG 2026-06-03 09:34:29,179 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Customers.Dto.CustomerDto
+DEBUG 2026-06-03 09:34:29,179 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Customers.Dto.UpdateCustomerDto
+DEBUG 2026-06-03 09:34:29,179 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Categories.Dto.CategoryDto
+DEBUG 2026-06-03 09:34:29,179 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Categories.Dto.CreateUpdateCategoryDto
+DEBUG 2026-06-03 09:34:29,179 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Categories.Dto.UpdateCategoryDto
+INFO  2026-06-03 09:34:31,301 [2    ] tCore.Builder.RequestLocalizationOptions - Supported Request Localization Cultures: en,vi
+WARN  2026-06-03 09:34:31,556 [2    ] Microsoft.AspNetCore.Server.Kestrel      - Overriding address(es) 'https://localhost:44311/'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+INFO  2026-06-03 09:34:31,579 [2    ] Microsoft.Hosting.Lifetime               - Now listening on: https://localhost:44311
+INFO  2026-06-03 09:34:31,580 [2    ] Microsoft.Hosting.Lifetime               - Application started. Press Ctrl+C to shut down.
+INFO  2026-06-03 09:34:31,580 [2    ] Microsoft.Hosting.Lifetime               - Hosting environment: Development
+INFO  2026-06-03 09:34:31,580 [2    ] Microsoft.Hosting.Lifetime               - Content root path: D:\Thuctap\InternProject\QuanLyTapHoa\src\InternProject.Web.Host
+INFO  2026-06-03 09:34:32,096 [12   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/ - - -
+INFO  2026-06-03 09:34:32,164 [12   ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Web.Host.Controllers.HomeController.Index (InternProject.Web.Host)'
+INFO  2026-06-03 09:34:32,253 [12   ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller InternProject.Web.Host.Controllers.HomeController (InternProject.Web.Host).
+INFO  2026-06-03 09:34:32,410 [12   ] vc.Infrastructure.RedirectResultExecutor - Executing RedirectResult, redirecting to /swagger.
+INFO  2026-06-03 09:34:32,422 [12   ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Web.Host.Controllers.HomeController.Index (InternProject.Web.Host) in 157.8258ms
+INFO  2026-06-03 09:34:32,423 [12   ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Web.Host.Controllers.HomeController.Index (InternProject.Web.Host)'
+INFO  2026-06-03 09:34:32,429 [12   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/ - 302 0 - 332.4061ms
+INFO  2026-06-03 09:34:32,488 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/ui/abp.js - - -
+INFO  2026-06-03 09:34:32,488 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/ui/abp.swagger.js - - -
+INFO  2026-06-03 09:34:32,488 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - - -
+INFO  2026-06-03 09:34:32,491 [7    ] NetCore.StaticFiles.StaticFileMiddleware - The file /swagger/ui/abp.swagger.js was not modified
+INFO  2026-06-03 09:34:32,491 [5    ] NetCore.StaticFiles.StaticFileMiddleware - The file /swagger/ui/abp.js was not modified
+INFO  2026-06-03 09:34:32,492 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/ui/abp.swagger.js - 304 - text/javascript 3.6236ms
+INFO  2026-06-03 09:34:32,492 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/ui/abp.js - 304 - text/javascript 3.6236ms
+INFO  2026-06-03 09:34:32,494 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - 200 16481 application/javascript;+charset=utf-8 5.9128ms
+INFO  2026-06-03 09:34:32,662 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - - -
+INFO  2026-06-03 09:34:32,704 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - - -
+INFO  2026-06-03 09:34:32,777 [7    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 09:34:32,789 [7    ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "SetCookie", controller = "AntiForgery", area = ""}. Executing controller action with signature Void SetCookie() on controller InternProject.Web.Host.Controllers.AntiForgeryController (InternProject.Web.Host).
+INFO  2026-06-03 09:34:32,813 [7    ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-03 09:34:32,830 [7    ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host) in 40.4903ms
+INFO  2026-06-03 09:34:32,830 [7    ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 09:34:32,831 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - 200 - application/json;+charset=utf-8 168.3731ms
+INFO  2026-06-03 09:34:32,932 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - 200 - application/json;charset=utf-8 227.6288ms
+INFO  2026-06-03 09:34:37,047 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/index.html - - -
+INFO  2026-06-03 09:34:37,089 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/index.html - 200 - text/html;charset=utf-8 41.2416ms
+INFO  2026-06-03 09:34:37,120 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - - -
+INFO  2026-06-03 09:34:37,121 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - 200 16481 application/javascript;+charset=utf-8 0.6614ms
+INFO  2026-06-03 09:34:37,155 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - - -
+INFO  2026-06-03 09:34:37,156 [8    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 09:34:37,157 [8    ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "SetCookie", controller = "AntiForgery", area = ""}. Executing controller action with signature Void SetCookie() on controller InternProject.Web.Host.Controllers.AntiForgeryController (InternProject.Web.Host).
+INFO  2026-06-03 09:34:37,168 [8    ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-03 09:34:37,168 [8    ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host) in 11.0078ms
+INFO  2026-06-03 09:34:37,168 [8    ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 09:34:37,169 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - 200 - application/json;+charset=utf-8 13.5789ms
+INFO  2026-06-03 09:34:37,172 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - - -
+INFO  2026-06-03 09:34:37,206 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - 200 - application/json;charset=utf-8 33.9147ms
+INFO  2026-06-03 09:34:46,866 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 POST https://localhost:44311/api/TokenAuth/Authenticate - application/json 56
+INFO  2026-06-03 09:34:46,869 [5    ] pNetCore.Cors.Infrastructure.CorsService - CORS policy execution failed.
+INFO  2026-06-03 09:34:46,869 [5    ] pNetCore.Cors.Infrastructure.CorsService - Request origin https://localhost:44311 does not have permission to access the resource.
+INFO  2026-06-03 09:34:46,870 [5    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Controllers.TokenAuthController.Authenticate (InternProject.Web.Core)'
+INFO  2026-06-03 09:34:46,876 [5    ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "Authenticate", controller = "TokenAuth", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[InternProject.Models.TokenAuth.AuthenticateResultModel] Authenticate(InternProject.Models.TokenAuth.AuthenticateModel) on controller InternProject.Controllers.TokenAuthController (InternProject.Web.Core).
+INFO  2026-06-03 09:34:47,229 [5    ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-03 09:34:47,231 [5    ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Controllers.TokenAuthController.Authenticate (InternProject.Web.Core) in 354.1931ms
+INFO  2026-06-03 09:34:47,231 [5    ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Controllers.TokenAuthController.Authenticate (InternProject.Web.Core)'
+INFO  2026-06-03 09:34:47,231 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 POST https://localhost:44311/api/TokenAuth/Authenticate - 200 - application/json;+charset=utf-8 364.7567ms
+INFO  2026-06-03 09:34:47,259 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/index.html - - -
+INFO  2026-06-03 09:34:47,262 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/index.html - 200 - text/html;charset=utf-8 2.7258ms
+INFO  2026-06-03 09:34:47,301 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - - -
+INFO  2026-06-03 09:34:47,301 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - 200 16481 application/javascript;+charset=utf-8 0.4253ms
+INFO  2026-06-03 09:34:47,317 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - - -
+INFO  2026-06-03 09:34:47,321 [5    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 09:34:47,322 [5    ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "SetCookie", controller = "AntiForgery", area = ""}. Executing controller action with signature Void SetCookie() on controller InternProject.Web.Host.Controllers.AntiForgeryController (InternProject.Web.Host).
+INFO  2026-06-03 09:34:47,328 [5    ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-03 09:34:47,328 [5    ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host) in 5.6415ms
+INFO  2026-06-03 09:34:47,328 [5    ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 09:34:47,328 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - 200 - application/json;+charset=utf-8 11.1379ms
+INFO  2026-06-03 09:34:47,364 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - - -
+INFO  2026-06-03 09:34:47,386 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - 200 - application/json;charset=utf-8 21.8009ms
+INFO  2026-06-03 09:36:03,353 [16   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/index.html - - -
+INFO  2026-06-03 09:36:03,355 [17   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/index.html - 200 - text/html;charset=utf-8 2.4719ms
+INFO  2026-06-03 09:36:03,392 [17   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - - -
+INFO  2026-06-03 09:36:03,392 [16   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - 200 16481 application/javascript;+charset=utf-8 0.2514ms
+INFO  2026-06-03 09:36:03,428 [16   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - - -
+INFO  2026-06-03 09:36:03,429 [16   ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 09:36:03,430 [16   ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "SetCookie", controller = "AntiForgery", area = ""}. Executing controller action with signature Void SetCookie() on controller InternProject.Web.Host.Controllers.AntiForgeryController (InternProject.Web.Host).
+INFO  2026-06-03 09:36:03,439 [16   ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-03 09:36:03,439 [16   ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host) in 9.1679ms
+INFO  2026-06-03 09:36:03,439 [16   ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 09:36:03,439 [16   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - 200 - application/json;+charset=utf-8 10.8491ms
+INFO  2026-06-03 09:36:03,452 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - - -
+INFO  2026-06-03 09:36:03,462 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - 200 - application/json;charset=utf-8 10.3632ms
+DEBUG 2026-06-03 11:39:00,611 [2    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2026-06-03 11:39:00,625 [2    ] Abp.Modules.AbpModuleManager             - Found 15 ABP modules in total.
+DEBUG 2026-06-03 11:39:00,636 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.Web.Host.Startup.InternProjectWebHostModule, InternProject.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:39:00,637 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectWebCoreModule, InternProject.Web.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:39:00,637 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectApplicationModule, InternProject.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:39:00,637 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectCoreModule, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:39:00,638 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:39:00,638 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:39:00,638 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:39:00,639 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:39:00,639 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.EntityFrameworkCore.InternProjectEntityFrameworkModule, InternProject.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:39:00,639 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:39:00,640 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:39:00,640 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:39:00,640 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:39:00,640 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:39:00,640 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:39:00,641 [2    ] Abp.Modules.AbpModuleManager             - 15 modules loaded.
+DEBUG 2026-06-03 11:39:00,678 [2    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 11:39:00,678 [2    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 11:39:00,678 [2    ] o.Configuration.LanguageManagementConfig - Converted InternProject (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 11:39:00,678 [2    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 11:39:00,901 [2    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: InternProject.EntityFrameworkCore.InternProjectDbContext, InternProject.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:39:01,048 [2    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2026-06-03 11:39:01,089 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2026-06-03 11:39:01,095 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+FATAL 2026-06-03 11:39:01,106 [2    ] Abp.AbpBootstrapper                      - System.Xml.XmlException: Name cannot begin with the '{' character, hexadecimal value 0x7B. Line 247, position 84.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String[] args)
+   at System.Xml.XmlTextReaderImpl.ParseAttributes()
+   at System.Xml.XmlTextReaderImpl.ParseElement()
+   at System.Xml.XmlTextReaderImpl.ParseElementContent()
+   at System.Xml.XmlLoader.LoadNode(Boolean skipOverWhitespace)
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at Abp.Localization.Dictionaries.Xml.XmlLocalizationDictionary.BuildFomXmlString(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.CreateXmlLocalizationDictionary(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.InitializeDictionaries()
+   at Abp.Localization.Dictionaries.LocalizationDictionaryProviderBase.Initialize(String sourceName)
+   at Abp.Localization.MultiTenantLocalizationDictionaryProvider.Initialize(String sourceName)
+   at Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.MultiTenantLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.LocalizationManager.InitializeSources()
+   at Abp.Localization.LocalizationManager.Initialize()
+   at Abp.AbpKernelModule.PostInitialize()
+   at Abp.Modules.AbpModuleManager.<>c.<StartModules>b__15_2(AbpModuleInfo module)
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.Modules.AbpModuleManager.StartModules()
+   at Abp.AbpBootstrapper.Initialize()
+System.Xml.XmlException: Name cannot begin with the '{' character, hexadecimal value 0x7B. Line 247, position 84.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String[] args)
+   at System.Xml.XmlTextReaderImpl.ParseAttributes()
+   at System.Xml.XmlTextReaderImpl.ParseElement()
+   at System.Xml.XmlTextReaderImpl.ParseElementContent()
+   at System.Xml.XmlLoader.LoadNode(Boolean skipOverWhitespace)
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at Abp.Localization.Dictionaries.Xml.XmlLocalizationDictionary.BuildFomXmlString(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.CreateXmlLocalizationDictionary(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.InitializeDictionaries()
+   at Abp.Localization.Dictionaries.LocalizationDictionaryProviderBase.Initialize(String sourceName)
+   at Abp.Localization.MultiTenantLocalizationDictionaryProvider.Initialize(String sourceName)
+   at Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.MultiTenantLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.LocalizationManager.InitializeSources()
+   at Abp.Localization.LocalizationManager.Initialize()
+   at Abp.AbpKernelModule.PostInitialize()
+   at Abp.Modules.AbpModuleManager.<>c.<StartModules>b__15_2(AbpModuleInfo module)
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.Modules.AbpModuleManager.StartModules()
+   at Abp.AbpBootstrapper.Initialize()
+FATAL 2026-06-03 11:39:01,117 [2    ] Microsoft.AspNetCore.Hosting.Diagnostics - Application startup exception
+System.Xml.XmlException: Name cannot begin with the '{' character, hexadecimal value 0x7B. Line 247, position 84.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String[] args)
+   at System.Xml.XmlTextReaderImpl.ParseAttributes()
+   at System.Xml.XmlTextReaderImpl.ParseElement()
+   at System.Xml.XmlTextReaderImpl.ParseElementContent()
+   at System.Xml.XmlLoader.LoadNode(Boolean skipOverWhitespace)
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at Abp.Localization.Dictionaries.Xml.XmlLocalizationDictionary.BuildFomXmlString(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.CreateXmlLocalizationDictionary(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.InitializeDictionaries()
+   at Abp.Localization.Dictionaries.LocalizationDictionaryProviderBase.Initialize(String sourceName)
+   at Abp.Localization.MultiTenantLocalizationDictionaryProvider.Initialize(String sourceName)
+   at Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.MultiTenantLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.LocalizationManager.InitializeSources()
+   at Abp.Localization.LocalizationManager.Initialize()
+   at Abp.AbpKernelModule.PostInitialize()
+   at Abp.Modules.AbpModuleManager.<>c.<StartModules>b__15_2(AbpModuleInfo module)
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.Modules.AbpModuleManager.StartModules()
+   at Abp.AbpBootstrapper.Initialize()
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.InitializeAbp(IApplicationBuilder app)
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.UseAbp(IApplicationBuilder app, Action`1 optionsAction)
+   at InternProject.Web.Host.Startup.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory) in D:\Thuctap\InternProject\QuanLyTapHoa\src\InternProject.Web.Host\Startup\Startup.cs:line 86
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+ERROR 2026-06-03 11:39:01,119 [2    ] crosoft.Extensions.Hosting.Internal.Host - Hosting failed to start
+System.Xml.XmlException: Name cannot begin with the '{' character, hexadecimal value 0x7B. Line 247, position 84.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String[] args)
+   at System.Xml.XmlTextReaderImpl.ParseAttributes()
+   at System.Xml.XmlTextReaderImpl.ParseElement()
+   at System.Xml.XmlTextReaderImpl.ParseElementContent()
+   at System.Xml.XmlLoader.LoadNode(Boolean skipOverWhitespace)
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at Abp.Localization.Dictionaries.Xml.XmlLocalizationDictionary.BuildFomXmlString(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.CreateXmlLocalizationDictionary(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.InitializeDictionaries()
+   at Abp.Localization.Dictionaries.LocalizationDictionaryProviderBase.Initialize(String sourceName)
+   at Abp.Localization.MultiTenantLocalizationDictionaryProvider.Initialize(String sourceName)
+   at Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.MultiTenantLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.LocalizationManager.InitializeSources()
+   at Abp.Localization.LocalizationManager.Initialize()
+   at Abp.AbpKernelModule.PostInitialize()
+   at Abp.Modules.AbpModuleManager.<>c.<StartModules>b__15_2(AbpModuleInfo module)
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.Modules.AbpModuleManager.StartModules()
+   at Abp.AbpBootstrapper.Initialize()
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.InitializeAbp(IApplicationBuilder app)
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.UseAbp(IApplicationBuilder app, Action`1 optionsAction)
+   at InternProject.Web.Host.Startup.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory) in D:\Thuctap\InternProject\QuanLyTapHoa\src\InternProject.Web.Host\Startup\Startup.cs:line 86
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+DEBUG 2026-06-03 11:40:56,436 [2    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2026-06-03 11:40:56,448 [2    ] Abp.Modules.AbpModuleManager             - Found 15 ABP modules in total.
+DEBUG 2026-06-03 11:40:56,459 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.Web.Host.Startup.InternProjectWebHostModule, InternProject.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:40:56,460 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectWebCoreModule, InternProject.Web.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:40:56,461 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectApplicationModule, InternProject.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:40:56,461 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectCoreModule, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:40:56,461 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:40:56,461 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:40:56,461 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:40:56,462 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:40:56,462 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.EntityFrameworkCore.InternProjectEntityFrameworkModule, InternProject.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:40:56,462 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:40:56,463 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:40:56,463 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:40:56,463 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:40:56,463 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:40:56,463 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:40:56,464 [2    ] Abp.Modules.AbpModuleManager             - 15 modules loaded.
+DEBUG 2026-06-03 11:40:56,500 [2    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 11:40:56,500 [2    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 11:40:56,500 [2    ] o.Configuration.LanguageManagementConfig - Converted InternProject (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 11:40:56,500 [2    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 11:40:56,761 [2    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: InternProject.EntityFrameworkCore.InternProjectDbContext, InternProject.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:40:56,909 [2    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2026-06-03 11:40:56,950 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2026-06-03 11:40:56,956 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+FATAL 2026-06-03 11:40:56,970 [2    ] Abp.AbpBootstrapper                      - System.Xml.XmlException: Name cannot begin with the '{' character, hexadecimal value 0x7B. Line 247, position 84.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String[] args)
+   at System.Xml.XmlTextReaderImpl.ParseAttributes()
+   at System.Xml.XmlTextReaderImpl.ParseElement()
+   at System.Xml.XmlTextReaderImpl.ParseElementContent()
+   at System.Xml.XmlLoader.LoadNode(Boolean skipOverWhitespace)
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at Abp.Localization.Dictionaries.Xml.XmlLocalizationDictionary.BuildFomXmlString(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.CreateXmlLocalizationDictionary(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.InitializeDictionaries()
+   at Abp.Localization.Dictionaries.LocalizationDictionaryProviderBase.Initialize(String sourceName)
+   at Abp.Localization.MultiTenantLocalizationDictionaryProvider.Initialize(String sourceName)
+   at Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.MultiTenantLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.LocalizationManager.InitializeSources()
+   at Abp.Localization.LocalizationManager.Initialize()
+   at Abp.AbpKernelModule.PostInitialize()
+   at Abp.Modules.AbpModuleManager.<>c.<StartModules>b__15_2(AbpModuleInfo module)
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.Modules.AbpModuleManager.StartModules()
+   at Abp.AbpBootstrapper.Initialize()
+System.Xml.XmlException: Name cannot begin with the '{' character, hexadecimal value 0x7B. Line 247, position 84.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String[] args)
+   at System.Xml.XmlTextReaderImpl.ParseAttributes()
+   at System.Xml.XmlTextReaderImpl.ParseElement()
+   at System.Xml.XmlTextReaderImpl.ParseElementContent()
+   at System.Xml.XmlLoader.LoadNode(Boolean skipOverWhitespace)
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at Abp.Localization.Dictionaries.Xml.XmlLocalizationDictionary.BuildFomXmlString(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.CreateXmlLocalizationDictionary(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.InitializeDictionaries()
+   at Abp.Localization.Dictionaries.LocalizationDictionaryProviderBase.Initialize(String sourceName)
+   at Abp.Localization.MultiTenantLocalizationDictionaryProvider.Initialize(String sourceName)
+   at Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.MultiTenantLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.LocalizationManager.InitializeSources()
+   at Abp.Localization.LocalizationManager.Initialize()
+   at Abp.AbpKernelModule.PostInitialize()
+   at Abp.Modules.AbpModuleManager.<>c.<StartModules>b__15_2(AbpModuleInfo module)
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.Modules.AbpModuleManager.StartModules()
+   at Abp.AbpBootstrapper.Initialize()
+FATAL 2026-06-03 11:40:56,980 [2    ] Microsoft.AspNetCore.Hosting.Diagnostics - Application startup exception
+System.Xml.XmlException: Name cannot begin with the '{' character, hexadecimal value 0x7B. Line 247, position 84.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String[] args)
+   at System.Xml.XmlTextReaderImpl.ParseAttributes()
+   at System.Xml.XmlTextReaderImpl.ParseElement()
+   at System.Xml.XmlTextReaderImpl.ParseElementContent()
+   at System.Xml.XmlLoader.LoadNode(Boolean skipOverWhitespace)
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at Abp.Localization.Dictionaries.Xml.XmlLocalizationDictionary.BuildFomXmlString(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.CreateXmlLocalizationDictionary(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.InitializeDictionaries()
+   at Abp.Localization.Dictionaries.LocalizationDictionaryProviderBase.Initialize(String sourceName)
+   at Abp.Localization.MultiTenantLocalizationDictionaryProvider.Initialize(String sourceName)
+   at Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.MultiTenantLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.LocalizationManager.InitializeSources()
+   at Abp.Localization.LocalizationManager.Initialize()
+   at Abp.AbpKernelModule.PostInitialize()
+   at Abp.Modules.AbpModuleManager.<>c.<StartModules>b__15_2(AbpModuleInfo module)
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.Modules.AbpModuleManager.StartModules()
+   at Abp.AbpBootstrapper.Initialize()
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.InitializeAbp(IApplicationBuilder app)
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.UseAbp(IApplicationBuilder app, Action`1 optionsAction)
+   at InternProject.Web.Host.Startup.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory) in D:\Thuctap\InternProject\QuanLyTapHoa\src\InternProject.Web.Host\Startup\Startup.cs:line 86
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+ERROR 2026-06-03 11:40:56,982 [2    ] crosoft.Extensions.Hosting.Internal.Host - Hosting failed to start
+System.Xml.XmlException: Name cannot begin with the '{' character, hexadecimal value 0x7B. Line 247, position 84.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String[] args)
+   at System.Xml.XmlTextReaderImpl.ParseAttributes()
+   at System.Xml.XmlTextReaderImpl.ParseElement()
+   at System.Xml.XmlTextReaderImpl.ParseElementContent()
+   at System.Xml.XmlLoader.LoadNode(Boolean skipOverWhitespace)
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at Abp.Localization.Dictionaries.Xml.XmlLocalizationDictionary.BuildFomXmlString(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.CreateXmlLocalizationDictionary(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.InitializeDictionaries()
+   at Abp.Localization.Dictionaries.LocalizationDictionaryProviderBase.Initialize(String sourceName)
+   at Abp.Localization.MultiTenantLocalizationDictionaryProvider.Initialize(String sourceName)
+   at Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.MultiTenantLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.LocalizationManager.InitializeSources()
+   at Abp.Localization.LocalizationManager.Initialize()
+   at Abp.AbpKernelModule.PostInitialize()
+   at Abp.Modules.AbpModuleManager.<>c.<StartModules>b__15_2(AbpModuleInfo module)
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.Modules.AbpModuleManager.StartModules()
+   at Abp.AbpBootstrapper.Initialize()
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.InitializeAbp(IApplicationBuilder app)
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.UseAbp(IApplicationBuilder app, Action`1 optionsAction)
+   at InternProject.Web.Host.Startup.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory) in D:\Thuctap\InternProject\QuanLyTapHoa\src\InternProject.Web.Host\Startup\Startup.cs:line 86
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+DEBUG 2026-06-03 11:42:45,179 [2    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2026-06-03 11:42:45,192 [2    ] Abp.Modules.AbpModuleManager             - Found 15 ABP modules in total.
+DEBUG 2026-06-03 11:42:45,205 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.Web.Host.Startup.InternProjectWebHostModule, InternProject.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:42:45,206 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectWebCoreModule, InternProject.Web.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:42:45,206 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectApplicationModule, InternProject.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:42:45,207 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectCoreModule, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:42:45,207 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:42:45,207 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:42:45,207 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:42:45,208 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:42:45,208 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.EntityFrameworkCore.InternProjectEntityFrameworkModule, InternProject.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:42:45,208 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:42:45,208 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:42:45,209 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:42:45,209 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:42:45,209 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:42:45,209 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:42:45,210 [2    ] Abp.Modules.AbpModuleManager             - 15 modules loaded.
+DEBUG 2026-06-03 11:42:45,250 [2    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 11:42:45,250 [2    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 11:42:45,250 [2    ] o.Configuration.LanguageManagementConfig - Converted InternProject (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 11:42:45,250 [2    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 11:42:45,495 [2    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: InternProject.EntityFrameworkCore.InternProjectDbContext, InternProject.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:42:45,664 [2    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2026-06-03 11:42:45,694 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2026-06-03 11:42:45,700 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+FATAL 2026-06-03 11:42:45,711 [2    ] Abp.AbpBootstrapper                      - System.Xml.XmlException: Name cannot begin with the '{' character, hexadecimal value 0x7B. Line 247, position 84.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String[] args)
+   at System.Xml.XmlTextReaderImpl.ParseAttributes()
+   at System.Xml.XmlTextReaderImpl.ParseElement()
+   at System.Xml.XmlTextReaderImpl.ParseElementContent()
+   at System.Xml.XmlLoader.LoadNode(Boolean skipOverWhitespace)
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at Abp.Localization.Dictionaries.Xml.XmlLocalizationDictionary.BuildFomXmlString(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.CreateXmlLocalizationDictionary(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.InitializeDictionaries()
+   at Abp.Localization.Dictionaries.LocalizationDictionaryProviderBase.Initialize(String sourceName)
+   at Abp.Localization.MultiTenantLocalizationDictionaryProvider.Initialize(String sourceName)
+   at Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.MultiTenantLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.LocalizationManager.InitializeSources()
+   at Abp.Localization.LocalizationManager.Initialize()
+   at Abp.AbpKernelModule.PostInitialize()
+   at Abp.Modules.AbpModuleManager.<>c.<StartModules>b__15_2(AbpModuleInfo module)
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.Modules.AbpModuleManager.StartModules()
+   at Abp.AbpBootstrapper.Initialize()
+System.Xml.XmlException: Name cannot begin with the '{' character, hexadecimal value 0x7B. Line 247, position 84.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String[] args)
+   at System.Xml.XmlTextReaderImpl.ParseAttributes()
+   at System.Xml.XmlTextReaderImpl.ParseElement()
+   at System.Xml.XmlTextReaderImpl.ParseElementContent()
+   at System.Xml.XmlLoader.LoadNode(Boolean skipOverWhitespace)
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at Abp.Localization.Dictionaries.Xml.XmlLocalizationDictionary.BuildFomXmlString(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.CreateXmlLocalizationDictionary(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.InitializeDictionaries()
+   at Abp.Localization.Dictionaries.LocalizationDictionaryProviderBase.Initialize(String sourceName)
+   at Abp.Localization.MultiTenantLocalizationDictionaryProvider.Initialize(String sourceName)
+   at Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.MultiTenantLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.LocalizationManager.InitializeSources()
+   at Abp.Localization.LocalizationManager.Initialize()
+   at Abp.AbpKernelModule.PostInitialize()
+   at Abp.Modules.AbpModuleManager.<>c.<StartModules>b__15_2(AbpModuleInfo module)
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.Modules.AbpModuleManager.StartModules()
+   at Abp.AbpBootstrapper.Initialize()
+FATAL 2026-06-03 11:42:45,720 [2    ] Microsoft.AspNetCore.Hosting.Diagnostics - Application startup exception
+System.Xml.XmlException: Name cannot begin with the '{' character, hexadecimal value 0x7B. Line 247, position 84.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String[] args)
+   at System.Xml.XmlTextReaderImpl.ParseAttributes()
+   at System.Xml.XmlTextReaderImpl.ParseElement()
+   at System.Xml.XmlTextReaderImpl.ParseElementContent()
+   at System.Xml.XmlLoader.LoadNode(Boolean skipOverWhitespace)
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at Abp.Localization.Dictionaries.Xml.XmlLocalizationDictionary.BuildFomXmlString(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.CreateXmlLocalizationDictionary(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.InitializeDictionaries()
+   at Abp.Localization.Dictionaries.LocalizationDictionaryProviderBase.Initialize(String sourceName)
+   at Abp.Localization.MultiTenantLocalizationDictionaryProvider.Initialize(String sourceName)
+   at Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.MultiTenantLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.LocalizationManager.InitializeSources()
+   at Abp.Localization.LocalizationManager.Initialize()
+   at Abp.AbpKernelModule.PostInitialize()
+   at Abp.Modules.AbpModuleManager.<>c.<StartModules>b__15_2(AbpModuleInfo module)
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.Modules.AbpModuleManager.StartModules()
+   at Abp.AbpBootstrapper.Initialize()
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.InitializeAbp(IApplicationBuilder app)
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.UseAbp(IApplicationBuilder app, Action`1 optionsAction)
+   at InternProject.Web.Host.Startup.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory) in D:\Thuctap\InternProject\QuanLyTapHoa\src\InternProject.Web.Host\Startup\Startup.cs:line 86
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+ERROR 2026-06-03 11:42:45,722 [2    ] crosoft.Extensions.Hosting.Internal.Host - Hosting failed to start
+System.Xml.XmlException: Name cannot begin with the '{' character, hexadecimal value 0x7B. Line 247, position 84.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String[] args)
+   at System.Xml.XmlTextReaderImpl.ParseAttributes()
+   at System.Xml.XmlTextReaderImpl.ParseElement()
+   at System.Xml.XmlTextReaderImpl.ParseElementContent()
+   at System.Xml.XmlLoader.LoadNode(Boolean skipOverWhitespace)
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at Abp.Localization.Dictionaries.Xml.XmlLocalizationDictionary.BuildFomXmlString(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.CreateXmlLocalizationDictionary(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.InitializeDictionaries()
+   at Abp.Localization.Dictionaries.LocalizationDictionaryProviderBase.Initialize(String sourceName)
+   at Abp.Localization.MultiTenantLocalizationDictionaryProvider.Initialize(String sourceName)
+   at Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.MultiTenantLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.LocalizationManager.InitializeSources()
+   at Abp.Localization.LocalizationManager.Initialize()
+   at Abp.AbpKernelModule.PostInitialize()
+   at Abp.Modules.AbpModuleManager.<>c.<StartModules>b__15_2(AbpModuleInfo module)
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.Modules.AbpModuleManager.StartModules()
+   at Abp.AbpBootstrapper.Initialize()
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.InitializeAbp(IApplicationBuilder app)
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.UseAbp(IApplicationBuilder app, Action`1 optionsAction)
+   at InternProject.Web.Host.Startup.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory) in D:\Thuctap\InternProject\QuanLyTapHoa\src\InternProject.Web.Host\Startup\Startup.cs:line 86
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+DEBUG 2026-06-03 11:43:23,362 [2    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2026-06-03 11:43:23,377 [2    ] Abp.Modules.AbpModuleManager             - Found 15 ABP modules in total.
+DEBUG 2026-06-03 11:43:23,390 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.Web.Host.Startup.InternProjectWebHostModule, InternProject.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:43:23,391 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectWebCoreModule, InternProject.Web.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:43:23,392 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectApplicationModule, InternProject.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:43:23,392 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectCoreModule, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:43:23,392 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:43:23,393 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:43:23,393 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:43:23,394 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:43:23,394 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.EntityFrameworkCore.InternProjectEntityFrameworkModule, InternProject.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:43:23,395 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:43:23,395 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:43:23,395 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:43:23,396 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:43:23,396 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:43:23,396 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:43:23,398 [2    ] Abp.Modules.AbpModuleManager             - 15 modules loaded.
+DEBUG 2026-06-03 11:43:23,436 [2    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 11:43:23,436 [2    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 11:43:23,437 [2    ] o.Configuration.LanguageManagementConfig - Converted InternProject (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 11:43:23,437 [2    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 11:43:23,677 [2    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: InternProject.EntityFrameworkCore.InternProjectDbContext, InternProject.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 11:43:23,847 [2    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2026-06-03 11:43:23,877 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2026-06-03 11:43:23,883 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+FATAL 2026-06-03 11:43:23,893 [2    ] Abp.AbpBootstrapper                      - Abp.AbpException: A dictionary can not contain same key twice. There are some duplicated names: Cashier, OutOfStock, SearchProductsPlaceholder
+   at Abp.Localization.Dictionaries.Xml.XmlLocalizationDictionary.BuildFomXmlString(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.CreateXmlLocalizationDictionary(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.InitializeDictionaries()
+   at Abp.Localization.Dictionaries.LocalizationDictionaryProviderBase.Initialize(String sourceName)
+   at Abp.Localization.MultiTenantLocalizationDictionaryProvider.Initialize(String sourceName)
+   at Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.MultiTenantLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.LocalizationManager.InitializeSources()
+   at Abp.Localization.LocalizationManager.Initialize()
+   at Abp.AbpKernelModule.PostInitialize()
+   at Abp.Modules.AbpModuleManager.<>c.<StartModules>b__15_2(AbpModuleInfo module)
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.Modules.AbpModuleManager.StartModules()
+   at Abp.AbpBootstrapper.Initialize()
+Abp.AbpException: A dictionary can not contain same key twice. There are some duplicated names: Cashier, OutOfStock, SearchProductsPlaceholder
+   at Abp.Localization.Dictionaries.Xml.XmlLocalizationDictionary.BuildFomXmlString(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.CreateXmlLocalizationDictionary(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.InitializeDictionaries()
+   at Abp.Localization.Dictionaries.LocalizationDictionaryProviderBase.Initialize(String sourceName)
+   at Abp.Localization.MultiTenantLocalizationDictionaryProvider.Initialize(String sourceName)
+   at Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.MultiTenantLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.LocalizationManager.InitializeSources()
+   at Abp.Localization.LocalizationManager.Initialize()
+   at Abp.AbpKernelModule.PostInitialize()
+   at Abp.Modules.AbpModuleManager.<>c.<StartModules>b__15_2(AbpModuleInfo module)
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.Modules.AbpModuleManager.StartModules()
+   at Abp.AbpBootstrapper.Initialize()
+FATAL 2026-06-03 11:43:23,903 [2    ] Microsoft.AspNetCore.Hosting.Diagnostics - Application startup exception
+Abp.AbpException: A dictionary can not contain same key twice. There are some duplicated names: Cashier, OutOfStock, SearchProductsPlaceholder
+   at Abp.Localization.Dictionaries.Xml.XmlLocalizationDictionary.BuildFomXmlString(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.CreateXmlLocalizationDictionary(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.InitializeDictionaries()
+   at Abp.Localization.Dictionaries.LocalizationDictionaryProviderBase.Initialize(String sourceName)
+   at Abp.Localization.MultiTenantLocalizationDictionaryProvider.Initialize(String sourceName)
+   at Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.MultiTenantLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.LocalizationManager.InitializeSources()
+   at Abp.Localization.LocalizationManager.Initialize()
+   at Abp.AbpKernelModule.PostInitialize()
+   at Abp.Modules.AbpModuleManager.<>c.<StartModules>b__15_2(AbpModuleInfo module)
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.Modules.AbpModuleManager.StartModules()
+   at Abp.AbpBootstrapper.Initialize()
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.InitializeAbp(IApplicationBuilder app)
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.UseAbp(IApplicationBuilder app, Action`1 optionsAction)
+   at InternProject.Web.Host.Startup.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory) in D:\Thuctap\InternProject\QuanLyTapHoa\src\InternProject.Web.Host\Startup\Startup.cs:line 86
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+ERROR 2026-06-03 11:43:23,905 [2    ] crosoft.Extensions.Hosting.Internal.Host - Hosting failed to start
+Abp.AbpException: A dictionary can not contain same key twice. There are some duplicated names: Cashier, OutOfStock, SearchProductsPlaceholder
+   at Abp.Localization.Dictionaries.Xml.XmlLocalizationDictionary.BuildFomXmlString(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.CreateXmlLocalizationDictionary(String xmlString)
+   at Abp.Localization.Dictionaries.Xml.XmlEmbeddedFileLocalizationDictionaryProvider.InitializeDictionaries()
+   at Abp.Localization.Dictionaries.LocalizationDictionaryProviderBase.Initialize(String sourceName)
+   at Abp.Localization.MultiTenantLocalizationDictionaryProvider.Initialize(String sourceName)
+   at Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.MultiTenantLocalizationSource.Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
+   at Abp.Localization.LocalizationManager.InitializeSources()
+   at Abp.Localization.LocalizationManager.Initialize()
+   at Abp.AbpKernelModule.PostInitialize()
+   at Abp.Modules.AbpModuleManager.<>c.<StartModules>b__15_2(AbpModuleInfo module)
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.Modules.AbpModuleManager.StartModules()
+   at Abp.AbpBootstrapper.Initialize()
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.InitializeAbp(IApplicationBuilder app)
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.UseAbp(IApplicationBuilder app, Action`1 optionsAction)
+   at InternProject.Web.Host.Startup.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory) in D:\Thuctap\InternProject\QuanLyTapHoa\src\InternProject.Web.Host\Startup\Startup.cs:line 86
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)

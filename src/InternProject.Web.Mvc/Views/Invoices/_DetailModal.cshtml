@@ -1,0 +1,161 @@
+@using InternProject.Grocery
+@model InternProject.Grocery.Invoices.Dto.InvoiceDto
+
+<div class="modal-header border-bottom-0 pb-0">
+    <h5 class="modal-title font-weight-bold text-dark" id="InvoiceDetailModalLabel">
+        <i class="fas fa-file-invoice-dollar text-primary mr-2"></i> @L("InvoiceDetails"): <span class="text-primary">@Model.InvoiceNumber</span>
+    </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<div class="modal-body pt-3">
+    <!-- Status & Info Ribbon -->
+    <div class="d-flex justify-content-between align-items-center mb-4 p-3 rounded bg-light border">
+        <div>
+            <span class="text-muted mr-2">@L("InvoiceDate"):</span>
+            <strong>@Model.CreationTime.ToString("dd/MM/yyyy HH:mm:ss")</strong>
+        </div>
+        <div>
+            @if (Model.Status == InvoiceStatus.Completed)
+            {
+                <span class="badge bg-success font-weight-bold px-3 py-2"><i class="fas fa-check-circle mr-1"></i> @L("CompletedInvoices").ToUpper()</span>
+            }
+            else
+            {
+                <span class="badge bg-danger font-weight-bold px-3 py-2"><i class="fas fa-ban mr-1"></i> @L("CancelledInvoices").ToUpper()</span>
+            }
+        </div>
+    </div>
+
+    <!-- Cancellation details if cancelled -->
+    @if (Model.Status == InvoiceStatus.Cancelled && !string.IsNullOrWhiteSpace(Model.CancelReason))
+    {
+        <div class="alert alert-danger mb-4 d-flex align-items-start border-0 rounded-3 shadow-sm">
+            <i class="fas fa-exclamation-circle fs-4 mr-3 mt-1"></i>
+            <div>
+                <h6 class="alert-heading font-weight-bold mb-1">@L("CancelInvoice")</h6>
+                <p class="mb-1"><strong>@L("CancelReason"):</strong> @Model.CancelReason</p>
+                <small class="text-muted">@L("On"): @(Model.LastModificationTime?.ToString("dd/MM/yyyy HH:mm:ss") ?? "---")</small>
+            </div>
+        </div>
+    }
+
+    <div class="row g-4 mb-4">
+        <!-- Customer Info -->
+        <div class="col-md-6">
+            <div class="card border border-light-subtle h-100 shadow-none">
+                <div class="card-body">
+                    <h6 class="font-weight-bold text-secondary mb-3 border-bottom pb-2">
+                        <i class="fas fa-user-tag mr-2 text-info"></i> @L("Customer")
+                    </h6>
+                    @if (Model.CustomerId.HasValue)
+                    {
+                        <p class="mb-2">@L("CustomerName"): <strong>@Model.CustomerName</strong></p>
+                        <p class="mb-0">Customer ID: <code class="text-secondary">@Model.CustomerId</code></p>
+                    }
+                    else
+                    {
+                        <p class="mb-2 text-muted"><strong>@L("Guest")</strong></p>
+                        <p class="mb-0 text-muted">@L("Guest")</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Sales Info -->
+        <div class="col-md-6">
+            <div class="card border border-light-subtle h-100 shadow-none">
+                <div class="card-body">
+                    <h6 class="font-weight-bold text-secondary mb-3 border-bottom pb-2">
+                        <i class="fas fa-shopping-bag mr-2 text-warning"></i> @L("InvoiceDetails")
+                    </h6>
+                    <p class="mb-2">@L("Cashier"): <span class="badge bg-light text-dark border">@Model.CashierUserName</span></p>
+                    <p class="mb-0">@L("PaymentMethod"): 
+                        @switch (Model.PaymentMethod)
+                        {
+                            case PaymentMethod.Cash:
+                                <strong>@L("CashPayment")</strong>
+                                break;
+                            case PaymentMethod.Transfer:
+                                <strong>@L("BankTransfer")</strong>
+                                break;
+                            case PaymentMethod.Momo:
+                                <strong>@L("MomoWallet")</strong>
+                                break;
+                            case PaymentMethod.ZaloPay:
+                                <strong>@L("ZaloPayWallet")</strong>
+                                break;
+                            default:
+                                <span class="text-muted">---</span>
+                                break;
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Items Table -->
+    <h6 class="font-weight-bold text-dark mb-3"><i class="fas fa-list mr-2"></i> @L("Products")</h6>
+    <div class="table-responsive mb-4 rounded border">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th style="width: 15%;">SKU</th>
+                    <th>@L("Name")</th>
+                    <th class="text-end" style="width: 15%;">@L("SalePrice")</th>
+                    <th class="text-center" style="width: 12%;">@L("StockQuantity")</th>
+                    <th class="text-end" style="width: 18%;">@L("TotalAmount")</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.InvoiceItems)
+                {
+                    <tr>
+                        <td>
+                            @if (!string.IsNullOrWhiteSpace(item.Sku))
+                            {
+                                <code>@item.Sku</code>
+                            }
+                            else
+                            {
+                                <span class="text-muted">---</span>
+                            }
+                        </td>
+                        <td><strong>@item.ProductName</strong></td>
+                        <td class="text-end">@item.UnitPrice.ToString("N0") đ</td>
+                        <td class="text-center font-weight-bold">@item.Quantity.ToString("N0")</td>
+                        <td class="text-end font-weight-bold text-primary">@item.Subtotal.ToString("N0") đ</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Financial summary -->
+    <div class="row justify-content-end">
+        <div class="col-md-5">
+            <div class="p-3 bg-light rounded border">
+                <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
+                    <span class="text-muted">@L("TotalAmount"):</span>
+                    <h5 class="font-weight-bold text-dark mb-0">@Model.TotalAmount.ToString("N0") đ</h5>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">@L("AmountPaid"):</span>
+                    <strong class="text-success">@Model.AmountPaid.ToString("N0") đ</strong>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class="text-muted">@L("ReturnChange"):</span>
+                    <strong class="text-primary">@Model.ChangeAmount.ToString("N0") đ</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer border-top-0 d-flex justify-content-between">
+    <button type="button" class="btn btn-outline-secondary font-weight-bold" data-bs-dismiss="modal">@L("Cancel")</button>
+    <button type="button" class="btn btn-primary font-weight-bold" onclick="window.print()">
+        <i class="fas fa-print mr-2"></i> @L("PrintInvoice")
+    </button>
+</div>

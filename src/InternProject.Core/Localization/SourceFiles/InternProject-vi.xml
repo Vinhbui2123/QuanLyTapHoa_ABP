@@ -21,6 +21,8 @@
     <text name="Password" value="Mật khẩu" />
     <text name="RememberMe" value="Ghi nhớ đăng nhập" />
     <text name="LogIn" value="Đăng nhập" />
+    <text name="ResetPassword" value="Đặt lại mật khẩu" />
+    <text name="UpdatePassword" value="Đổi mật khẩu" />
 
     <text name="LoginFailed" value="Đăng nhập thất bại!" />
 
@@ -191,6 +193,64 @@
     <text name="SearchCategoriesPlaceholder" value="Tìm kiếm theo tên danh mục, mô tả..." />
     <text name="AllCategories" value="Tất cả danh mục" />
     <text name="OutOfStock" value="Hết hàng" />
+    <text name="Invoices" value="Hóa đơn" />
+    <text name="CreateInvoice" value="Bán hàng (POS)" />
+    <text name="CancelInvoice" value="Hủy hóa đơn" />
+    <text name="InvoiceNumber" value="Mã hóa đơn" />
+    <text name="Cashier" value="Thu ngân" />
+    <text name="PaymentMethod" value="Hình thức thanh toán" />
+    <text name="TotalAmount" value="Tổng tiền" />
+    <text name="AmountPaid" value="Khách đưa" />
+    <text name="ChangeAmount" value="Tiền thừa trả khách" />
+    <text name="CancelReason" value="Lý do hủy" />
+    <text name="InvoiceDetails" value="Chi tiết hóa đơn" />
+    <text name="ManageInvoices" value="Quản lý hóa đơn" />
+    <text name="ManageInvoicesSubtitle" value="Quản lý lịch sử, thông tin chi tiết và hủy hóa đơn" />
+    <text name="TotalRevenue" value="Tổng doanh thu" />
+    <text name="CompletedInvoices" value="Hoàn thành" />
+    <text name="CancelledInvoices" value="Đã hủy" />
+    <text name="SearchInvoicesPlaceholder" value="Tìm theo mã hóa đơn, tên khách hàng..." />
+    <text name="CashPayment" value="Tiền mặt" />
+    <text name="BankTransfer" value="Chuyển khoản" />
+    <text name="MomoWallet" value="Ví MoMo" />
+    <text name="ZaloPayWallet" value="Ví ZaloPay" />
+    <text name="InvoiceDate" value="Ngày tạo" />
+    <text name="InvoiceStatus" value="Trạng thái" />
+    <text name="Action" value="Thao tác" />
+    <text name="CancelInvoiceConfirmText" value="Bạn có chắc chắn muốn hủy Hóa đơn {0}?\nHành động này sẽ hoàn trả toàn bộ sản phẩm về kho hàng." />
+    <text name="CancelInvoiceReasonPrompt" value="Vui lòng nhập lý do hủy:" />
+    <text name="CancelInvoiceReasonEmpty" value="Lý do hủy không được để trống!" />
+    <text name="InvoiceCancelledSuccessfully" value="Hủy hóa đơn thành công." />
+    <text name="CancelInvoiceFailed" value="Hủy hóa đơn thất bại." />
+    <text name="Customer" value="Khách hàng" />
+    <text name="Guest" value="Khách lẻ" />
+    <text name="Note" value="Ghi chú" />
+    <text name="POS" value="Bán hàng (POS)" />
+    <text name="Catalog" value="Danh mục sản phẩm" />
+    <text name="Cart" value="Giỏ hàng" />
+    <text name="EmptyCartPlaceholder" value="Giỏ hàng trống. Chọn sản phẩm bên trái để thanh toán." />
+    <text name="Checkout" value="THANH TOÁN (F10)" />
+    <text name="AmountPaidPlaceholder" value="Nhập số tiền khách đưa" />
+    <text name="StockFormat" value="Kho: {0} {1}" />
+    <text name="LowStockFormat" value="Sắp hết: {0}" />
+    <text name="CheckoutSuccess" value="Thanh toán thành công" />
+    <text name="CheckoutSuccessDetail" value="Hóa đơn {0} đã được tạo thành công. Tiền thừa: {1}" />
+    <text name="PrintConfirm" value="Đã hoàn tất thanh toán. Bạn có muốn in hóa đơn không?" />
+    <text name="CancelCartConfirm" value="Bạn có chắc chắn muốn xóa toàn bộ sản phẩm khỏi giỏ hàng hiện tại?" />
+    <text name="ClearCart" value="Hủy giỏ hàng" />
+    <text name="CartCleared" value="Đã làm trống giỏ hàng." />
+    <text name="PaidAmountInvalid" value="Số tiền khách đưa không đủ thanh toán!" />
+    <text name="EnterPaidAmountWarning" value="Vui lòng nhập đủ tiền khách đưa" />
+    <text name="NoProductFound" value="Không tìm thấy sản phẩm nào khớp bộ lọc." />
+    <text name="BarcodeScanNotFound" value='Không quét được mã sản phẩm khớp với "{0}"' />
+    <text name="QuantityExceededStock" value="Sản phẩm '{0}' trong kho chỉ còn tối đa {1}." />
+    <text name="BarcodeScanSuccess" value="Đã quét được mã sản phẩm: {0}" />
+    <text name="PaidCashAmount" value="Tiền mặt khách đưa" />
+    <text name="ReturnChange" value="Tiền trả lại" />
+    <text name="InsufficientAmount" value="Chưa đủ tiền" />
+    <text name="QuickSelect" value="Chọn nhanh" />
+    <text name="ExactPayment" value="Đủ tiền" />
+    <text name="PrintInvoice" value="In Hóa Đơn" />
   </texts>
 </localizationDictionary>
 

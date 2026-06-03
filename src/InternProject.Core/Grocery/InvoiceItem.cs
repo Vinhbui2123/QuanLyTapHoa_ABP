@@ -19,6 +19,13 @@ namespace InternProject.Grocery
         [ForeignKey(nameof(ProductId))]
         public virtual Product Product { get; set; }
 
+        [Required]
+        [StringLength(200)]
+        public string ProductName { get; set; }
+
+        [StringLength(50)]
+        public string? Sku { get; set; }
+
         public int Quantity { get; set; }
 
         public decimal UnitPrice { get; set; }

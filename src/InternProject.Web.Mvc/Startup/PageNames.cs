@@ -10,5 +10,6 @@ public class PageNames
     public const string Customers = "Customers";
     public const string Products = "Products";
     public const string Categories = "Categories";
+    public const string Invoices = "Invoices";
 }
 

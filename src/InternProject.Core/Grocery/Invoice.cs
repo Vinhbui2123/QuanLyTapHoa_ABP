@@ -32,7 +32,10 @@ namespace InternProject.Grocery
 
         public PaymentMethod PaymentMethod { get; set; }
 
-        public InvoiceStatus Status { get; set; } = InvoiceStatus.Pending;
+        public InvoiceStatus Status { get; set; } = InvoiceStatus.Completed;
+
+        [StringLength(500)]
+        public string? CancelReason { get; set; }
 
         [StringLength(500)]
         public string? Note { get; set; }

@@ -15,14 +15,6 @@ public class InternProjectNavigationProvider : NavigationProvider
         context.Manager.MainMenu
             .AddItem(
                 new MenuItemDefinition(
-                    PageNames.About,
-                    L("About"),
-                    url: "About",
-                    icon: "fas fa-info-circle"
-                )
-            )
-            .AddItem(
-                new MenuItemDefinition(
                     PageNames.Home,
                     L("HomePage"),
                     url: "",
@@ -68,6 +60,14 @@ public class InternProjectNavigationProvider : NavigationProvider
                     url: "Products",
                     icon: "fas fa-box",
                     permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_Products)
+                )
+            ).AddItem(
+                new MenuItemDefinition(
+                    PageNames.Invoices,
+                    L("Invoices"),
+                    url: "Invoices",
+                    icon: "fas fa-file-invoice-dollar",
+                    permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_Invoices)
                 )
             );
 

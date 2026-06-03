@@ -1737,7 +1737,7 @@ namespace InternProject.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("RemainingQuantity")
+                    b.Property<int>("RemainingQuantity")
                         .HasColumnType("int");
 
                     b.Property<Guid?>("SupplierId")
@@ -1773,6 +1773,10 @@ namespace InternProject.Migrations
                     b.Property<decimal>("AmountPaid")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("CancelReason")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<long>("CashierUserId")
                         .HasColumnType("bigint");
@@ -1869,8 +1873,17 @@ namespace InternProject.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.Property<string>("Sku")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("Subtotal")
                         .HasPrecision(18, 2)
