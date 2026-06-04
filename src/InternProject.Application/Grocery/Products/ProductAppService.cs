@@ -87,14 +87,49 @@ public class ProductAppService : InternProjectAppServiceBase, IProductAppService
     public async Task UpdateAsync(UpdateProductDto input)
     {
         var product = await _productRepository.GetAsync(input.Id);
+        var oldImageUrl = product.ImageUrl;
+
         ObjectMapper.Map(input, product);
         await _productRepository.UpdateAsync(product);
+
+        if (oldImageUrl != product.ImageUrl)
+        {
+            TryDeleteProductImage(oldImageUrl);
+        }
     }
 
     [AbpAuthorize(PermissionNames.Pages_Products_Delete)]
     public async Task DeleteAsync(EntityDto<Guid> input)
     {
-        await _productRepository.DeleteAsync(input.Id);
+        var product = await _productRepository.FirstOrDefaultAsync(input.Id);
+        if (product != null)
+        {
+            var imageUrl = product.ImageUrl;
+            await _productRepository.DeleteAsync(product);
+            TryDeleteProductImage(imageUrl);
+        }
+    }
+
+    private void TryDeleteProductImage(string imageUrl)
+    {
+        if (string.IsNullOrEmpty(imageUrl) || !imageUrl.StartsWith("/uploads/products/"))
+        {
+            return;
+        }
+
+        try
+        {
+            var relativePath = imageUrl.TrimStart('/');
+            var fileSystemPath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", relativePath);
+            if (System.IO.File.Exists(fileSystemPath))
+            {
+                System.IO.File.Delete(fileSystemPath);
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.Warn($"Failed to delete product image file: {imageUrl}. Error: {ex.Message}", ex);
+        }
     }
 
     public async Task<ListResultDto<CategoryLookupDto>> GetCategoryLookupAsync()

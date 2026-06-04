@@ -34,10 +34,19 @@
         targets: 1,
         data: "name",
         render: (data, type, row) => {
-          if (abp.auth.hasPermission('Pages.Products.Edit')) {
-            return `<a href="javascript:;" class="product-name-link edit-product" data-product-id="${row.id}" data-bs-toggle="modal" data-bs-target="#ProductEditModal"><strong>${data}</strong></a>`;
+          var imgHtml = "";
+          if (row.imageUrl) {
+            var imgUrl = abp.appPath + row.imageUrl.replace(/^\//, "");
+            imgHtml = `<img src="${imgUrl}" class="rounded mr-2 border" style="width: 36px; height: 36px; object-fit: cover;" onerror="this.onerror=null; this.src=''; $(this).hide(); $(this).next().show();" />` + 
+                      `<div class="rounded mr-2 border bg-light d-none align-items-center justify-content-center" style="width: 36px; height: 36px; font-size: 14px; color: #94a3b8;"><i class="fas fa-image"></i></div>`;
+          } else {
+            imgHtml = `<div class="rounded mr-2 border bg-light d-inline-flex align-items-center justify-content-center" style="width: 36px; height: 36px; font-size: 14px; color: #94a3b8;"><i class="fas fa-image"></i></div>`;
           }
-          return `<strong>${data}</strong>`;
+          var nameHtml = `<strong>${data}</strong>`;
+          if (abp.auth.hasPermission('Pages.Products.Edit')) {
+            nameHtml = `<a href="javascript:;" class="product-name-link edit-product" data-product-id="${row.id}" data-bs-toggle="modal" data-bs-target="#ProductEditModal">${nameHtml}</a>`;
+          }
+          return `<div class="d-flex align-items-center">${imgHtml} ${nameHtml}</div>`;
         }
       },
       {
@@ -211,6 +220,65 @@
     );
   }
 
+  // Handle Product Image Upload
+  $("#product-image-file").on("change", function () {
+    var files = this.files;
+    if (files.length === 0) {
+      return;
+    }
+
+    var file = files[0];
+    var formData = new FormData();
+    formData.append("file", file);
+
+    abp.ui.setBusy(_$modal);
+    
+    $.ajax({
+      url: abp.appPath + "Products/UploadImage",
+      type: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      headers: {
+        "X-XSRF-TOKEN": abp.security.antiForgery.getToken()
+      },
+      success: function (response) {
+        if (response.success) {
+          $("#product-image-url").val(response.imageUrl);
+          var previewUrl = abp.appPath + response.imageUrl.replace(/^\//, "");
+          $("#product-image-preview").attr("src", previewUrl).show();
+          $("#product-image-placeholder").hide();
+          $("#btn-remove-product-image").show();
+        }
+      },
+      error: function (xhr) {
+        var errorMsg = l("UploadFailed");
+        if (xhr.status === 400 && xhr.responseText) {
+          try {
+            var errObj = JSON.parse(xhr.responseText);
+            errorMsg = errObj.message || errObj.error?.message || xhr.responseText;
+          } catch(e) {
+            errorMsg = xhr.responseText;
+          }
+        }
+        abp.message.error(errorMsg);
+        $("#product-image-file").val("");
+      },
+      complete: function () {
+        abp.ui.clearBusy(_$modal);
+      }
+    });
+  });
+
+  // Handle Remove Image button click
+  $("#btn-remove-product-image").on("click", function () {
+    $("#product-image-url").val("");
+    $("#product-image-preview").attr("src", "").hide();
+    $("#product-image-placeholder").show();
+    $("#product-image-file").val("");
+    $(this).hide();
+  });
+
   _$modal
     .on("shown.bs.modal", () => {
       _$modal.find("input:not([type=hidden]):first").focus();
@@ -222,6 +290,11 @@
       $("#product-sale-price").val(0);
       $("#product-stock-qty").val(0);
       $("#product-min-stock").val(10);
+      $("#product-image-preview").attr("src", "").hide();
+      $("#product-image-placeholder").show();
+      $("#product-image-url").val("");
+      $("#product-image-file").val("");
+      $("#btn-remove-product-image").hide();
     });
 
   $(".btn-search").on("click", () => {

@@ -147,6 +147,15 @@
     <text name="DeleteSupplier" value="Xóa nhà cung cấp" />
     <text name="EditSupplier" value="Sửa thông tin nhà cung cấp" />
     <text name="SuccessfullyDeleted" value="Đã xóa thành công" />
+    <text name="ManageSuppliers" value="Quản lý nhà cung cấp" />
+    <text name="ManageSuppliersSubtitle" value="Quản lý danh sách và thông tin liên hệ của nhà cung cấp" />
+    <text name="TotalSuppliers" value="Tổng nhà cung cấp" />
+    <text name="ActiveSuppliers" value="Đang hoạt động" />
+    <text name="InactiveSuppliers" value="Tạm dừng" />
+    <text name="SupplierCode" value="Mã NCC" />
+    <text name="SupplierName" value="Tên nhà cung cấp" />
+    <text name="ContactPerson" value="Người liên hệ" />
+    <text name="SearchSuppliersPlaceholder" value="Tìm theo tên, mã NCC, SĐT, địa chỉ..." />
 
     <!-- Customer Dashboard -->
     <text name="ManageCustomers" value="Quản lý khách hàng" />
@@ -175,6 +184,11 @@
     <text name="EditProduct" value="Sửa sản phẩm" />
     <text name="DeleteProduct" value="Xóa sản phẩm" />
     <text name="TotalProducts" value="Tổng sản phẩm" />
+    <text name="ProductImage" value="Ảnh sản phẩm" />
+    <text name="UploadImage" value="Tải ảnh" />
+    <text name="RemoveImage" value="Xóa ảnh" />
+    <text name="InvalidImageFormat" value="Định dạng file không hợp lệ. Chỉ chấp nhận .jpg, .jpeg, .png, .webp." />
+    <text name="ImageSizeTooLarge" value="Kích thước ảnh quá lớn. Tối đa là 2MB." />
     <text name="LowStockWarning" value="Sắp hết hàng" />
     <text name="ActiveProducts" value="Đang kinh doanh" />
     <text name="InactiveProducts" value="Ngừng kinh doanh" />

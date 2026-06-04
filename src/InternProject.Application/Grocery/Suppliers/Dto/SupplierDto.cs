@@ -15,7 +15,7 @@ public class SupplierDto : FullAuditedEntityDto<Guid>
 
     public string? Address { get; set; }
 
-    public String? Email { get; set; }
+    public string? Email { get; set; }
 
     public string? ContactPerson { get; set; }
 

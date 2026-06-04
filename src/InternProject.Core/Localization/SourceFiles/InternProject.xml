@@ -75,6 +75,15 @@
     <text name="CreateSupplier" value="Create supplier" />
     <text name="DeleteSupplier" value="Delete supplier" />
     <text name="EditSupplier" value="Edit supplier" />
+    <text name="ManageSuppliers" value="Manage Suppliers" />
+    <text name="ManageSuppliersSubtitle" value="Manage lists and contact information of suppliers" />
+    <text name="TotalSuppliers" value="Total Suppliers" />
+    <text name="ActiveSuppliers" value="Active" />
+    <text name="InactiveSuppliers" value="Inactive" />
+    <text name="SupplierCode" value="Supplier Code" />
+    <text name="SupplierName" value="Supplier Name" />
+    <text name="ContactPerson" value="Contact Person" />
+    <text name="SearchSuppliersPlaceholder" value="Search by name, code, phone, address..." />
     <text name="Active" value="Active" />
     <text name="DisplayName">Display Name</text>
     <text name="Edit">Edit</text>
@@ -163,6 +172,11 @@
     <text name="EditProduct" value="Edit Product" />
     <text name="DeleteProduct" value="Delete Product" />
     <text name="TotalProducts" value="Total Products" />
+    <text name="ProductImage" value="Product Image" />
+    <text name="UploadImage" value="Upload Image" />
+    <text name="RemoveImage" value="Remove Image" />
+    <text name="InvalidImageFormat" value="Invalid image format. Only .jpg, .jpeg, .png, .webp are allowed." />
+    <text name="ImageSizeTooLarge" value="Image size too large. Maximum is 2MB." />
     <text name="LowStockWarning" value="Low Stock" />
     <text name="ActiveProducts" value="Active Products" />
     <text name="InactiveProducts" value="Inactive Products" />

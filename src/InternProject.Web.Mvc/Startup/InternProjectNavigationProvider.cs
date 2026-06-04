@@ -47,6 +47,14 @@ public class InternProjectNavigationProvider : NavigationProvider
                 )
             ).AddItem(
                 new MenuItemDefinition(
+                    PageNames.Suppliers,
+                    L("Suppliers"),
+                    url: "Suppliers",
+                    icon: "fas fa-truck",
+                    permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_Suppliers)
+                )
+            ).AddItem(
+                new MenuItemDefinition(
                     PageNames.Categories,
                     L("Categories"),
                     url: "Categories",

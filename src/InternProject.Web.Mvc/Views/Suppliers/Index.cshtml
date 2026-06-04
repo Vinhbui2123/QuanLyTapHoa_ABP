@@ -1,0 +1,445 @@
+@using InternProject.Web.Startup
+@model InternProject.Web.Models.Suppliers.SupplierListViewModel
+@{
+    ViewBag.Title = L("Suppliers");
+    ViewBag.CurrentPageName = PageNames.Suppliers;
+}
+@section scripts
+{
+    <environment names="Development">
+        <script src="~/view-resources/Views/Suppliers/Index.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Suppliers/Index.min.js" asp-append-version="true"></script>
+    </environment>
+}
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+    .content-wrapper {
+        background-color: #f8fafc !important;
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .content-header {
+        padding: 0 !important;
+    }
+
+    /* Top Header Bar */
+    .dashboard-top-header {
+        border-bottom: 1px solid #e2e8f0;
+        padding: 12px 0;
+        font-size: 14px;
+        color: #475569;
+        margin-bottom: 20px;
+    }
+    
+    .dashboard-top-header .top-header-left {
+        font-weight: 600;
+        color: #0f172a;
+    }
+
+    /* Main Title & Add Button */
+    .suppliers-main-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #0f172a;
+        letter-spacing: -0.02em;
+    }
+
+    .suppliers-subtitle {
+        font-size: 14px;
+        color: #64748b;
+        margin-top: 4px;
+    }
+
+    .btn-add-supplier {
+        background-color: #2563eb !important;
+        color: #ffffff !important;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: 600;
+        font-size: 14px;
+        box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        transition: all 0.2s ease-in-out;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .btn-add-supplier:hover {
+        background-color: #1d4ed8 !important;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 12px -1px rgba(37, 99, 235, 0.3);
+        color: #ffffff !important;
+    }
+
+    /* KPI Cards */
+    .kpi-card {
+        border-radius: 16px;
+        padding: 24px;
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+        transition: all 0.2s ease-in-out;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .kpi-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    .kpi-card-blue {
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    }
+    
+    .kpi-card-green {
+        background: linear-gradient(135deg, #10b981, #059669);
+    }
+    
+    .kpi-card-gray {
+        background: linear-gradient(135deg, #64748b, #475569);
+    }
+
+    .kpi-icon-wrapper {
+        width: 44px;
+        height: 44px;
+        background-color: rgba(255, 255, 255, 0.18);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+    }
+
+    .kpi-trend {
+        font-size: 18px;
+        opacity: 0.8;
+    }
+
+    .kpi-value {
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        margin-top: 15px;
+    }
+
+    .kpi-label {
+        font-size: 14px;
+        opacity: 0.9;
+        margin-top: 4px;
+        font-weight: 500;
+    }
+
+    /* Search & Filter Containers */
+    .filter-container {
+        background-color: #ffffff;
+        border-radius: 12px;
+        padding: 16px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+    }
+
+    .custom-search-input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .custom-search-input-wrapper .search-icon {
+        position: absolute;
+        left: 16px;
+        color: #94a3b8;
+        font-size: 16px;
+    }
+
+    .custom-search-input-wrapper input {
+        padding-left: 48px;
+        height: 48px;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+        background-color: #ffffff;
+        font-size: 14px;
+        color: #0f172a;
+        transition: all 0.15s ease-in-out;
+        width: 100%;
+    }
+
+    .custom-search-input-wrapper input:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        outline: none;
+    }
+
+    .custom-select-filter {
+        height: 48px;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+        font-size: 14px;
+        font-weight: 500;
+        color: #334155;
+        padding: 0 16px;
+        transition: all 0.15s ease-in-out;
+        width: 100%;
+        background-color: #ffffff;
+    }
+
+    .custom-select-filter:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        outline: none;
+    }
+
+    /* DataTable Styles */
+    .table-card {
+        border: 1px solid #e2e8f0 !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02) !important;
+    }
+
+    .custom-suppliers-table {
+        border-collapse: separate !important;
+        border-spacing: 0 !important;
+    }
+
+    .custom-suppliers-table thead th {
+        background-color: #f8fafc !important;
+        color: #64748b !important;
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        padding: 16px 20px !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+        border-top: none !important;
+    }
+
+    .custom-suppliers-table tbody td {
+        padding: 16px 20px !important;
+        vertical-align: middle !important;
+        font-size: 14px !important;
+        color: #334155 !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        background-color: #ffffff !important;
+    }
+
+    .custom-suppliers-table tbody tr:hover td {
+        background-color: #f8fafc !important;
+    }
+
+    /* Supplier Code link */
+    .supplier-code-link {
+        color: #2563eb !important;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.15s ease-in-out;
+    }
+
+    .supplier-code-link:hover {
+        color: #1d4ed8 !important;
+        text-decoration: underline;
+    }
+
+    /* Status Badges */
+    .badge-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 12px;
+        border-radius: 9999px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .badge-status-active {
+        background-color: #d1fae5;
+        color: #065f46;
+        border: 1px solid #a7f3d0;
+    }
+
+    .badge-status-inactive {
+        background-color: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+    }
+
+    /* Detail link */
+    .supplier-action-detail {
+        color: #2563eb !important;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.15s ease-in-out;
+    }
+
+    .supplier-action-detail:hover {
+        color: #1d4ed8 !important;
+        text-decoration: underline;
+    }
+
+    /* Pagination Styling overrides */
+    .dataTables_wrapper .dataTables_paginate {
+        margin: 20px 0 !important;
+        padding-top: 10px !important;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        border-radius: 8px !important;
+        border: 1px solid #cbd5e1 !important;
+        background: #ffffff !important;
+        color: #475569 !important;
+        padding: 6px 14px !important;
+        font-size: 13px !important;
+        font-weight: 500 !important;
+        cursor: pointer !important;
+        transition: all 0.15s ease-in-out !important;
+        margin: 0 2px !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background: #f1f5f9 !important;
+        color: #0f172a !important;
+        border-color: #94a3b8 !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+        background: #2563eb !important;
+        color: #ffffff !important;
+        border-color: #2563eb !important;
+        font-weight: 600 !important;
+        text-shadow: none !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover {
+        background: #f8fafc !important;
+        color: #94a3b8 !important;
+        border-color: #e2e8f0 !important;
+        cursor: not-allowed !important;
+    }
+
+    .dataTables_wrapper .dataTables_info {
+        font-size: 13px !important;
+        color: #64748b !important;
+        margin-top: 24px !important;
+    }
+</style>
+
+<div class="container-fluid py-4">
+    <div class="suppliers-header-row d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="suppliers-main-title m-0">@L("ManageSuppliers")</h1>
+            <p class="suppliers-subtitle m-0">@L("ManageSuppliersSubtitle")</p>
+        </div>
+        <div>
+            <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#SupplierCreateModal" class="btn btn-add-supplier">
+                <i class="fas fa-plus mr-2"></i>
+                @L("CreateSupplier")
+            </a>
+        </div>
+    </div>
+
+    <!-- 3 Main KPI Cards -->
+    <div class="row mb-4">
+        <!-- Card 1: Tổng nhà cung cấp -->
+        <div class="col-md-4 mb-3">
+            <div class="kpi-card kpi-card-blue">
+                <div class="kpi-card-header d-flex justify-content-between">
+                    <span class="kpi-icon-wrapper"><i class="fas fa-truck"></i></span>
+                    <span class="kpi-trend"><i class="fas fa-chart-line"></i></span>
+                </div>
+                <div>
+                    <div class="kpi-value" id="kpi-total-suppliers">0</div>
+                    <div class="kpi-label">@L("TotalSuppliers")</div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 2: Đang hoạt động -->
+        <div class="col-md-4 mb-3">
+            <div class="kpi-card kpi-card-green">
+                <div class="kpi-card-header d-flex justify-content-between align-items-center">
+                    <span class="kpi-icon-wrapper"><i class="fas fa-check-circle"></i></span>
+                </div>
+                <div>
+                    <div class="kpi-value" id="kpi-active-suppliers">0</div>
+                    <div class="kpi-label">@L("ActiveSuppliers")</div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 3: Tạm khóa / Tạm dừng -->
+        <div class="col-md-4 mb-3">
+            <div class="kpi-card kpi-card-gray">
+                <div class="kpi-card-header d-flex justify-content-between align-items-center">
+                    <span class="kpi-icon-wrapper"><i class="fas fa-ban"></i></span>
+                </div>
+                <div>
+                    <div class="kpi-value" id="kpi-inactive-suppliers">0</div>
+                    <div class="kpi-label">@L("InactiveSuppliers")</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search & Filter Controls -->
+    <div class="filter-container mb-4">
+        <form id="SuppliersSearchForm" class="w-100 mb-0">
+            <div class="row g-3">
+                <div class="col-md-9">
+                    <div class="custom-search-input-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" name="Keyword" class="form-control txt-search" placeholder="@L("SearchSuppliersPlaceholder")" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select id="StatusFilter" name="IsActive" class="form-select custom-select-filter">
+                        <option value="">@L("AllStatuses")</option>
+                        <option value="true">@L("ActiveSuppliers")</option>
+                        <option value="false">@L("InactiveSuppliers")</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Table Card -->
+    <div class="card table-card border-0 rounded-4 mb-4">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table id="SuppliersTable" class="table custom-suppliers-table mb-0 w-100">
+                    <thead>
+                        <tr>
+                            <th>@L("SupplierCode")</th>
+                            <th>@L("SupplierName")</th>
+                            <th>@L("Phone")</th>
+                            <th>@L("ContactPerson")</th>
+                            <th>@L("Email")</th>
+                            <th>@L("Address")</th>
+                            <th>@L("Status")</th>
+                            <th>@L("Actions")</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Views/Suppliers/_CreateModal.cshtml", Model)
+
+<div class="modal fade" id="SupplierEditModal" tabindex="-1" role="dialog" aria-labelledby="SupplierEditModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>

@@ -171,6 +171,7 @@ erDiagram
 		string PaymentMethod
 		string Status
 		string Note
+		string CancelReason "MỚI"
 		datetime CreationTime
 		bool IsDeleted
 	}
@@ -182,6 +183,8 @@ erDiagram
 		int Quantity
 		decimal UnitPrice
 		decimal Subtotal
+		string ProductName "MỚI"
+		string Sku "MỚI"
 	}
 
 	InventoryLogs {
@@ -190,7 +193,7 @@ erDiagram
 		long UserId FK
 		string Type
 		int Quantity
-		int RemainingQuantity
+		int RemainingQuantity "SỬA: NOT NULL"
 		string BatchId
 		datetime ExpiryDate
 		Guid SupplierId FK
@@ -236,9 +239,13 @@ erDiagram
 
 ### Điểm mới so với bản cũ
 
-| Bảng | Trường mới | Kiểu | Mô tả |
+| Bảng | Trường mới / Sửa | Kiểu | Mô tả |
 | --- | --- | --- | --- |
 | Products | `ImageUrl` | nvarchar(500) NULL | Đường dẫn tương đối, ví dụ `/uploads/products/{guid}.jpg`. NULL = chưa có ảnh, UI hiển placeholder. |
+| Invoices | `CancelReason` | nvarchar(500) NULL | Lý do hủy hóa đơn. |
+| InvoiceItems | `ProductName` | nvarchar(200) NOT NULL | Lưu tên sản phẩm tại thời điểm bán để tránh biến động dữ liệu khi sản phẩm đổi tên/xóa. |
+| InvoiceItems | `Sku` | nvarchar(50) NULL | Mã SKU của sản phẩm tại thời điểm bán. |
+| InventoryLogs | `RemainingQuantity` | int NOT NULL | Tồn kho thực tế còn lại của lô hàng (chuyển từ Nullable sang Not Null, mặc định 0). |
 
 ---
 
@@ -304,6 +311,7 @@ classDiagram
 		+PaymentMethod PaymentMethod
 		+InvoiceStatus Status
 		+string Note
+		+string CancelReason
 		+Customer Customer
 		+ICollection~InvoiceItem~ Items
 	}
@@ -314,6 +322,8 @@ classDiagram
 		+int Quantity
 		+decimal UnitPrice
 		+decimal Subtotal
+		+string ProductName
+		+string Sku
 		+Invoice Invoice
 		+Product Product
 	}
@@ -323,7 +333,7 @@ classDiagram
 		+long? UserId
 		+InventoryLogType Type
 		+int Quantity
-		+int? RemainingQuantity
+		+int RemainingQuantity
 		+string BatchId
 		+DateTime? ExpiryDate
 		+Guid? SupplierId
@@ -568,112 +578,7 @@ stateDiagram-v2
 
 ---
 
-## VII. THAY ĐỔI CỤ THỂ TRONG CODE
-
-### 7.1 Entity `Product.cs`
-
-```csharp
-public class Product : FullAuditedAggregateRoot<Guid>
-{
-    public string Name { get; set; }
-    public string? Barcode { get; set; }
-    public Guid? CategoryId { get; set; }
-    public decimal CostPrice { get; set; } = 0;
-    public decimal SalePrice { get; set; }
-    public int StockQuantity { get; set; } = 0;
-    public int MinStock { get; set; } = 10;
-    public string Unit { get; set; } = "cái";
-    public string? ImageUrl { get; set; }   // MỚI: đường dẫn ảnh đại diện
-    public bool IsActive { get; set; } = true;
-    public virtual Category Category { get; set; }
-}
-```
-
-### 7.2 Fluent API trong `InternProjectDbContext`
-
-```csharp
-builder.Entity<Product>(b =>
-{
-    b.Property(x => x.ImageUrl).HasMaxLength(500);
-    // ... các cấu hình khác giữ nguyên
-});
-```
-
-### 7.3 Migration
-
-```
-dotnet ef migrations add Add_Product_ImageUrl -p src/InternProject.EntityFrameworkCore -s src/InternProject.Web.Mvc
-dotnet ef database update -p src/InternProject.EntityFrameworkCore -s src/InternProject.Web.Mvc
-```
-
-### 7.4 DTO cho POS
-
-```csharp
-public class ProductPosDto
-{
-    public Guid Id { get; set; }
-    public string Name { get; set; }
-    public string? Barcode { get; set; }
-    public decimal SalePrice { get; set; }
-    public int StockQuantity { get; set; }
-    public string Unit { get; set; }
-    public string? ImageUrl { get; set; }  // hiển thị trên grid POS
-}
-```
-
-### 7.5 FileUploadService (Web.Mvc)
-
-```csharp
-public class FileUploadService
-{
-    private readonly IWebHostEnvironment _env;
-    private const long MaxSize = 2 * 1024 * 1024;  // 2MB
-    private static readonly string[] AllowedMimes = { "image/jpeg", "image/png", "image/webp" };
-
-    public async Task<string> SaveProductImageAsync(IFormFile file)
-    {
-        if (file.Length > MaxSize) throw new UserFriendlyException("Ảnh quá 2MB");
-        if (!AllowedMimes.Contains(file.ContentType)) throw new UserFriendlyException("Định dạng ảnh không hợp lệ");
-
-        var folder = Path.Combine(_env.WebRootPath, "uploads", "products");
-        Directory.CreateDirectory(folder);
-        var fileName = $"{Guid.NewGuid()}.jpg";
-        var fullPath = Path.Combine(folder, fileName);
-
-        // Resize + lưu JPEG bằng SixLabors.ImageSharp
-        using var image = await Image.LoadAsync(file.OpenReadStream());
-        image.Mutate(x => x.Resize(new ResizeOptions
-        {
-            Mode = ResizeMode.Max,
-            Size = new Size(500, 500)
-        }));
-        await image.SaveAsJpegAsync(fullPath);
-
-        return $"/uploads/products/{fileName}";
-    }
-}
-```
-
-### 7.6 POS View (snippet hiển grid ảnh)
-
-```html
-<div class="row" id="pos-products">
-    @foreach (var p in Model.Products)
-    {
-        <div class="col-md-2 product-tile" data-id="@p.Id" data-price="@p.SalePrice">
-            <img src="@(string.IsNullOrEmpty(p.ImageUrl) ? "/images/no-image.png" : p.ImageUrl)"
-                 alt="@p.Name" class="img-fluid" />
-            <div class="product-name">@p.Name</div>
-            <div class="product-price">@p.SalePrice.ToString("N0") đ</div>
-            <div class="product-stock">Tồn: @p.StockQuantity @p.Unit</div>
-        </div>
-    }
-</div>
-```
-
----
-
-## VIII. CHECKLIST CHO BÁO CÁO
+## VII. CHECKLIST CHO BÁO CÁO
 
 - [ ]  Vẽ lại Use Case Diagram (mở [draw.io](http://draw.io) / Visual Paradigm theo sơ đồ mermaid ở mục II).
 - [ ]  Vẽ lại ERD trong PowerDesigner / MySQL Workbench / [draw.io](http://draw.io) theo mục III.

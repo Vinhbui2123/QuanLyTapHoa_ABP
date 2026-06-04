@@ -77,8 +77,20 @@ public class SupplierAppService : InternProjectAppServiceBase, ISupplierAppServi
         await _supplierRepository.UpdateAsync(supplier);
     }   
     [AbpAuthorize(PermissionNames.Pages_Suppliers_Delete)]
-    public async Task DeleteAsync(Guid id)
+    public async Task DeleteAsync(EntityDto<Guid> input)
     {
-        await _supplierRepository.DeleteAsync(id);
+        await _supplierRepository.DeleteAsync(input.Id);
+    }
+
+    public async Task<SupplierDashboardStatsDto> GetDashboardStatsAsync()
+    {
+        var query = _supplierRepository.GetAll();
+        return new SupplierDashboardStatsDto
+        {
+            TotalCount = await query.CountAsync(),
+            ActiveCount = await query.CountAsync(x => x.IsActive),
+            InactiveCount = await query.CountAsync(x => !x.IsActive)
+        };
     }
 }
+

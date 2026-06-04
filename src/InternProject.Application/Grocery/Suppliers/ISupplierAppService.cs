@@ -10,9 +10,10 @@ public interface ISupplierAppService : IApplicationService
 {
     Task<SupplierDto> GetAsync(EntityDto<Guid> input);
     Task CreateAsync(CreateUpdateSupplierDto input);
-    Task DeleteAsync(Guid id);
+    Task DeleteAsync(EntityDto<Guid> input);
     Task UpdateAsync(UpdateSupplierDto input);
 
     Task<PagedResultDto<SupplierDto>> GetListAsync(PagedSupplierResultRequestDto input);
-
+    Task<SupplierDashboardStatsDto> GetDashboardStatsAsync();
 }
+

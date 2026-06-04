@@ -1,0 +1,60 @@
+@using InternProject.Web.Models.Common.Modals
+@using InternProject.Web.Models.Suppliers
+@model EditSupplierModalViewModel
+@{
+    Layout = null;
+}
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditSupplier")))
+<form name="SupplierEditForm" role="form" class="form-horizontal">
+    <input type="hidden" name="Id" value="@Model.Supplier.Id" />
+    <div class="modal-body">
+        <div class="form-group row required">
+            <label class="col-md-3 col-form-label" for="SupplierEditCode">@L("Code")</label>
+            <div class="col-md-9">
+                <input id="SupplierEditCode" type="text" class="form-control" name="Code" value="@Model.Supplier.Code" required maxlength="50">
+            </div>
+        </div>
+        <div class="form-group row required">
+            <label class="col-md-3 col-form-label" for="SupplierEditName">@L("Name")</label>
+            <div class="col-md-9">
+                <input id="SupplierEditName" type="text" class="form-control" name="Name" value="@Model.Supplier.Name" required maxlength="100">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="SupplierEditPhone">@L("Phone")</label>
+            <div class="col-md-9">
+                <input id="SupplierEditPhone" type="text" class="form-control" name="Phone" value="@Model.Supplier.Phone" maxlength="32">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="SupplierEditContactPerson">@L("ContactPerson")</label>
+            <div class="col-md-9">
+                <input id="SupplierEditContactPerson" type="text" class="form-control" name="ContactPerson" value="@Model.Supplier.ContactPerson" maxlength="100">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="SupplierEditEmail">@L("Email")</label>
+            <div class="col-md-9">
+                <input id="SupplierEditEmail" type="email" class="form-control" name="Email" value="@Model.Supplier.Email" maxlength="100">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="SupplierEditAddress">@L("Address")</label>
+            <div class="col-md-9">
+                <input id="SupplierEditAddress" type="text" class="form-control" name="Address" value="@Model.Supplier.Address" maxlength="256">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="SupplierEditIsActive">@L("IsActive")</label>
+            <div class="col-md-9">
+                <div class="form-check mt-2">
+                    <input id="SupplierEditIsActive" type="checkbox" name="IsActive" class="form-check-input" value="true" @(Model.Supplier.IsActive ? "checked" : "") />
+                    <label class="form-check-label" for="SupplierEditIsActive">@L("Active")</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+</form>
+
+<script src="~/view-resources/Views/Suppliers/_EditModal.js" asp-append-version="true"></script>

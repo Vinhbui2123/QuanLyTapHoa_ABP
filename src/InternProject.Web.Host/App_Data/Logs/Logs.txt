@@ -3635,3 +3635,287 @@ Abp.AbpException: A dictionary can not contain same key twice. There are some du
    at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
    at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
    at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+DEBUG 2026-06-03 13:44:02,758 [2    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2026-06-03 13:44:02,776 [2    ] Abp.Modules.AbpModuleManager             - Found 15 ABP modules in total.
+DEBUG 2026-06-03 13:44:02,787 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.Web.Host.Startup.InternProjectWebHostModule, InternProject.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 13:44:02,789 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectWebCoreModule, InternProject.Web.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 13:44:02,789 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectApplicationModule, InternProject.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 13:44:02,789 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.InternProjectCoreModule, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 13:44:02,789 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 13:44:02,790 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 13:44:02,790 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 13:44:02,790 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 13:44:02,791 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: InternProject.EntityFrameworkCore.InternProjectEntityFrameworkModule, InternProject.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 13:44:02,791 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 13:44:02,791 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 13:44:02,791 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 13:44:02,791 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 13:44:02,791 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 13:44:02,792 [2    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=10.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 13:44:02,793 [2    ] Abp.Modules.AbpModuleManager             - 15 modules loaded.
+DEBUG 2026-06-03 13:44:02,826 [2    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 13:44:02,826 [2    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 13:44:02,826 [2    ] o.Configuration.LanguageManagementConfig - Converted InternProject (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 13:44:02,826 [2    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2026-06-03 13:44:03,059 [2    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: InternProject.EntityFrameworkCore.InternProjectDbContext, InternProject.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2026-06-03 13:44:03,211 [2    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2026-06-03 13:44:03,241 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2026-06-03 13:44:03,249 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2026-06-03 13:44:03,253 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: InternProject
+DEBUG 2026-06-03 13:44:03,256 [2    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2026-06-03 13:44:03,262 [2    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2026-06-03 13:44:03,265 [2    ] , Culture=neutral, PublicKeyToken=null]] - Start background worker: Abp.Authorization.Users.UserTokenExpirationWorker`2[[InternProject.MultiTenancy.Tenant, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[InternProject.Authorization.Users.User, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+DEBUG 2026-06-03 13:44:03,281 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 22 classes define auto mapping attributes
+DEBUG 2026-06-03 13:44:03,281 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Users.Dto.CreateUserDto
+DEBUG 2026-06-03 13:44:03,283 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Users.Dto.UserDto
+DEBUG 2026-06-03 13:44:03,284 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2026-06-03 13:44:03,284 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Sessions.Dto.UserLoginInfoDto
+DEBUG 2026-06-03 13:44:03,284 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Roles.Dto.PermissionDto
+DEBUG 2026-06-03 13:44:03,284 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.MultiTenancy.Dto.CreateTenantDto
+DEBUG 2026-06-03 13:44:03,284 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.MultiTenancy.Dto.TenantDto
+DEBUG 2026-06-03 13:44:03,284 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Suppliers.Dto.CreateUpdateSupplierDto
+DEBUG 2026-06-03 13:44:03,284 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Suppliers.Dto.SupplierDto
+DEBUG 2026-06-03 13:44:03,284 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Suppliers.Dto.UpdateSupplierDto
+DEBUG 2026-06-03 13:44:03,284 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Products.Dto.CategoryLookupDto
+DEBUG 2026-06-03 13:44:03,284 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Products.Dto.CreateUpdateProductDto
+DEBUG 2026-06-03 13:44:03,284 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Products.Dto.ProductDto
+DEBUG 2026-06-03 13:44:03,284 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Products.Dto.UpdateProductDto
+DEBUG 2026-06-03 13:44:03,284 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Invoices.Dto.InvoiceDto
+DEBUG 2026-06-03 13:44:03,285 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Invoices.Dto.InvoiceItemDto
+DEBUG 2026-06-03 13:44:03,285 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Customers.Dto.CreateUpdateCustomerDto
+DEBUG 2026-06-03 13:44:03,285 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Customers.Dto.CustomerDto
+DEBUG 2026-06-03 13:44:03,285 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Customers.Dto.UpdateCustomerDto
+DEBUG 2026-06-03 13:44:03,285 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Categories.Dto.CategoryDto
+DEBUG 2026-06-03 13:44:03,285 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Categories.Dto.CreateUpdateCategoryDto
+DEBUG 2026-06-03 13:44:03,285 [2    ] Abp.AutoMapper.AbpAutoMapperModule       - InternProject.Grocery.Categories.Dto.UpdateCategoryDto
+INFO  2026-06-03 13:44:05,621 [2    ] tCore.Builder.RequestLocalizationOptions - Supported Request Localization Cultures: en,vi
+WARN  2026-06-03 13:44:05,829 [2    ] Microsoft.AspNetCore.Server.Kestrel      - Overriding address(es) 'https://localhost:44311/'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+INFO  2026-06-03 13:44:05,856 [2    ] Microsoft.Hosting.Lifetime               - Now listening on: https://localhost:44311
+INFO  2026-06-03 13:44:05,857 [2    ] Microsoft.Hosting.Lifetime               - Application started. Press Ctrl+C to shut down.
+INFO  2026-06-03 13:44:05,857 [2    ] Microsoft.Hosting.Lifetime               - Hosting environment: Development
+INFO  2026-06-03 13:44:05,857 [2    ] Microsoft.Hosting.Lifetime               - Content root path: D:\Thuctap\InternProject\QuanLyTapHoa\src\InternProject.Web.Host
+INFO  2026-06-03 13:44:06,331 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/ - - -
+INFO  2026-06-03 13:44:06,416 [5    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Web.Host.Controllers.HomeController.Index (InternProject.Web.Host)'
+INFO  2026-06-03 13:44:06,479 [5    ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller InternProject.Web.Host.Controllers.HomeController (InternProject.Web.Host).
+INFO  2026-06-03 13:44:06,682 [12   ] vc.Infrastructure.RedirectResultExecutor - Executing RedirectResult, redirecting to /swagger.
+INFO  2026-06-03 13:44:06,697 [12   ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Web.Host.Controllers.HomeController.Index (InternProject.Web.Host) in 204.3062ms
+INFO  2026-06-03 13:44:06,697 [12   ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Web.Host.Controllers.HomeController.Index (InternProject.Web.Host)'
+INFO  2026-06-03 13:44:06,704 [12   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/ - 302 0 - 372.3277ms
+INFO  2026-06-03 13:44:06,768 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - - -
+INFO  2026-06-03 13:44:06,776 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - 200 16481 application/javascript;+charset=utf-8 7.3539ms
+INFO  2026-06-03 13:44:06,874 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - - -
+INFO  2026-06-03 13:44:06,895 [12   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - - -
+INFO  2026-06-03 13:44:07,061 [13   ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 13:44:07,072 [13   ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "SetCookie", controller = "AntiForgery", area = ""}. Executing controller action with signature Void SetCookie() on controller InternProject.Web.Host.Controllers.AntiForgeryController (InternProject.Web.Host).
+INFO  2026-06-03 13:44:07,094 [13   ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+ERROR 2026-06-03 13:44:07,099 [5    ] Microsoft.EntityFrameworkCore.Update     - An exception occurred in the database while saving changes for context type 'InternProject.EntityFrameworkCore.InternProjectDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert duplicate key row in object 'dbo.AbpSettings' with unique index 'IX_AbpSettings_TenantId_Name_UserId'. The duplicate key value is (1, Abp.Localization.DefaultLanguageName, 4).
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:4757ccff-0ac1-4468-a7d6-2e598b99a2ea
+Error Number:2601,State:1,Class:14
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert duplicate key row in object 'dbo.AbpSettings' with unique index 'IX_AbpSettings_TenantId_Name_UserId'. The duplicate key value is (1, Abp.Localization.DefaultLanguageName, 4).
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:4757ccff-0ac1-4468-a7d6-2e598b99a2ea
+Error Number:2601,State:1,Class:14
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+INFO  2026-06-03 13:44:07,106 [13   ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host) in 33.7938ms
+INFO  2026-06-03 13:44:07,106 [13   ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 13:44:07,106 [13   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - 200 - application/json;+charset=utf-8 232.6863ms
+ERROR 2026-06-03 13:44:07,111 [5    ] Microsoft.AspNetCore.Server.Kestrel      - Connection id "0HNM17E1182C2", Request id "0HNM17E1182C2:00000007": An unhandled exception was thrown by the application.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert duplicate key row in object 'dbo.AbpSettings' with unique index 'IX_AbpSettings_TenantId_Name_UserId'. The duplicate key value is (1, Abp.Localization.DefaultLanguageName, 4).
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:4757ccff-0ac1-4468-a7d6-2e598b99a2ea
+Error Number:2601,State:1,Class:14
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Abp.EntityFrameworkCore.AbpDbContext.SaveChangesAsync(CancellationToken cancellationToken)
+   at Abp.Zero.EntityFrameworkCore.AbpZeroCommonDbContext`3.SaveChangesAsync(CancellationToken cancellationToken)
+   at Abp.EntityFrameworkCore.Uow.EfCoreUnitOfWork.SaveChangesAsync()
+   at Abp.Configuration.SettingStore.<>c__DisplayClass9_0.<<CreateAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Abp.Domain.Uow.UnitOfWorkManagerExtensions.WithUnitOfWorkAsync(IUnitOfWorkManager manager, Func`1 action, UnitOfWorkOptions options)
+   at Abp.Configuration.SettingStore.CreateAsync(SettingInfo settingInfo)
+   at Abp.Configuration.SettingManager.InsertOrUpdateOrDeleteSettingValueAsync(String name, String value, Nullable`1 tenantId, Nullable`1 userId)
+   at Abp.Configuration.SettingManager.<>c__DisplayClass52_0.<<ChangeSettingForUserAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Abp.Domain.Uow.UnitOfWorkManagerExtensions.WithUnitOfWorkAsync(IUnitOfWorkManager manager, Func`1 action, UnitOfWorkOptions options)
+   at Abp.Configuration.SettingManager.ChangeSettingForUserAsync(UserIdentifier user, String name, String value)
+   at Abp.AspNetCore.Localization.AbpUserRequestCultureProvider.DetermineProviderCultureResult(HttpContext httpContext)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Abp.AspNetCore.Security.AbpSecurityHeadersMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+INFO  2026-06-03 13:44:07,113 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - 500 0 - 217.9019ms
+INFO  2026-06-03 13:45:46,924 [3    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/index.html - - -
+INFO  2026-06-03 13:45:47,006 [3    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/index.html - 200 - text/html;charset=utf-8 82.4059ms
+INFO  2026-06-03 13:45:47,030 [3    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - - -
+INFO  2026-06-03 13:45:47,030 [17   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - 200 16481 application/javascript;+charset=utf-8 0.5592ms
+INFO  2026-06-03 13:45:47,053 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - - -
+INFO  2026-06-03 13:45:47,061 [5    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 13:45:47,063 [5    ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "SetCookie", controller = "AntiForgery", area = ""}. Executing controller action with signature Void SetCookie() on controller InternProject.Web.Host.Controllers.AntiForgeryController (InternProject.Web.Host).
+INFO  2026-06-03 13:45:47,074 [3    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - - -
+INFO  2026-06-03 13:45:47,077 [5    ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-03 13:45:47,078 [5    ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host) in 14.4652ms
+INFO  2026-06-03 13:45:47,079 [5    ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 13:45:47,079 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - 200 - application/json;+charset=utf-8 26.2084ms
+INFO  2026-06-03 13:45:47,240 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - 200 - application/json;charset=utf-8 165.8978ms
+INFO  2026-06-03 13:45:50,593 [17   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/index.html - - -
+INFO  2026-06-03 13:45:50,597 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/index.html - 200 - text/html;charset=utf-8 3.7241ms
+INFO  2026-06-03 13:45:50,636 [17   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - - -
+INFO  2026-06-03 13:45:50,636 [3    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - 200 16481 application/javascript;+charset=utf-8 0.4154ms
+INFO  2026-06-03 13:45:50,648 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - - -
+INFO  2026-06-03 13:45:50,649 [5    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 13:45:50,650 [5    ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "SetCookie", controller = "AntiForgery", area = ""}. Executing controller action with signature Void SetCookie() on controller InternProject.Web.Host.Controllers.AntiForgeryController (InternProject.Web.Host).
+INFO  2026-06-03 13:45:50,657 [5    ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-03 13:45:50,657 [5    ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host) in 7.2977ms
+INFO  2026-06-03 13:45:50,657 [5    ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 13:45:50,658 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - 200 - application/json;+charset=utf-8 9.2426ms
+INFO  2026-06-03 13:45:50,671 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - - -
+INFO  2026-06-03 13:45:50,705 [17   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - 200 - application/json;charset=utf-8 33.7298ms
+INFO  2026-06-03 13:46:01,707 [17   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 POST https://localhost:44311/api/TokenAuth/Authenticate - application/json 54
+INFO  2026-06-03 13:46:01,709 [17   ] pNetCore.Cors.Infrastructure.CorsService - CORS policy execution failed.
+INFO  2026-06-03 13:46:01,710 [17   ] pNetCore.Cors.Infrastructure.CorsService - Request origin https://localhost:44311 does not have permission to access the resource.
+INFO  2026-06-03 13:46:01,711 [17   ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Controllers.TokenAuthController.Authenticate (InternProject.Web.Core)'
+INFO  2026-06-03 13:46:01,720 [17   ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "Authenticate", controller = "TokenAuth", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[InternProject.Models.TokenAuth.AuthenticateResultModel] Authenticate(InternProject.Models.TokenAuth.AuthenticateModel) on controller InternProject.Controllers.TokenAuthController (InternProject.Web.Core).
+INFO  2026-06-03 13:46:02,147 [3    ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-03 13:46:02,149 [3    ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Controllers.TokenAuthController.Authenticate (InternProject.Web.Core) in 429.147ms
+INFO  2026-06-03 13:46:02,149 [3    ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Controllers.TokenAuthController.Authenticate (InternProject.Web.Core)'
+INFO  2026-06-03 13:46:02,149 [3    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 POST https://localhost:44311/api/TokenAuth/Authenticate - 200 - application/json;+charset=utf-8 442.1791ms
+INFO  2026-06-03 13:46:02,174 [3    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/index.html - - -
+INFO  2026-06-03 13:46:02,175 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/index.html - 200 - text/html;charset=utf-8 1.3452ms
+INFO  2026-06-03 13:46:02,226 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - - -
+INFO  2026-06-03 13:46:02,241 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - 200 16481 application/javascript;+charset=utf-8 6.0593ms
+INFO  2026-06-03 13:46:02,255 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - - -
+INFO  2026-06-03 13:46:02,259 [5    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 13:46:02,260 [5    ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "SetCookie", controller = "AntiForgery", area = ""}. Executing controller action with signature Void SetCookie() on controller InternProject.Web.Host.Controllers.AntiForgeryController (InternProject.Web.Host).
+INFO  2026-06-03 13:46:02,266 [5    ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-03 13:46:02,266 [5    ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host) in 5.867ms
+INFO  2026-06-03 13:46:02,266 [5    ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 13:46:02,266 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - 200 - application/json;+charset=utf-8 11.3962ms
+INFO  2026-06-03 13:46:02,271 [8    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - - -
+INFO  2026-06-03 13:46:02,301 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - 200 - application/json;charset=utf-8 29.7268ms
+INFO  2026-06-03 13:46:24,100 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/api/services/app/Category/GetList - - -
+INFO  2026-06-03 13:46:24,101 [5    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Grocery.Categories.CategoryAppService.GetListAsync (InternProject.Application)'
+INFO  2026-06-03 13:46:24,105 [5    ] c.Infrastructure.ControllerActionInvoker - Route matched with {area = "app", action = "GetList", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Abp.Application.Services.Dto.PagedResultDto`1[InternProject.Grocery.Categories.Dto.CategoryDto]] GetListAsync(InternProject.Grocery.Categories.Dto.PagedCategoryResultRequestDto) on controller InternProject.Grocery.Categories.CategoryAppService (InternProject.Application).
+INFO  2026-06-03 13:46:24,349 [5    ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-03 13:46:24,364 [5    ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Grocery.Categories.CategoryAppService.GetListAsync (InternProject.Application) in 258.7316ms
+INFO  2026-06-03 13:46:24,364 [5    ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Grocery.Categories.CategoryAppService.GetListAsync (InternProject.Application)'
+INFO  2026-06-03 13:46:24,364 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/api/services/app/Category/GetList - 200 - application/json;+charset=utf-8 264.1784ms
+INFO  2026-06-03 13:46:52,296 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 DELETE https://localhost:44311/api/services/app/Category/Delete?Id=0eacc77a-df1d-47e1-7c59-08dec0798ec5 - - -
+INFO  2026-06-03 13:46:52,297 [5    ] pNetCore.Cors.Infrastructure.CorsService - CORS policy execution failed.
+INFO  2026-06-03 13:46:52,297 [5    ] pNetCore.Cors.Infrastructure.CorsService - Request origin https://localhost:44311 does not have permission to access the resource.
+INFO  2026-06-03 13:46:52,301 [5    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Grocery.Categories.CategoryAppService.DeleteAsync (InternProject.Application)'
+INFO  2026-06-03 13:46:52,305 [5    ] c.Infrastructure.ControllerActionInvoker - Route matched with {area = "app", action = "Delete", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task DeleteAsync(Abp.Application.Services.Dto.EntityDto`1[System.Guid]) on controller InternProject.Grocery.Categories.CategoryAppService (InternProject.Application).
+WARN  2026-06-03 13:46:52,343 [13   ] Mvc.ExceptionHandling.AbpExceptionFilter - Không thể xoá danh mục vì đang có sản phẩm thuộc danh mục
+Abp.UI.UserFriendlyException: Không thể xoá danh mục vì đang có sản phẩm thuộc danh mục
+   at InternProject.Grocery.Categories.CategoryAppService.DeleteAsync(EntityDto`1 input) in D:\Thuctap\InternProject\QuanLyTapHoa\src\InternProject.Application\Grocery\Categories\CategoryAppService.cs:line 92
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|26_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+INFO  2026-06-03 13:46:52,350 [13   ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-03 13:46:52,351 [13   ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Grocery.Categories.CategoryAppService.DeleteAsync (InternProject.Application) in 45.9133ms
+INFO  2026-06-03 13:46:52,351 [13   ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Grocery.Categories.CategoryAppService.DeleteAsync (InternProject.Application)'
+INFO  2026-06-03 13:46:52,351 [13   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 DELETE https://localhost:44311/api/services/app/Category/Delete?Id=0eacc77a-df1d-47e1-7c59-08dec0798ec5 - 500 - application/json;+charset=utf-8 54.6937ms
+INFO  2026-06-03 13:47:16,620 [17   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/api/services/app/Category/Get?Id=0eacc77a-df1d-47e1-7c59-08dec0798ec5 - - -
+INFO  2026-06-03 13:47:16,621 [17   ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Grocery.Categories.CategoryAppService.GetAsync (InternProject.Application)'
+INFO  2026-06-03 13:47:16,625 [17   ] c.Infrastructure.ControllerActionInvoker - Route matched with {area = "app", action = "Get", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[InternProject.Grocery.Categories.Dto.CategoryDto] GetAsync(Abp.Application.Services.Dto.EntityDto`1[System.Guid]) on controller InternProject.Grocery.Categories.CategoryAppService (InternProject.Application).
+INFO  2026-06-03 13:47:16,658 [12   ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-03 13:47:16,658 [12   ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Grocery.Categories.CategoryAppService.GetAsync (InternProject.Application) in 32.8999ms
+INFO  2026-06-03 13:47:16,658 [12   ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Grocery.Categories.CategoryAppService.GetAsync (InternProject.Application)'
+INFO  2026-06-03 13:47:16,658 [12   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/api/services/app/Category/Get?Id=0eacc77a-df1d-47e1-7c59-08dec0798ec5 - 200 - application/json;+charset=utf-8 38.6169ms
+INFO  2026-06-03 13:50:57,985 [22   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/index.html - - -
+INFO  2026-06-03 13:50:57,987 [24   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/index.html - 200 - text/html;charset=utf-8 2.2083ms
+INFO  2026-06-03 13:50:58,043 [24   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - - -
+INFO  2026-06-03 13:50:58,045 [18   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - 200 16481 application/javascript;+charset=utf-8 1.2780ms
+INFO  2026-06-03 13:50:58,097 [24   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - - -
+INFO  2026-06-03 13:50:58,098 [24   ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 13:50:58,100 [24   ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "SetCookie", controller = "AntiForgery", area = ""}. Executing controller action with signature Void SetCookie() on controller InternProject.Web.Host.Controllers.AntiForgeryController (InternProject.Web.Host).
+INFO  2026-06-03 13:50:58,110 [24   ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2026-06-03 13:50:58,110 [24   ] c.Infrastructure.ControllerActionInvoker - Executed action InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host) in 9.8478ms
+INFO  2026-06-03 13:50:58,110 [24   ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'InternProject.Web.Host.Controllers.AntiForgeryController.SetCookie (InternProject.Web.Host)'
+INFO  2026-06-03 13:50:58,110 [24   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - 200 - application/json;+charset=utf-8 12.8660ms
+INFO  2026-06-03 13:50:58,148 [24   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - - -
+INFO  2026-06-03 13:50:58,165 [24   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - 200 - application/json;charset=utf-8 16.6268ms
+DEBUG 2026-06-03 13:50:59,885 [25   ] Abp.Modules.AbpModuleManager             - Shutting down has been started
+DEBUG 2026-06-03 13:50:59,886 [25   ] Abp.BackgroundJobs.BackgroundJobManager  - Stop background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2026-06-03 13:50:59,886 [25   ] , Culture=neutral, PublicKeyToken=null]] - Stop background worker: Abp.Authorization.Users.UserTokenExpirationWorker`2[[InternProject.MultiTenancy.Tenant, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[InternProject.Authorization.Users.User, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+DEBUG 2026-06-03 13:50:59,886 [25   ] Abp.BackgroundJobs.BackgroundJobManager  - WaitToStop background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2026-06-03 13:50:59,886 [25   ] , Culture=neutral, PublicKeyToken=null]] - WaitToStop background worker: Abp.Authorization.Users.UserTokenExpirationWorker`2[[InternProject.MultiTenancy.Tenant, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[InternProject.Authorization.Users.User, InternProject.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+DEBUG 2026-06-03 13:50:59,886 [25   ] Abp.Modules.AbpModuleManager             - Shutting down completed.
+INFO  2026-06-03 13:50:59,886 [25   ] Microsoft.Hosting.Lifetime               - Application is shutting down...

@@ -1,0 +1,26 @@
+[
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Invoices/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Invoices/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Categories/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Categories/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Products/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Products/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Suppliers/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Suppliers/Index.js"
+    ]
+  }
+]

@@ -107,7 +107,39 @@
             </div>
         </div>
 
-        <!-- Row 5: Status -->
+        <!-- Row 5: Image Upload & Preview -->
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <div class="form-group row">
+                    <label class="col-md-12 col-form-label font-weight-bold">@L("ProductImage")</label>
+                    <div class="col-md-12">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="image-preview-wrapper border rounded-3 d-flex align-items-center justify-content-center bg-light" style="width: 100px; height: 100px; overflow: hidden; position: relative;">
+                                <img id="product-edit-image-preview" src="@Model.Product.ImageUrl" alt="Preview" 
+                                     style="width: 100%; height: 100%; object-fit: cover; @(string.IsNullOrEmpty(Model.Product.ImageUrl) ? "display: none;" : "")" 
+                                     onerror="this.style.display='none'; document.getElementById('product-edit-image-placeholder').style.display='block';" />
+                                <div id="product-edit-image-placeholder" class="text-muted text-center" style="@(string.IsNullOrEmpty(Model.Product.ImageUrl) ? "" : "display: none;")">
+                                    <i class="fas fa-image fa-2x"></i>
+                                    <div style="font-size: 10px; margin-top: 4px;">@L("UploadImage")</div>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <input type="file" id="product-edit-image-file" class="form-control mb-2" accept="image/*" />
+                                <input type="hidden" id="product-edit-image-url" name="ImageUrl" value="@Model.Product.ImageUrl" />
+                                <div class="d-flex align-items-center gap-2">
+                                    <button type="button" id="btn-remove-product-edit-image" class="btn btn-outline-danger btn-sm" style="@(string.IsNullOrEmpty(Model.Product.ImageUrl) ? "display: none;" : "")">
+                                        <i class="fas fa-trash-alt mr-1"></i> @L("RemoveImage")
+                                    </button>
+                                    <span class="text-muted" style="font-size: 11px;">Chấp nhận JPG, JPEG, PNG, WEBP (Tối đa 2MB)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 6: Status -->
         <div class="row mt-2">
             <div class="col-md-12">
                 <div class="form-check">

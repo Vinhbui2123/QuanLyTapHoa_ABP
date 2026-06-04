@@ -15,7 +15,13 @@
     <PreserveCompilationReferences>true</PreserveCompilationReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="eslint.config.mjs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Dockerfile">

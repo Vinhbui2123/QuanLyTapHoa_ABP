@@ -254,3 +254,4 @@ paket-files/
 src/InternProject.Web.Mvc/secrets.json
 src/InternProject.Web.Host/secrets.json
 src/InternProject.Migrator/secrets.json
+src/InternProject.Web.Mvc/wwwroot/uploads/*
