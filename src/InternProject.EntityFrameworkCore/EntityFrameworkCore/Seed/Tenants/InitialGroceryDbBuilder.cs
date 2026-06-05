@@ -19,6 +19,32 @@ public class InitialGroceryDbBuilder
     {
         CreateCategoriesAndProducts();
         CreateCustomers();
+        CreateSuppliers();
+        CreateDefaultBatchesForExistingProducts();
+        CreatePurchaseOrders();
+    }
+
+    private void CreateDefaultBatchesForExistingProducts()
+    {
+        var products = _context.Products.IgnoreQueryFilters().ToList();
+        foreach (var product in products)
+        {
+            var hasBatches = _context.StockBatches.IgnoreQueryFilters().Any(x => x.ProductId == product.Id);
+            if (!hasBatches)
+            {
+                var defaultBatch = new StockBatch
+                {
+                    ProductId = product.Id,
+                    BatchCode = $"SYS-INITIAL-{product.Sku ?? product.Id.ToString()}",
+                    ExpiryDate = null,
+                    ImportPrice = product.CostPrice,
+                    InitialQuantity = product.StockQuantity,
+                    RemainingQuantity = product.StockQuantity
+                };
+                _context.StockBatches.Add(defaultBatch);
+            }
+        }
+        _context.SaveChanges();
     }
 
     private void CreateCategoriesAndProducts()
@@ -174,6 +200,143 @@ public class InitialGroceryDbBuilder
             }
         }
         _context.SaveChanges();
+    }
+
+    private void CreateSuppliers()
+    {
+        var suppliers = new List<Supplier>
+        {
+            new Supplier { Code = "SUP-COCA", Name = "Công ty TNHH Nước Giải Khát Coca-Cola Việt Nam", Phone = "1900555584", Address = "Quận Thủ Đức, TP. HCM", ContactPerson = "Nguyễn Văn A", IsActive = true },
+            new Supplier { Code = "SUP-PEPSI", Name = "Công ty TNHH Nước Giải Khát Suntory PepsiCo Việt Nam", Phone = "02838219190", Address = "Quận 1, TP. HCM", ContactPerson = "Trần Thị B", IsActive = true },
+            new Supplier { Code = "SUP-KINHDO", Name = "Công ty Cổ phần Mondelez Kinh Đô Việt Nam", Phone = "02838270838", Address = "Quận 1, TP. HCM", ContactPerson = "Lê Văn C", IsActive = true },
+            new Supplier { Code = "SUP-VINAMILK", Name = "Công ty Cổ phần Sữa Việt Nam (Vinamilk)", Phone = "02854155555", Address = "Quận 7, TP. HCM", ContactPerson = "Phạm Thị D", IsActive = true }
+        };
+
+        foreach (var supplier in suppliers)
+        {
+            var existingSupplier = _context.Suppliers.IgnoreQueryFilters().FirstOrDefault(x => x.Code == supplier.Code);
+            if (existingSupplier == null)
+            {
+                _context.Suppliers.Add(supplier);
+            }
+        }
+        _context.SaveChanges();
+    }
+
+    private void CreatePurchaseOrders()
+    {
+        if (_context.PurchaseOrders.IgnoreQueryFilters().Any())
+        {
+            return;
+        }
+
+        var dbSuppliers = _context.Suppliers.IgnoreQueryFilters().ToList();
+        var dbProducts = _context.Products.IgnoreQueryFilters().ToList();
+        var defaultUser = _context.Users.IgnoreQueryFilters().FirstOrDefault(x => x.UserName == "admin" && x.TenantId == 1);
+        
+        if (!dbSuppliers.Any() || !dbProducts.Any() || defaultUser == null)
+        {
+            return;
+        }
+
+        var random = new Random();
+
+        for (int i = 1; i <= 20; i++)
+        {
+            var supplier = dbSuppliers[random.Next(dbSuppliers.Count)];
+            var orderDate = DateTime.Now.AddDays(-random.Next(1, 30));
+            var orderNumber = $"PO-{orderDate:yyyyMMdd}-{i:D4}";
+
+            var order = new PurchaseOrder
+            {
+                OrderNumber = orderNumber,
+                SupplierId = supplier.Id,
+                UserId = defaultUser.Id,
+                Status = PurchaseOrderStatus.Completed,
+                Note = $"Đợt nhập hàng mẫu số {i} tự động sinh",
+                CreationTime = orderDate,
+                CreatorUserId = defaultUser.Id,
+                PurchaseOrderItems = new List<PurchaseOrderItem>()
+            };
+
+            var selectedProducts = dbProducts.OrderBy(x => Guid.NewGuid()).Take(random.Next(2, 6)).ToList();
+            decimal totalAmount = 0;
+
+            foreach (var product in selectedProducts)
+            {
+                var qty = random.Next(10, 100);
+                var unitPrice = product.CostPrice * (decimal)(0.9 + random.NextDouble() * 0.2);
+                unitPrice = Math.Round(unitPrice, 2);
+                var subtotal = qty * unitPrice;
+
+                var batchCode = $"BATCH-{orderNumber}-{product.Sku ?? product.Id.ToString().Substring(0, 8).ToUpper()}";
+                var expiryDate = orderDate.AddDays(random.Next(30, 365));
+
+                var orderItem = new PurchaseOrderItem
+                {
+                    ProductId = product.Id,
+                    Quantity = qty,
+                    UnitPrice = unitPrice,
+                    Subtotal = subtotal,
+                    BatchId = batchCode,
+                    ExpiryDate = expiryDate,
+                    CreationTime = orderDate,
+                    CreatorUserId = defaultUser.Id
+                };
+
+                order.PurchaseOrderItems.Add(orderItem);
+                totalAmount += subtotal;
+            }
+
+            order.TotalAmount = totalAmount;
+
+            _context.PurchaseOrders.Add(order);
+            _context.SaveChanges();
+
+            foreach (var item in order.PurchaseOrderItems)
+            {
+                var stockBatch = new StockBatch
+                {
+                    ProductId = item.ProductId,
+                    SupplierId = order.SupplierId,
+                    PurchaseOrderItemId = item.Id,
+                    BatchCode = item.BatchId,
+                    ExpiryDate = item.ExpiryDate,
+                    ImportPrice = item.UnitPrice,
+                    InitialQuantity = item.Quantity,
+                    RemainingQuantity = item.Quantity,
+                    CreationTime = orderDate,
+                    CreatorUserId = defaultUser.Id
+                };
+
+                _context.StockBatches.Add(stockBatch);
+                _context.SaveChanges();
+
+                var product = _context.Products.IgnoreQueryFilters().First(x => x.Id == item.ProductId);
+                product.StockQuantity += item.Quantity;
+                _context.Products.Update(product);
+
+                var log = new InventoryLog
+                {
+                    ProductId = product.Id,
+                    UserId = defaultUser.Id,
+                    Type = InventoryLogType.Import,
+                    Quantity = item.Quantity,
+                    RemainingQuantity = product.StockQuantity,
+                    StockBatchId = stockBatch.Id,
+                    ExpiryDate = item.ExpiryDate,
+                    SupplierId = order.SupplierId,
+                    ReferenceId = order.Id,
+                    ReferenceType = nameof(PurchaseOrder),
+                    Note = $"Nhập hàng mẫu - Phiếu nhập {order.OrderNumber} (Lô: {item.BatchId})",
+                    CreationTime = orderDate,
+                    CreatorUserId = defaultUser.Id
+                };
+
+                _context.InventoryLogs.Add(log);
+            }
+            _context.SaveChanges();
+        }
     }
 }
 

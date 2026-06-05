@@ -64,7 +64,7 @@ public class CustomerAppService : InternProjectAppServiceBase, ICustomerAppServi
     }
 
     [AbpAuthorize(PermissionNames.Pages_Customers_Create)]
-    public async Task CreateAsync(CreateUpdateCustomerDto input)
+    public async Task CreateAsync(CreateCustomerDto input)
     {
         var customer = ObjectMapper.Map<Customer>(input);
         await _customerRepository.InsertAsync(customer);

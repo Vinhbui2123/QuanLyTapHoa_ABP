@@ -32,4 +32,9 @@ public static class PermissionNames
     public const string Pages_Invoices_Create = "Pages.Invoices.Create";
     public const string Pages_Invoices_Cancel = "Pages.Invoices.Cancel";
 
+    public const string Pages_PurchaseOrders = "Pages.PurchaseOrders";
+    public const string Pages_PurchaseOrders_Create = "Pages.PurchaseOrders.Create";
+
+    public const string Pages_StockBatches = "Pages.StockBatches";
+    public const string Pages_StockBatches_Dispose = "Pages.StockBatches.Dispose";
 }

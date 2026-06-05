@@ -1740,6 +1740,9 @@ namespace InternProject.Migrations
                     b.Property<int>("RemainingQuantity")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("StockBatchId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("SupplierId")
                         .HasColumnType("uniqueidentifier");
 
@@ -1756,6 +1759,8 @@ namespace InternProject.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("StockBatchId");
 
                     b.HasIndex("SupplierId");
 
@@ -1900,6 +1905,55 @@ namespace InternProject.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("InvoiceItems", (string)null);
+                });
+
+            modelBuilder.Entity("InternProject.Grocery.InvoiceItemBatch", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("CostPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("InvoiceItemId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("StockBatchId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvoiceItemId");
+
+                    b.HasIndex("StockBatchId");
+
+                    b.ToTable("InvoiceItemBatches", (string)null);
                 });
 
             modelBuilder.Entity("InternProject.Grocery.Product", b =>
@@ -2096,6 +2150,71 @@ namespace InternProject.Migrations
                     b.HasIndex("PurchaseOrderId");
 
                     b.ToTable("PurchaseOrderItems", (string)null);
+                });
+
+            modelBuilder.Entity("InternProject.Grocery.StockBatch", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("BatchCode")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("ImportPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("InitialQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("PurchaseOrderItemId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("RemainingQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("SupplierId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("PurchaseOrderItemId");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("StockBatches", (string)null);
                 });
 
             modelBuilder.Entity("InternProject.Grocery.Supplier", b =>
@@ -2452,6 +2571,11 @@ namespace InternProject.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("InternProject.Grocery.StockBatch", "StockBatch")
+                        .WithMany()
+                        .HasForeignKey("StockBatchId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("InternProject.Grocery.Supplier", "Supplier")
                         .WithMany()
                         .HasForeignKey("SupplierId")
@@ -2463,6 +2587,8 @@ namespace InternProject.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Product");
+
+                    b.Navigation("StockBatch");
 
                     b.Navigation("Supplier");
 
@@ -2504,6 +2630,25 @@ namespace InternProject.Migrations
                     b.Navigation("Invoice");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("InternProject.Grocery.InvoiceItemBatch", b =>
+                {
+                    b.HasOne("InternProject.Grocery.InvoiceItem", "InvoiceItem")
+                        .WithMany("InvoiceItemBatches")
+                        .HasForeignKey("InvoiceItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InternProject.Grocery.StockBatch", "StockBatch")
+                        .WithMany()
+                        .HasForeignKey("StockBatchId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("InvoiceItem");
+
+                    b.Navigation("StockBatch");
                 });
 
             modelBuilder.Entity("InternProject.Grocery.Product", b =>
@@ -2552,6 +2697,31 @@ namespace InternProject.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("PurchaseOrder");
+                });
+
+            modelBuilder.Entity("InternProject.Grocery.StockBatch", b =>
+                {
+                    b.HasOne("InternProject.Grocery.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("InternProject.Grocery.PurchaseOrderItem", "PurchaseOrderItem")
+                        .WithMany()
+                        .HasForeignKey("PurchaseOrderItemId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("InternProject.Grocery.Supplier", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Product");
+
+                    b.Navigation("PurchaseOrderItem");
+
+                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("InternProject.MultiTenancy.Tenant", b =>
@@ -2660,6 +2830,11 @@ namespace InternProject.Migrations
             modelBuilder.Entity("InternProject.Grocery.Invoice", b =>
                 {
                     b.Navigation("InvoiceItems");
+                });
+
+            modelBuilder.Entity("InternProject.Grocery.InvoiceItem", b =>
+                {
+                    b.Navigation("InvoiceItemBatches");
                 });
 
             modelBuilder.Entity("InternProject.Grocery.PurchaseOrder", b =>

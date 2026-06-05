@@ -24,7 +24,7 @@ public class CustomerAppService_Tests : InternProjectTestBase
     {
         const string customerName = "Nguyen Van A";
 
-        await _customerAppService.CreateAsync(new CreateUpdateCustomerDto
+        await _customerAppService.CreateAsync(new CreateCustomerDto
         {
             Name = customerName,
             Phone = "0909000111",

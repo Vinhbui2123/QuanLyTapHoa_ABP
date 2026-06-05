@@ -1,0 +1,51 @@
+@model InternProject.Grocery.PurchaseOrders.Dto.PurchaseOrderDto
+
+<div class="modal-header">
+    <h5 class="modal-title" id="PODetailModalLabel">@L("PurchaseOrderDetails") - @Model.OrderNumber</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <p class="mb-1"><strong>@L("Supplier"):</strong> @Model.SupplierName</p>
+            <p class="mb-1"><strong>@L("Creator"):</strong> @Model.UserName</p>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1"><strong>Ngày tạo:</strong> @Model.CreationTime.ToString("dd/MM/yyyy HH:mm")</p>
+            <p class="mb-1"><strong>@L("Note"):</strong> @(string.IsNullOrWhiteSpace(Model.Note) ? "Không có" : Model.Note)</p>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>@L("Product")</th>
+                <th>@L("ImportPrice")</th>
+                <th>@L("Quantity")</th>
+                <th>@L("ExpiryDate")</th>
+                <th>@L("Subtotal")</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.PurchaseOrderItems)
+            {
+                <tr>
+                    <td><strong>@item.ProductName</strong></td>
+                    <td class="text-end">@item.UnitPrice.ToString("N0") ₫</td>
+                    <td class="text-center">@item.Quantity.ToString("N0")</td>
+                    <td class="text-center">@(item.ExpiryDate.HasValue ? item.ExpiryDate.Value.ToString("dd/MM/yyyy") : "Không hạn dùng")</td>
+                    <td class="text-end fw-bold">@item.Subtotal.ToString("N0") ₫</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="4" class="text-end">@L("TotalAmount"):</th>
+                <th class="text-end text-danger fs-5">@Model.TotalAmount.ToString("N0") ₫</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@L("Close")</button>
+</div>

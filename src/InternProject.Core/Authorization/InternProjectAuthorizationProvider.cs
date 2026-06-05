@@ -35,6 +35,12 @@ public class InternProjectAuthorizationProvider : AuthorizationProvider
         var invoices = context.CreatePermission(PermissionNames.Pages_Invoices, L("Invoices"));
         invoices.CreateChildPermission(PermissionNames.Pages_Invoices_Create, L("CreateInvoice"));
         invoices.CreateChildPermission(PermissionNames.Pages_Invoices_Cancel, L("CancelInvoice"));
+
+        var purchaseOrders = context.CreatePermission(PermissionNames.Pages_PurchaseOrders, L("PurchaseOrders"));
+        purchaseOrders.CreateChildPermission(PermissionNames.Pages_PurchaseOrders_Create, L("CreatePurchaseOrder"));
+
+        var stockBatches = context.CreatePermission(PermissionNames.Pages_StockBatches, L("StockBatches"));
+        stockBatches.CreateChildPermission(PermissionNames.Pages_StockBatches_Dispose, L("DisposeStockBatch"));
         
         context.CreatePermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
     }

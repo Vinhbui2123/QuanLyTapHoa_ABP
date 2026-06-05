@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace InternProject.Grocery.Invoices.Dto;
 
 [AutoMapFrom(typeof(Invoice))]
-public class InvoiceDto : FullAuditedEntityDto<Guid>
+public class InvoiceDto : AuditedEntityDto<Guid>
 {
     public string InvoiceNumber { get; set; }
 

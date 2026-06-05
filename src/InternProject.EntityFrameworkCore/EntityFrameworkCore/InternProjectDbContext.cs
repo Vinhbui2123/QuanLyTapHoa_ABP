@@ -19,6 +19,8 @@ public class InternProjectDbContext : AbpZeroDbContext<Tenant, Role, User, Inter
     public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
     public DbSet<PurchaseOrderItem> PurchaseOrderItems { get; set; }
     public DbSet<InventoryLog> InventoryLogs { get; set; }
+    public DbSet<StockBatch> StockBatches { get; set; }
+    public DbSet<InvoiceItemBatch> InvoiceItemBatches { get; set; }
 
     public InternProjectDbContext(DbContextOptions<InternProjectDbContext> options)
         : base(options)
@@ -183,6 +185,49 @@ public class InternProjectDbContext : AbpZeroDbContext<Tenant, Role, User, Inter
             b.HasOne(x => x.Supplier)
                 .WithMany()
                 .HasForeignKey(x => x.SupplierId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            b.HasOne(x => x.StockBatch)
+                .WithMany()
+                .HasForeignKey(x => x.StockBatchId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        modelBuilder.Entity<StockBatch>(b =>
+        {
+            b.ToTable("StockBatches");
+            b.Property(x => x.BatchCode).IsRequired().HasMaxLength(50);
+            b.Property(x => x.ImportPrice).HasPrecision(18, 2);
+
+            b.HasOne(x => x.Product)
+                .WithMany()
+                .HasForeignKey(x => x.ProductId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            b.HasOne(x => x.Supplier)
+                .WithMany()
+                .HasForeignKey(x => x.SupplierId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            b.HasOne(x => x.PurchaseOrderItem)
+                .WithMany()
+                .HasForeignKey(x => x.PurchaseOrderItemId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        modelBuilder.Entity<InvoiceItemBatch>(b =>
+        {
+            b.ToTable("InvoiceItemBatches");
+            b.Property(x => x.CostPrice).HasPrecision(18, 2);
+
+            b.HasOne(x => x.InvoiceItem)
+                .WithMany(x => x.InvoiceItemBatches)
+                .HasForeignKey(x => x.InvoiceItemId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            b.HasOne(x => x.StockBatch)
+                .WithMany()
+                .HasForeignKey(x => x.StockBatchId)
                 .OnDelete(DeleteBehavior.Restrict);
         });
     }

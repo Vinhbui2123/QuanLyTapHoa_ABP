@@ -265,6 +265,54 @@
     <text name="QuickSelect" value="Chọn nhanh" />
     <text name="ExactPayment" value="Đủ tiền" />
     <text name="PrintInvoice" value="In Hóa Đơn" />
+    <!-- Purchase Orders & Stock Batches -->
+    <text name="PurchaseOrders" value="Phiếu nhập hàng" />
+    <text name="CreatePurchaseOrder" value="Tạo phiếu nhập" />
+    <text name="StockBatches" value="Lô hàng tồn kho" />
+    <text name="DisposeStockBatch" value="Hủy lô quá hạn" />
+    <text name="ProductExpiredWarning" value="Sản phẩm '{0}' có hàng tồn kho nhưng đã quá hạn sử dụng, vui lòng báo Admin thực hiện Hủy lô hết hạn." />
+    <text name="ProductOutOfStockWarning" value="Sản phẩm '{0}' trong kho không đủ số lượng bán." />
+    <text name="BatchCode" value="Mã lô" />
+    <text name="ExpiryDate" value="Hạn sử dụng" />
+    <text name="RemainingQuantity" value="Tồn kho lô" />
+    <text name="ImportPrice" value="Giá nhập" />
+    <text name="Dispose" value="Hủy lô" />
+    <text name="InitialQuantity" value="SL nhập ban đầu" />
+    <text name="PurchaseOrder" value="Phiếu nhập hàng" />
+    <text name="OrderNumber" value="Số phiếu nhập" />
+    <text name="Supplier" value="Nhà cung cấp" />
+    <text name="Creator" value="Người tạo" />
+    <text name="PurchaseOrderDetails" value="Chi tiết phiếu nhập" />
+    <text name="Product" value="Sản phẩm" />
+    <text name="Quantity" value="Số lượng" />
+    <text name="UnitPrice" value="Đơn giá" />
+    <text name="Subtotal" value="Thành tiền" />
+    <text name="Reason" value="Lý do" />
+    <text name="DisposeQuantity" value="Số lượng hủy" />
+    
+    <!-- Purchase Orders & Stock Batches Page Extras -->
+    <text name="PurchaseOrdersSubtitle" value="Xem và quản lý danh sách các phiếu nhập hàng." />
+    <text name="SearchPurchaseOrdersPlaceholder" value="Tìm theo số phiếu nhập, tên NCC..." />
+    <text name="AllSuppliersSelect" value="-- Tất cả nhà cung cấp --" />
+    <text name="AllStatusesSelect" value="-- Tất cả trạng thái --" />
+    <text name="StatusPending" value="Đang chờ" />
+    <text name="StatusCompleted" value="Hoàn thành" />
+    <text name="StatusCancelled" value="Đã hủy" />
+    
+    <text name="StockBatchesSubtitle" value="Quản lý lô sản phẩm, hạn sử dụng và thực hiện hủy hàng hết hạn." />
+    <text name="SearchStockBatchesPlaceholder" value="Tìm theo mã lô, tên sản phẩm..." />
+    <text name="AllProductsSelect" value="-- Tất cả sản phẩm --" />
+    <text name="AllBatchesSelect" value="-- Tất cả lô hàng --" />
+    <text name="ExpiredBatchesOnly" value="Chỉ lô quá hạn" />
+    <text name="NonExpiredBatchesOnly" value="Chỉ lô còn hạn" />
+    <text name="BatchCodeLabel" value="Mã lô:" />
+    <text name="CurrentBatchStockLabel" value="Tồn kho lô hiện tại:" />
+    <text name="DisposeReasonPlaceholder" value="Nhập lý do hủy lô hàng (ví dụ: Hết hạn sử dụng, hỏng hóc...)" />
+    <text name="NoExpiryDate" value="Không hạn dùng" />
+    <text name="BatchStatusOutOfStock" value="Hết hàng" />
+    <text name="BatchStatusExpired" value="Quá hạn" />
+    <text name="BatchStatusNearExpiry" value="Cận hạn" />
+    <text name="BatchStatusNormal" value="Bình thường" />
   </texts>
 </localizationDictionary>
 

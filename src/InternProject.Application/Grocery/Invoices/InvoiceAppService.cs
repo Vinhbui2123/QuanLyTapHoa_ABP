@@ -5,6 +5,7 @@ using Abp.Extensions;
 using Abp.Linq.Extensions;
 using Abp.UI;
 using InternProject.Authorization;
+using InternProject.Grocery;
 using InternProject.Grocery.Invoices.Dto;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,15 +22,18 @@ public class InvoiceAppService : InternProjectAppServiceBase, IInvoiceAppService
     private readonly IRepository<Invoice, Guid> _invoiceRepository;
     private readonly IRepository<Product, Guid> _productRepository;
     private readonly IRepository<InventoryLog, Guid> _inventoryLogRepository;
+    private readonly IRepository<StockBatch, Guid> _stockBatchRepository;
 
     public InvoiceAppService(
         IRepository<Invoice, Guid> invoiceRepository,
         IRepository<Product, Guid> productRepository,
-        IRepository<InventoryLog, Guid> _inventoryLogRepository)
+        IRepository<InventoryLog, Guid> _inventoryLogRepository,
+        IRepository<StockBatch, Guid> stockBatchRepository)
     {
         _invoiceRepository = invoiceRepository;
         _productRepository = productRepository;
         this._inventoryLogRepository = _inventoryLogRepository;
+        _stockBatchRepository = stockBatchRepository;
     }
 
     public async Task<InvoiceDto> GetAsync(EntityDto<Guid> input)
@@ -98,6 +102,11 @@ public class InvoiceAppService : InternProjectAppServiceBase, IInvoiceAppService
             .Where(p => productIds.Contains(p.Id) && p.IsActive)
             .ToListAsync();
 
+        // Load all active stock batches for these products
+        var batches = await _stockBatchRepository.GetAll()
+            .Where(b => productIds.Contains(b.ProductId) && b.RemainingQuantity > 0)
+            .ToListAsync();
+
         // 2. Validate stock & build items with snapshot
         var items = new List<InvoiceItem>();
         decimal totalAmount = 0;
@@ -112,9 +121,22 @@ public class InvoiceAppService : InternProjectAppServiceBase, IInvoiceAppService
                 throw new UserFriendlyException($"Số lượng mua phải lớn hơn 0 ({p.Name}).");
             }
 
-            if (p.StockQuantity < line.Quantity)
+            var productBatches = batches.Where(b => b.ProductId == p.Id).ToList();
+
+            var availableUnexpiredStock = productBatches
+                .Where(b => b.ExpiryDate == null || b.ExpiryDate > DateTime.Now)
+                .Sum(b => b.RemainingQuantity);
+
+            var totalStock = productBatches.Sum(b => b.RemainingQuantity);
+
+            if (line.Quantity > totalStock)
             {
-                throw new UserFriendlyException($"Sản phẩm '{p.Name}' trong kho chỉ còn {p.StockQuantity} sản phẩm, không đủ số lượng bán.");
+                throw new UserFriendlyException($"Sản phẩm '{p.Name}' trong kho không đủ số lượng bán.");
+            }
+
+            if (line.Quantity > availableUnexpiredStock)
+            {
+                throw new UserFriendlyException($"Sản phẩm '{p.Name}' có hàng tồn kho nhưng đã quá hạn sử dụng, vui lòng báo Admin thực hiện Hủy lô hết hạn.");
             }
 
             var subtotal = p.SalePrice * line.Quantity;
@@ -125,7 +147,8 @@ public class InvoiceAppService : InternProjectAppServiceBase, IInvoiceAppService
                 Sku = p.Sku,
                 Quantity = line.Quantity,
                 UnitPrice = p.SalePrice,
-                Subtotal = subtotal
+                Subtotal = subtotal,
+                InvoiceItemBatches = new List<InvoiceItemBatch>()
             });
             totalAmount += subtotal;
         }
@@ -153,24 +176,56 @@ public class InvoiceAppService : InternProjectAppServiceBase, IInvoiceAppService
 
         var invoiceId = await _invoiceRepository.InsertAndGetIdAsync(invoice);
 
-        // 5. Deduct stock + write InventoryLog
+        // 5. Deduct stock + write InventoryLog for each batch
         foreach (var item in items)
         {
             var p = products.First(x => x.Id == item.ProductId);
-            p.StockQuantity -= item.Quantity;
-            await _productRepository.UpdateAsync(p);
+            var productBatches = batches.Where(b => b.ProductId == p.Id).ToList();
+            
+            int itemRemainingNeed = item.Quantity;
+            
+            var sortedBatches = productBatches
+                .Where(b => b.ExpiryDate == null || b.ExpiryDate > DateTime.Now)
+                .OrderBy(b => b.ExpiryDate == null)
+                .ThenBy(b => b.ExpiryDate)
+                .ToList();
 
-            await _inventoryLogRepository.InsertAsync(new InventoryLog
+            foreach (var batch in sortedBatches)
             {
-                ProductId = p.Id,
-                UserId = AbpSession.UserId,
-                Type = InventoryLogType.Export,
-                Quantity = item.Quantity,
-                RemainingQuantity = p.StockQuantity,
-                ReferenceId = invoiceId,
-                ReferenceType = nameof(Invoice),
-                Note = $"Bán hàng - HĐ {invoice.InvoiceNumber}"
-            });
+                if (itemRemainingNeed <= 0) break;
+
+                var allocatedQuantity = Math.Min(itemRemainingNeed, batch.RemainingQuantity);
+                
+                batch.RemainingQuantity -= allocatedQuantity;
+                await _stockBatchRepository.UpdateAsync(batch);
+
+                item.InvoiceItemBatches.Add(new InvoiceItemBatch
+                {
+                    StockBatchId = batch.Id,
+                    Quantity = allocatedQuantity,
+                    CostPrice = batch.ImportPrice
+                });
+
+                p.StockQuantity -= allocatedQuantity;
+                await _productRepository.UpdateAsync(p);
+
+                await _inventoryLogRepository.InsertAsync(new InventoryLog
+                {
+                    ProductId = p.Id,
+                    UserId = AbpSession.UserId,
+                    Type = InventoryLogType.Export,
+                    Quantity = allocatedQuantity,
+                    RemainingQuantity = p.StockQuantity,
+                    StockBatchId = batch.Id,
+                    ExpiryDate = batch.ExpiryDate,
+                    SupplierId = batch.SupplierId,
+                    ReferenceId = invoiceId,
+                    ReferenceType = nameof(Invoice),
+                    Note = $"Bán hàng - HĐ {invoice.InvoiceNumber} (Lô: {batch.BatchCode})"
+                });
+
+                itemRemainingNeed -= allocatedQuantity;
+            }
         }
 
         await CurrentUnitOfWork.SaveChangesAsync();
@@ -184,6 +239,7 @@ public class InvoiceAppService : InternProjectAppServiceBase, IInvoiceAppService
     {
         var invoice = await _invoiceRepository.GetAll()
             .Include(x => x.InvoiceItems)
+                .ThenInclude(x => x.InvoiceItemBatches)
             .FirstOrDefaultAsync(x => x.Id == input.Id);
 
         if (invoice == null)
@@ -211,13 +267,45 @@ public class InvoiceAppService : InternProjectAppServiceBase, IInvoiceAppService
         foreach (var item in invoice.InvoiceItems)
         {
             var p = await _productRepository.FirstOrDefaultAsync(item.ProductId);
-            if (p != null)
+            if (p == null) continue;
+
+            if (item.InvoiceItemBatches != null && item.InvoiceItemBatches.Any())
+            {
+                foreach (var ib in item.InvoiceItemBatches)
+                {
+                    var batch = await _stockBatchRepository.FirstOrDefaultAsync(ib.StockBatchId);
+                    if (batch != null)
+                    {
+                        batch.RemainingQuantity += ib.Quantity;
+                        await _stockBatchRepository.UpdateAsync(batch);
+                    }
+
+                    p.StockQuantity += ib.Quantity;
+                    await _productRepository.UpdateAsync(p);
+
+                    await _inventoryLogRepository.InsertAsync(new InventoryLog
+                    {
+                        ProductId = p.Id,
+                        UserId = AbpSession.UserId,
+                        Type = InventoryLogType.Import,
+                        Quantity = ib.Quantity,
+                        RemainingQuantity = p.StockQuantity,
+                        StockBatchId = batch?.Id,
+                        ExpiryDate = batch?.ExpiryDate,
+                        SupplierId = batch?.SupplierId,
+                        ReferenceId = invoice.Id,
+                        ReferenceType = nameof(Invoice),
+                        Note = $"Hủy hóa đơn {invoice.InvoiceNumber} (Hoàn kho Lô: {batch?.BatchCode}) - Lý do: {input.CancelReason}"
+                    });
+                }
+            }
+            else
             {
                 p.StockQuantity += item.Quantity;
                 await _productRepository.UpdateAsync(p);
 
                 await _inventoryLogRepository.InsertAsync(new InventoryLog
-                { 
+                {
                     ProductId = p.Id,
                     UserId = AbpSession.UserId,
                     Type = InventoryLogType.Import,

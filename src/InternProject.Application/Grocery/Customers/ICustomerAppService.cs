@@ -10,7 +10,7 @@ public interface ICustomerAppService : IApplicationService
 {
     Task<CustomerDto> GetAsync(EntityDto<Guid> input);
     Task<PagedResultDto<CustomerDto>> GetListAsync(PagedCustomerResultRequestDto input);
-    Task CreateAsync(CreateUpdateCustomerDto input);
+    Task CreateAsync(CreateCustomerDto input);
     Task UpdateAsync(UpdateCustomerDto input);
     Task DeleteAsync(EntityDto<Guid> input);
     Task<CustomerDashboardStatsDto> GetDashboardStatsAsync();

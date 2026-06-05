@@ -31,5 +31,7 @@ namespace InternProject.Grocery
         public decimal UnitPrice { get; set; }
 
         public decimal Subtotal { get; set; }
+
+        public virtual System.Collections.Generic.ICollection<InvoiceItemBatch> InvoiceItemBatches { get; set; }
     }
 }

@@ -253,6 +253,54 @@
     <text name="ExactPayment" value="Exact Payment" />
     <text name="InvoiceDetails" value="Invoice Details" />
     <text name="PrintInvoice" value="Print Invoice" />
+    <!-- Purchase Orders & Stock Batches -->
+    <text name="PurchaseOrders" value="Purchase Orders" />
+    <text name="CreatePurchaseOrder" value="Create Purchase Order" />
+    <text name="StockBatches" value="Stock Batches" />
+    <text name="DisposeStockBatch" value="Dispose Stock Batch" />
+    <text name="ProductExpiredWarning" value="Product '{0}' has stock but is expired. Please ask Admin to dispose the expired batch." />
+    <text name="ProductOutOfStockWarning" value="Product '{0}' in stock has insufficient quantity to sell." />
+    <text name="BatchCode" value="Batch Code" />
+    <text name="ExpiryDate" value="Expiry Date" />
+    <text name="RemainingQuantity" value="Remaining Qty" />
+    <text name="ImportPrice" value="Import Price" />
+    <text name="Dispose" value="Dispose" />
+    <text name="InitialQuantity" value="Initial Qty" />
+    <text name="PurchaseOrder" value="Purchase Order" />
+    <text name="OrderNumber" value="Order Number" />
+    <text name="Supplier" value="Supplier" />
+    <text name="Creator" value="Creator" />
+    <text name="PurchaseOrderDetails" value="Purchase Order Details" />
+    <text name="Product" value="Product" />
+    <text name="Quantity" value="Quantity" />
+    <text name="UnitPrice" value="Unit Price" />
+    <text name="Subtotal" value="Subtotal" />
+    <text name="Reason" value="Reason" />
+    <text name="DisposeQuantity" value="Quantity to Dispose" />
+    
+    <!-- Purchase Orders & Stock Batches Page Extras -->
+    <text name="PurchaseOrdersSubtitle" value="View and manage the list of purchase orders." />
+    <text name="SearchPurchaseOrdersPlaceholder" value="Search by order number, supplier name..." />
+    <text name="AllSuppliersSelect" value="-- All Suppliers --" />
+    <text name="AllStatusesSelect" value="-- All Statuses --" />
+    <text name="StatusPending" value="Pending" />
+    <text name="StatusCompleted" value="Completed" />
+    <text name="StatusCancelled" value="Cancelled" />
+    
+    <text name="StockBatchesSubtitle" value="Manage product batches, expiry dates, and perform disposal of expired stock." />
+    <text name="SearchStockBatchesPlaceholder" value="Search by batch code, product name..." />
+    <text name="AllProductsSelect" value="-- All Products --" />
+    <text name="AllBatchesSelect" value="-- All Batches --" />
+    <text name="ExpiredBatchesOnly" value="Expired Batches Only" />
+    <text name="NonExpiredBatchesOnly" value="Non-Expired Batches Only" />
+    <text name="BatchCodeLabel" value="Batch Code:" />
+    <text name="CurrentBatchStockLabel" value="Current Batch Stock:" />
+    <text name="DisposeReasonPlaceholder" value="Enter reason for batch disposal (e.g., Expired, damaged...)" />
+    <text name="NoExpiryDate" value="No Expiry Date" />
+    <text name="BatchStatusOutOfStock" value="Out of Stock" />
+    <text name="BatchStatusExpired" value="Expired" />
+    <text name="BatchStatusNearExpiry" value="Near Expiry" />
+    <text name="BatchStatusNormal" value="Normal" />
   </texts>
 </localizationDictionary>
 

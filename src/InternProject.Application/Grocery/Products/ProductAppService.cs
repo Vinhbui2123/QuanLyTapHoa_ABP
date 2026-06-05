@@ -80,6 +80,7 @@ public class ProductAppService : InternProjectAppServiceBase, IProductAppService
     public async Task CreateAsync(CreateUpdateProductDto input)
     {
         var product = ObjectMapper.Map<Product>(input);
+        product.StockQuantity = 0; // Force stock quantity to 0 on creation
         await _productRepository.InsertAsync(product);
     }
 
@@ -88,8 +89,10 @@ public class ProductAppService : InternProjectAppServiceBase, IProductAppService
     {
         var product = await _productRepository.GetAsync(input.Id);
         var oldImageUrl = product.ImageUrl;
+        var currentStockQuantity = product.StockQuantity; // Keep current stock quantity
 
         ObjectMapper.Map(input, product);
+        product.StockQuantity = currentStockQuantity; // Restore current stock quantity to ignore updates from input DTO
         await _productRepository.UpdateAsync(product);
 
         if (oldImageUrl != product.ImageUrl)

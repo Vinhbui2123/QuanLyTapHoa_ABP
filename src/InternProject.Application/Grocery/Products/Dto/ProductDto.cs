@@ -5,7 +5,7 @@ using System;
 namespace InternProject.Grocery.Products.Dto;
 
 [AutoMapFrom(typeof(Product))]
-public class ProductDto : FullAuditedEntityDto<Guid>
+public class ProductDto : EntityDto<Guid>
 {
     public string Name { get; set; } = string.Empty;
 

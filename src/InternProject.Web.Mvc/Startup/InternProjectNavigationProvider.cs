@@ -77,6 +77,22 @@ public class InternProjectNavigationProvider : NavigationProvider
                     icon: "fas fa-file-invoice-dollar",
                     permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_Invoices)
                 )
+            ).AddItem(
+                new MenuItemDefinition(
+                    PageNames.PurchaseOrders,
+                    L("PurchaseOrders"),
+                    url: "PurchaseOrders",
+                    icon: "fas fa-file-import",
+                    permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_PurchaseOrders)
+                )
+            ).AddItem(
+                new MenuItemDefinition(
+                    PageNames.StockBatches,
+                    L("StockBatches"),
+                    url: "StockBatches",
+                    icon: "fas fa-boxes",
+                    permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_StockBatches)
+                )
             );
 
             // .AddItem( // Menu items below is just for demonstration!

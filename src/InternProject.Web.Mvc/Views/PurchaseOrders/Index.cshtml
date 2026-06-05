@@ -1,0 +1,272 @@
+@using InternProject.Web.Startup
+@{
+    ViewBag.Title = L("PurchaseOrders");
+    ViewBag.CurrentPageName = PageNames.PurchaseOrders;
+}
+@section scripts
+{
+    <environment names="Development">
+        <script src="~/view-resources/Views/PurchaseOrders/Index.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/PurchaseOrders/Index.min.js" asp-append-version="true"></script>
+    </environment>
+}
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+    .content-wrapper {
+        background-color: #f8fafc !important;
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .content-header {
+        padding: 0 !important;
+    }
+
+    .po-main-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #0f172a;
+        letter-spacing: -0.02em;
+    }
+
+    .po-subtitle {
+        font-size: 14px;
+        color: #64748b;
+        margin-top: 4px;
+    }
+
+    .btn-create-po {
+        background-color: #2563eb !important;
+        color: #ffffff !important;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: 600;
+        font-size: 14px;
+        box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        transition: all 0.2s ease-in-out;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .btn-create-po:hover {
+        background-color: #1d4ed8 !important;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 12px -1px rgba(37, 99, 235, 0.3);
+        color: #ffffff !important;
+    }
+
+    .filter-container {
+        background-color: #ffffff;
+        border-radius: 12px;
+        padding: 16px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+    }
+
+    .custom-search-input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .custom-search-input-wrapper .search-icon {
+        position: absolute;
+        left: 16px;
+        color: #94a3b8;
+        font-size: 16px;
+    }
+
+    .custom-search-input-wrapper input {
+        padding-left: 48px;
+        height: 48px;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+        background-color: #ffffff;
+        font-size: 14px;
+        color: #0f172a;
+        transition: all 0.15s ease-in-out;
+        width: 100%;
+    }
+
+    .custom-search-input-wrapper input:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        outline: none;
+    }
+
+    .custom-select-filter {
+        height: 48px;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+        font-size: 14px;
+        font-weight: 500;
+        color: #334155;
+        padding: 0 16px;
+        transition: all 0.15s ease-in-out;
+        width: 100%;
+        background-color: #ffffff;
+    }
+
+    .custom-select-filter:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        outline: none;
+    }
+
+    .table-card {
+        border: 1px solid #e2e8f0 !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02) !important;
+    }
+
+    .custom-po-table {
+        border-collapse: separate !important;
+        border-spacing: 0 !important;
+    }
+
+    .custom-po-table thead th {
+        background-color: #f8fafc !important;
+        color: #64748b !important;
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        padding: 16px 20px !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+        border-top: none !important;
+    }
+
+    .custom-po-table tbody td {
+        padding: 16px 20px !important;
+        vertical-align: middle !important;
+        font-size: 14px !important;
+        color: #334155 !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        background-color: #ffffff !important;
+    }
+
+    .custom-po-table tbody tr:hover td {
+        background-color: #f8fafc !important;
+    }
+
+    .po-code-link {
+        color: #2563eb !important;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.15s ease-in-out;
+    }
+
+    .po-code-link:hover {
+        color: #1d4ed8 !important;
+        text-decoration: underline;
+    }
+
+    .badge-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 12px;
+        border-radius: 9999px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .badge-status-completed {
+        background-color: #d1fae5;
+        color: #065f46;
+        border: 1px solid #a7f3d0;
+    }
+
+    .badge-status-pending {
+        background-color: #fef3c7;
+        color: #92400e;
+        border: 1px solid #fde68a;
+    }
+
+    .badge-status-cancelled {
+        background-color: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+    }
+</style>
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="po-main-title m-0">@L("PurchaseOrders")</h1>
+            <p class="po-subtitle m-0">@L("PurchaseOrdersSubtitle")</p>
+        </div>
+        <div>
+            <a asp-action="Create" class="btn btn-create-po">
+                <i class="fas fa-plus mr-2"></i>
+                @L("CreatePurchaseOrder")
+            </a>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-container mb-4">
+        <form id="POSearchForm" class="w-100 mb-0">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="custom-search-input-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" name="Keyword" class="form-control txt-search" placeholder="@L("SearchPurchaseOrdersPlaceholder")" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select id="SupplierFilter" name="SupplierId" class="form-select custom-select-filter">
+                        <option value="">@L("AllSuppliersSelect")</option>
+                        @foreach (var s in ViewBag.Suppliers)
+                        {
+                            <option value="@s.Id">@s.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select id="StatusFilter" name="Status" class="form-select custom-select-filter">
+                        <option value="">@L("AllStatusesSelect")</option>
+                        <option value="1">@L("StatusPending")</option>
+                        <option value="2">@L("StatusCompleted")</option>
+                        <option value="3">@L("StatusCancelled")</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Table -->
+    <div class="card table-card border-0 rounded-4 mb-4">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table id="POTable" class="table custom-po-table mb-0 w-100">
+                    <thead>
+                        <tr>
+                            <th>@L("OrderNumber")</th>
+                            <th>@L("Supplier")</th>
+                            <th>@L("Creator")</th>
+                            <th>@L("TotalAmount")</th>
+                            <th>@L("Status")</th>
+                            <th>@L("Note")</th>
+                            <th>Ngày Nhập</th>
+                            <th>@L("Actions")</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detail Modal -->
+<div class="modal fade" id="PODetailModal" tabindex="-1" role="dialog" aria-labelledby="PODetailModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>

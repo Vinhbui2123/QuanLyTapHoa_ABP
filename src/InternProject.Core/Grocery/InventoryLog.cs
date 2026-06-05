@@ -41,6 +41,11 @@ namespace InternProject.Grocery
         [StringLength(50)]
         public string? BatchId { get; set; }
 
+        public Guid? StockBatchId { get; set; }
+
+        [ForeignKey(nameof(StockBatchId))]
+        public virtual StockBatch? StockBatch { get; set; }
+
         public DateTime? ExpiryDate { get; set; }
 
         public Guid? SupplierId { get; set; }
