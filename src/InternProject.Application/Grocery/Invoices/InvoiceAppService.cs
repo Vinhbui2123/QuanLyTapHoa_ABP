@@ -36,6 +36,18 @@ public class InvoiceAppService : InternProjectAppServiceBase, IInvoiceAppService
         _stockBatchRepository = stockBatchRepository;
     }
 
+    /*
+    Khách mua hàng
+        ↓
+    1. Kiểm tra sản phẩm có tồn tại? còn bán không?
+    2. Kiểm tra kho đủ không? có hết hạn không?
+    3. Tính tổng tiền
+    4. Kiểm tra tiền khách đưa đủ không?
+    5. Tạo hóa đơn
+    6. Trừ kho (lô nào trước? → hạn gần trước)
+    7. Ghi nhật ký xuất kho
+    */
+
     public async Task<InvoiceDto> GetAsync(EntityDto<Guid> input)
     {
         var invoice = await _invoiceRepository.GetAll()
