@@ -77,10 +77,20 @@
     _$poTable.ajax.reload();
   });
 
-  $(".txt-search").on("keyup", function (e) {
-    if (e.which == 13 || $(this).val() == "") {
+  // Realtime search with debounce 350ms
+  var _searchTimer = null;
+  $(".txt-search").on("input", function () {
+    clearTimeout(_searchTimer);
+    _searchTimer = setTimeout(function () {
       _$poTable.ajax.reload();
-    }
+    }, 350);
+  });
+
+  // Prevent form submission on enter & reload table
+  $("#POSearchForm").on("submit", function (e) {
+    e.preventDefault();
+    clearTimeout(_searchTimer);
+    _$poTable.ajax.reload();
   });
 
   // Click handler for PO detail

@@ -100,10 +100,20 @@
     _$batchesTable.ajax.reload();
   });
 
-  $(".txt-search").on("keyup", function (e) {
-    if (e.which == 13 || $(this).val() == "") {
+  // Realtime search with debounce 350ms
+  var _searchTimer = null;
+  $(".txt-search").on("input", function () {
+    clearTimeout(_searchTimer);
+    _searchTimer = setTimeout(function () {
       _$batchesTable.ajax.reload();
-    }
+    }, 350);
+  });
+
+  // Prevent form submission on enter & reload table
+  $("#BatchesSearchForm").on("submit", function (e) {
+    e.preventDefault();
+    clearTimeout(_searchTimer);
+    _$batchesTable.ajax.reload();
   });
 
   // Dispose button click
