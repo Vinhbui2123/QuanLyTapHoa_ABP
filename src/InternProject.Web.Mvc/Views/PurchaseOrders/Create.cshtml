@@ -13,6 +13,7 @@
         <script src="~/view-resources/Views/PurchaseOrders/Create.min.js" asp-append-version="true"></script>
     </environment>
 }
+@section styles {
 <style>
     @@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
@@ -43,34 +44,97 @@
         border-radius: 12px;
         border: 1px solid #e2e8f0;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+        padding: 16px !important;
+    }
+
+    .card-custom .mb-3 {
+        margin-bottom: 12px !important;
     }
 
     .form-label-custom {
         font-weight: 600;
         color: #334155;
-        font-size: 14px;
+        font-size: 13px;
+    }
+
+    .col-left-custom {
+        max-width: 100% !important;
+    }
+
+    .col-left-custom,
+    .col-left-custom * {
+        min-width: 0 !important;
+    }
+
+    @@media (min-width: 992px) {
+        .col-left-custom {
+            flex: 0 0 300px !important;
+            width: 300px !important;
+        }
+        .col-right-custom {
+            flex: 1 !important;
+        }
+    }
+
+    /* Đồng bộ styling và chống tràn phần thông tin chung */
+    .col-left-custom select,
+    .col-left-custom .form-control,
+    .col-left-custom .form-select,
+    .col-left-custom textarea {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        border-radius: 8px !important;
+        border: 1px solid #cbd5e1 !important;
+        padding: 6px 12px !important;
+        font-size: 13px !important;
+    }
+
+    .col-left-custom select,
+    .col-left-custom .form-control,
+    .col-left-custom .form-select {
+        height: 36px !important;
+    }
+
+    .col-left-custom textarea {
+        height: auto !important;
+    }
+
+    .table-import th, .table-import td {
+        border-left: none !important;
+        border-right: none !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+        padding: 8px 10px !important;
     }
 
     .table-import th {
         background-color: #f8fafc !important;
-        color: #64748b !important;
-        font-size: 12px !important;
+        color: #475569 !important;
+        font-size: 13px !important;
         font-weight: 600 !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.05em !important;
-        padding: 12px 16px !important;
-        border-bottom: 1px solid #e2e8f0 !important;
+        border-bottom: 2px solid #cbd5e1 !important;
     }
 
     .table-import td {
-        padding: 12px 16px !important;
         vertical-align: middle !important;
+    }
+
+    .table-import .form-control,
+    .table-import .form-select,
+    .table-import select {
+        height: 36px !important;
+        font-size: 13px !important;
+        padding: 4px 8px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        min-width: 0 !important;
     }
 
     .btn-action {
         border-radius: 8px;
         font-weight: 600;
-        padding: 10px 20px;
+        padding: 8px 16px;
         font-size: 14px;
         transition: all 0.2s ease-in-out;
     }
@@ -101,6 +165,7 @@
         box-shadow: 0 6px 12px -1px rgba(16, 185, 129, 0.3);
     }
 </style>
+}
 
 <div class="container-fluid py-4">
     <div class="mb-4">
@@ -112,13 +177,13 @@
     <form id="CreatePurchaseOrderForm">
         <div class="row">
             <!-- Left Panel: General Info -->
-            <div class="col-md-4 mb-4">
-                <div class="card card-custom p-4">
+            <div class="col-lg-3 col-md-4 mb-4 col-left-custom">
+                <div class="card card-custom p-3">
                     <h5 class="fw-bold mb-3" style="color: #0f172a;">Thông tin chung</h5>
                     
                     <div class="mb-3">
                         <label class="form-label form-label-custom" for="SupplierId">@L("Supplier") <span class="text-danger">*</span></label>
-                        <select name="SupplierId" id="SupplierId" class="form-select" required>
+                        <select name="SupplierId" id="SupplierId" class="form-select form-select-sm" required>
                             <option value="">-- Chọn nhà cung cấp --</option>
                             @foreach (var s in ViewBag.Suppliers)
                             {
@@ -129,12 +194,12 @@
 
                     <div class="mb-3">
                         <label class="form-label form-label-custom" for="Note">@L("Note")</label>
-                        <textarea name="Note" id="Note" class="form-control" rows="4" placeholder="Nhập ghi chú phiếu nhập hàng..."></textarea>
+                        <textarea name="Note" id="Note" class="form-control" rows="2" placeholder="Nhập ghi chú..."></textarea>
                     </div>
 
                     <div class="pt-3 border-top">
                         <div class="d-flex justify-content-between mb-2">
-                            <span class="text-muted fw-semibold">Tổng giá trị nhập:</span>
+                            <span class="text-muted fw-semibold">Tổng tiền:</span>
                             <span class="text-danger fw-bold fs-5" id="po-total-amount">0 ₫</span>
                         </div>
                     </div>
@@ -147,23 +212,23 @@
             </div>
 
             <!-- Right Panel: Import Items List -->
-            <div class="col-md-8 mb-4">
-                <div class="card card-custom p-4">
+            <div class="col-lg-9 col-md-8 mb-4 col-right-custom">
+                <div class="card card-custom p-3">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h5 class="fw-bold m-0" style="color: #0f172a;">Danh sách sản phẩm nhập</h5>
                         <button type="button" id="BtnAddItem" class="btn btn-sm btn-action btn-add-item"><i class="fas fa-plus mr-1"></i> Thêm dòng</button>
                     </div>
 
                     <div class="table-responsive">
-                        <table class="table table-bordered table-import mb-0" id="POItemsTable">
+                        <table class="table table-import mb-0" id="POItemsTable">
                             <thead>
                                 <tr>
-                                    <th style="width: 30%;">@L("Product") *</th>
-                                    <th style="width: 15%;">Số lượng *</th>
-                                    <th style="width: 20%;">Đơn giá nhập *</th>
-                                    <th style="width: 15%;">Mã Lô (Tùy chọn)</th>
-                                    <th style="width: 15%;">Hạn SD</th>
-                                    <th style="width: 5%;">Thao tác</th>
+                                    <th>@L("Product") *</th>
+                                    <th style="width: 75px;" class="text-end">SL *</th>
+                                    <th style="width: 120px;" class="text-end">Đơn giá *</th>
+                                    <th style="width: 110px;">Mã lô</th>
+                                    <th style="width: 140px;">HSD</th>
+                                    <th style="width: 45px;" class="text-center"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -182,6 +247,6 @@
     <option value="">-- Chọn sản phẩm --</option>
     @foreach (var p in ViewBag.Products)
     {
-        <option value="@p.Id" data-price="@p.CostPrice">@p.Name</option>
+        <option value="@p.Id" data-price="@p.CostPrice" data-sku="@p.Sku">@p.Name</option>
     }
 </select>

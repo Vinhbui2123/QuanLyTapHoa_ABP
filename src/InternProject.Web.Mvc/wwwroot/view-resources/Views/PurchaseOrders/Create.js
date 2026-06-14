@@ -13,28 +13,25 @@
     var rowId = "item-row-" + rowIdCounter;
     
     // Copy options from product template
-    var selectHtml = `<select name="items[${rowId}][ProductId]" class="form-select product-select" required>` + _$productTemplate.html() + "</select>";
+    var selectHtml = `<select name="items[${rowId}][ProductId]" class="form-select form-select-sm product-select" required>` + _$productTemplate.html() + "</select>";
 
     var html = `
       <tr id="${rowId}">
         <td>${selectHtml}</td>
         <td>
-          <input type="number" name="items[${rowId}][Quantity]" class="form-control qty-input" min="1" value="1" required />
+          <input type="number" name="items[${rowId}][Quantity]" class="form-control form-control-sm qty-input text-end" min="1" value="1" required />
         </td>
         <td>
-          <div class="input-group">
-            <input type="number" name="items[${rowId}][UnitPrice]" class="form-control price-input" min="0" value="0" required />
-            <span class="input-group-text">₫</span>
-          </div>
+          <input type="number" name="items[${rowId}][UnitPrice]" class="form-control form-control-sm price-input text-end" min="0" value="0" required />
         </td>
         <td>
-          <input type="text" name="items[${rowId}][BatchId]" class="form-control" placeholder="Mã lô" />
+          <input type="text" name="items[${rowId}][BatchId]" class="form-control form-control-sm" placeholder="Mã lô" />
         </td>
         <td>
-          <input type="date" name="items[${rowId}][ExpiryDate]" class="form-control" />
+          <input type="date" name="items[${rowId}][ExpiryDate]" class="form-control form-control-sm" />
         </td>
         <td class="text-center">
-          <button type="button" class="btn btn-sm btn-danger btn-delete-row"><i class="fas fa-trash"></i></button>
+          <button type="button" class="btn btn-sm btn-danger btn-delete-row" style="height: 36px; display: inline-flex; align-items: center; justify-content: center;"><i class="fas fa-trash"></i></button>
         </td>
       </tr>
     `;
@@ -63,11 +60,52 @@
     addRow();
   });
 
-  // Product Selection Change -> Auto-fill default cost price
+  // Helper to remove accents/diacritics and keep uppercase alphanumeric
+  function cleanProductName(name) {
+    if (!name) return "";
+    var str = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    str = str.replace(/[^a-zA-Z0-9]/g, "");
+    return str.toUpperCase();
+  }
+
+  // Get current date in YYYYMMDD format
+  function getFormattedDate() {
+    var today = new Date();
+    var yyyy = today.getFullYear();
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var dd = String(today.getDate()).padStart(2, '0');
+    return yyyy + mm + dd;
+  }
+
+  // Generate random 4-digit sequence
+  function getRandomSeq() {
+    return String(Math.floor(1000 + Math.random() * 9000));
+  }
+
+  // Product Selection Change -> Auto-fill default cost price and batch number
   $(document).on("change", ".product-select", function () {
     var selectedOption = $(this).find("option:selected");
     var defaultPrice = parseFloat(selectedOption.attr("data-price")) || 0;
-    $(this).closest("tr").find(".price-input").val(defaultPrice);
+    var $row = $(this).closest("tr");
+    
+    $row.find(".price-input").val(defaultPrice);
+
+    // Auto-generate batch code if empty
+    var $batchInput = $row.find("input[name*='[BatchId]']");
+    if (!$batchInput.val()) {
+      var sku = selectedOption.attr("data-sku") || "";
+      var productName = selectedOption.text() || "";
+      var productIdentifier = sku ? sku : productName;
+
+      if (productIdentifier && !productIdentifier.startsWith("--")) {
+        var cleanIdent = cleanProductName(productIdentifier);
+        var dateStr = getFormattedDate();
+        var seqStr = getRandomSeq();
+        var batchCode = `BATCH-PO-${dateStr}-${seqStr}-${cleanIdent}`;
+        $batchInput.val(batchCode);
+      }
+    }
+
     calculateTotalAmount();
   });
 
@@ -120,6 +158,21 @@
         hasError = true;
         abp.message.warn("Số lượng phải lớn hơn 0.");
         return false;
+      }
+
+      // Auto-generate batch code if empty on submit
+      if (!batchId) {
+        var selectedOption = $(this).find(".product-select option:selected");
+        var sku = selectedOption.attr("data-sku") || "";
+        var productName = selectedOption.text() || "";
+        var productIdentifier = sku ? sku : productName;
+        if (productIdentifier && !productIdentifier.startsWith("--")) {
+          var cleanIdent = cleanProductName(productIdentifier);
+          var dateStr = getFormattedDate();
+          var seqStr = getRandomSeq();
+          batchId = `BATCH-PO-${dateStr}-${seqStr}-${cleanIdent}`;
+          $(this).find("input[name*='[BatchId]']").val(batchId);
+        }
       }
 
       items.push({
