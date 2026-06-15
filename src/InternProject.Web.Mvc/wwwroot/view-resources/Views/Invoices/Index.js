@@ -60,7 +60,9 @@
                 render: (data) => {
                     switch (data) {
                         case 1:
-                            return `<span class="badge bg-primary text-white"><i class="fas fa-money-bill-wave mr-1"></i> ${l("CashPayment")}</span>`;
+                            return `<span class="badge bg-primary text-white">
+                            <i class="fas fa-money-bill-wave mr-1"></i>
+                            ${l("CashPayment")}</span>`;
                         case 2:
                             return `<span class="badge bg-info text-dark"><i class="fas fa-university mr-1"></i> ${l("BankTransfer")}</span>`;
                         case 3:

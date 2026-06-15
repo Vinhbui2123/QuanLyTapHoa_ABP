@@ -37,4 +37,6 @@ public static class PermissionNames
 
     public const string Pages_StockBatches = "Pages.StockBatches";
     public const string Pages_StockBatches_Dispose = "Pages.StockBatches.Dispose";
+
+    public const string Pages_Reports = "Pages.Reports";
 }

@@ -14,5 +14,6 @@ public class PageNames
     public const string Suppliers = "Suppliers";
     public const string PurchaseOrders = "PurchaseOrders";
     public const string StockBatches = "StockBatches";
+    public const string Reports = "Reports";
 }
 

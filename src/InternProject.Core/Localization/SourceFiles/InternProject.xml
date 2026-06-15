@@ -4,6 +4,7 @@
     <text name="AppName" value="Grocery Management" />
     <text name="HomePage" value="Home page" />
     <text name="About" value="About" />
+    <text name="Email" value="Email" />
     <text name="WelcomeMessage" value="Welcome to InternProject!" />
     <text name="FormIsNotValidMessage" value="Form is not valid. Please check and fix errors." />
     <text name="TenantNameCanNotBeEmpty" value="Tenant name can not be empty" />
@@ -75,7 +76,7 @@
     <text name="CreateSupplier" value="Create supplier" />
     <text name="DeleteSupplier" value="Delete supplier" />
     <text name="EditSupplier" value="Edit supplier" />
-    <text name="ManageSuppliers" value="Manage Suppliers" />
+    <text name="ManageSuppliers" value="Suppliers" />
     <text name="ManageSuppliersSubtitle" value="Manage lists and contact information of suppliers" />
     <text name="TotalSuppliers" value="Total Suppliers" />
     <text name="ActiveSuppliers" value="Active" />
@@ -146,7 +147,7 @@
     <text name="403PageButton">Go back to Dashboard</text>
 
     <!-- Customer Dashboard -->
-    <text name="ManageCustomers" value="Manage Customers" />
+    <text name="ManageCustomers" value="Customers" />
     <text name="ManageCustomersSubtitle" value="Manage the list and active status of customers" />
     <text name="TotalCustomers" value="Total Customers" />
     <text name="ActiveCustomers" value="Active" />
@@ -157,7 +158,7 @@
     <text name="CustomerName" value="Customer Name" />
     <!-- Categories -->
     <text name="Categories" value="Categories" />
-    <text name="ManageCategories" value="Manage Categories" />
+    <text name="ManageCategories" value="Categories" />
     <text name="ManageCategoriesSubtitle" value="Manage list and status of category classifications" />
     <text name="CreateCategory" value="Create Category" />
     <text name="EditCategory" value="Edit Category" />
@@ -166,7 +167,7 @@
 
     <!-- Products -->
     <text name="Products" value="Products" />
-    <text name="ManageProducts" value="Manage Products" />
+    <text name="ManageProducts" value="Products" />
     <text name="ManageProductsSubtitle" value="Manage inventory stock, pricing, and classifications" />
     <text name="CreateProduct" value="Create Product" />
     <text name="EditProduct" value="Edit Product" />
@@ -301,6 +302,74 @@
     <text name="BatchStatusExpired" value="Expired" />
     <text name="BatchStatusNearExpiry" value="Near Expiry" />
     <text name="BatchStatusNormal" value="Normal" />
+
+    <!-- Reports & Dashboard -->
+    <text name="Reports" value="Reports" />
+    <text name="ReportRevenueProfit" value="Revenue &amp; Profit" />
+    <text name="ReportInventory" value="Inventory &amp; Expiring" />
+    <text name="ReportTopProducts" value="Top Selling Products" />
+    <text name="TotalCost" value="Total Cost" />
+    <text name="TotalProfit" value="Total Profit" />
+    <text name="ProfitMargin" value="Profit Margin" />
+    <text name="TotalOrders" value="Total Orders" />
+    <text name="OutOfStockAlert" value="Out of Stock Products" />
+    <text name="LowStockAlert" value="Low Stock Products" />
+    <text name="ExpiringBatches" value="Expiring Batches" />
+    <text name="ExpiredBatches" value="Expired Batches" />
+    <text name="TopSellingTitle" value="Top Selling Products" />
+    <text name="InventoryValuation" value="Inventory Valuation" />
+    <text name="InvoicesCount" value="Invoices Count" />
+    <text name="RevenueChart" value="Revenue Chart" />
+    <text name="SearchReportsPlaceholder" value="Search..." />
+    <text name="TodayRevenue" value="Today's Revenue" />
+    <text name="TodayProfit" value="Today's Profit" />
+    <text name="TodayInvoices" value="Today's Invoices" />
+    <text name="RevenueProfitGrowthLast6Months" value="Revenue &amp; Profit Growth (Last 6 Months)" />
+    <text name="RecentInvoices" value="Recent Invoices" />
+    <text name="LoadingData" value="Loading data..." />
+    <text name="ViewAllInvoices" value="View all invoices" />
+    <text name="LowStockProducts" value="Low Stock Products" />
+    <text name="ViewDetailedReports" value="View Detailed Reports" />
+    <text name="GoToReportsPage" value="Go to Reports Page" />
+    <text name="FromDate" value="From Date" />
+    <text name="ToDate" value="To Date" />
+    <text name="GroupBy" value="Group By" />
+    <text name="Day" value="Day" />
+    <text name="Month" value="Month" />
+    <text name="FilterData" value="Filter Data" />
+    <text name="ExportExcel" value="Export Excel" />
+    <text name="RevenueProfitChart" value="Revenue and Profit Chart" />
+    <text name="DetailedInvoiceList" value="Detailed Invoice List" />
+    <text name="Payment" value="Payment" />
+    <text name="NearExpiryDaysAlert" value="Days to near expiry alert" />
+    <text name="ReloadData" value="Reload Data" />
+    <text name="TotalStockQuantity" value="Total Stock Quantity" />
+    <text name="ProductInventoryReport" value="Product Inventory Report" />
+    <text name="ProductName" value="Product Name" />
+    <text name="TotalStockValue" value="Total Stock Value" />
+    <text name="StockStatus" value="Stock Status" />
+    <text name="ExpiryWarningTitle" value="Near Expiry &amp; Expired Batches Warning" />
+    <text name="BatchStockQuantity" value="Batch Stock Quantity" />
+    <text name="RemainingDays" value="Remaining Days" />
+    <text name="Warning" value="Warning" />
+    <text name="QuantitySold" value="Quantity Sold" />
+    <text name="LimitTopN" value="Limit Top N" />
+    <text name="TopSellingProductsRanking" value="Top Selling Products Ranking" />
+    <text name="RevenueShareOfTopProducts" value="Revenue Share of Top Products" />
+    <text name="NoReportPermission" value="You do not have permission to access report data." />
+    <text name="NoDataInThisPeriod" value="No data found in this period." />
+    <text name="NoInvoicesCreatedYet" value="No invoices created yet." />
+    <text name="LoadDashboardError" value="Could not load Dashboard information. Please try again!" />
+    <text name="NoExpiringOrExpiredBatches" value="No expiring or expired batches found" />
+    <text name="ExpiredNDays" value="Expired {0} days" />
+    <text name="NDays" value="{0} days" />
+    <text name="NoData" value="No data" />
+    <text name="Other" value="Other" />
+    <text name="LowStock" value="Low Stock" />
+    <text name="Expired" value="Expired" />
+    <text name="NearExpiry" value="Near Expiry" />
+    <text name="Revenue" value="Revenue" />
+    <text name="Profit" value="Profit" />
   </texts>
 </localizationDictionary>
 

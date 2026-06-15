@@ -42,6 +42,8 @@ public class InternProjectAuthorizationProvider : AuthorizationProvider
         var stockBatches = context.CreatePermission(PermissionNames.Pages_StockBatches, L("StockBatches"));
         stockBatches.CreateChildPermission(PermissionNames.Pages_StockBatches_Dispose, L("DisposeStockBatch"));
         
+        context.CreatePermission(PermissionNames.Pages_Reports, L("Reports"));
+        
         context.CreatePermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
     }
 

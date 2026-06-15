@@ -34,5 +34,11 @@
     "inputFiles": [
       "wwwroot/view-resources/Views/StockBatches/Index.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Reports/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Reports/Index.js"
+    ]
   }
 ]

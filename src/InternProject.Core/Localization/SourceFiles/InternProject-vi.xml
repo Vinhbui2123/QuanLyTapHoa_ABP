@@ -93,6 +93,7 @@
     <text name="Administration" value="Quản trị hệ thống" />
     <text name="ClearAll" value="Xóa tất cả" />
     <text name="ClearOthers" value="Xóa phần khác" />
+    <text name="Email" value="Email" />
     <text name="LabelOptions" value="Cài đặt nhãn" />
     <text name="Permissions" value="Quyền hạn" />
     <text name="RoleDescription" value="Mô tả vai trò" />
@@ -147,7 +148,7 @@
     <text name="DeleteSupplier" value="Xóa nhà cung cấp" />
     <text name="EditSupplier" value="Sửa thông tin nhà cung cấp" />
     <text name="SuccessfullyDeleted" value="Đã xóa thành công" />
-    <text name="ManageSuppliers" value="Quản lý nhà cung cấp" />
+    <text name="ManageSuppliers" value="Nhà cung cấp" />
     <text name="ManageSuppliersSubtitle" value="Quản lý danh sách và thông tin liên hệ của nhà cung cấp" />
     <text name="TotalSuppliers" value="Tổng nhà cung cấp" />
     <text name="ActiveSuppliers" value="Đang hoạt động" />
@@ -158,7 +159,7 @@
     <text name="SearchSuppliersPlaceholder" value="Tìm theo tên, mã NCC, SĐT, địa chỉ..." />
 
     <!-- Customer Dashboard -->
-    <text name="ManageCustomers" value="Quản lý khách hàng" />
+    <text name="ManageCustomers" value="Khách hàng" />
     <text name="ManageCustomersSubtitle" value="Quản lý danh sách và trạng thái hoạt động của khách hàng" />
     <text name="TotalCustomers" value="Tổng khách hàng" />
     <text name="ActiveCustomers" value="Đang hoạt động" />
@@ -169,7 +170,7 @@
     <text name="CustomerName" value="Tên khách hàng" />
     <!-- Categories -->
     <text name="Categories" value="Danh mục" />
-    <text name="ManageCategories" value="Quản lý danh mục" />
+    <text name="ManageCategories" value="Danh mục" />
     <text name="ManageCategoriesSubtitle" value="Quản lý phân loại danh mục và trạng thái hoạt động" />
     <text name="CreateCategory" value="Thêm danh mục" />
     <text name="EditCategory" value="Sửa danh mục" />
@@ -178,7 +179,7 @@
 
     <!-- Products -->
     <text name="Products" value="Sản phẩm" />
-    <text name="ManageProducts" value="Quản lý sản phẩm" />
+    <text name="ManageProducts" value="Sản phẩm" />
     <text name="ManageProductsSubtitle" value="Quản lý danh sách, số lượng tồn kho và giá bán sản phẩm" />
     <text name="CreateProduct" value="Thêm sản phẩm" />
     <text name="EditProduct" value="Sửa sản phẩm" />
@@ -313,6 +314,74 @@
     <text name="BatchStatusExpired" value="Quá hạn" />
     <text name="BatchStatusNearExpiry" value="Cận hạn" />
     <text name="BatchStatusNormal" value="Bình thường" />
+
+    <!-- Báo cáo & Dashboard -->
+    <text name="Reports" value="Báo cáo" />
+    <text name="ReportRevenueProfit" value="Doanh thu &amp; Lợi nhuận" />
+    <text name="ReportInventory" value="Tồn kho &amp; Cận hạn" />
+    <text name="ReportTopProducts" value="Sản phẩm bán chạy" />
+    <text name="TotalCost" value="Tổng giá vốn" />
+    <text name="TotalProfit" value="Tổng lợi nhuận" />
+    <text name="ProfitMargin" value="Tỉ suất lợi nhuận" />
+    <text name="TotalOrders" value="Tổng hóa đơn" />
+    <text name="OutOfStockAlert" value="Sản phẩm hết hàng" />
+    <text name="LowStockAlert" value="Sắp hết hàng" />
+    <text name="ExpiringBatches" value="Lô cận hạn" />
+    <text name="ExpiredBatches" value="Lô quá hạn" />
+    <text name="TopSellingTitle" value="Top sản phẩm bán chạy" />
+    <text name="InventoryValuation" value="Giá trị tồn kho" />
+    <text name="InvoicesCount" value="Số hóa đơn" />
+    <text name="RevenueChart" value="Biểu đồ doanh số" />
+    <text name="SearchReportsPlaceholder" value="Tìm kiếm..." />
+    <text name="TodayRevenue" value="Doanh thu hôm nay" />
+    <text name="TodayProfit" value="Lợi nhuận hôm nay" />
+    <text name="TodayInvoices" value="Hóa đơn hôm nay" />
+    <text name="RevenueProfitGrowthLast6Months" value="Tăng trưởng Doanh thu &amp; Lợi nhuận (6 tháng gần nhất)" />
+    <text name="RecentInvoices" value="Hóa đơn gần đây" />
+    <text name="LoadingData" value="Đang tải dữ liệu..." />
+    <text name="ViewAllInvoices" value="Xem tất cả hóa đơn" />
+    <text name="LowStockProducts" value="Sản phẩm sắp hết hàng" />
+    <text name="ViewDetailedReports" value="Xem báo cáo chi tiết" />
+    <text name="GoToReportsPage" value="Truy cập trang báo cáo" />
+    <text name="FromDate" value="Từ ngày" />
+    <text name="ToDate" value="Đến ngày" />
+    <text name="GroupBy" value="Gom nhóm theo" />
+    <text name="Day" value="Ngày" />
+    <text name="Month" value="Tháng" />
+    <text name="FilterData" value="Lọc dữ liệu" />
+    <text name="ExportExcel" value="Xuất Excel" />
+    <text name="RevenueProfitChart" value="Biểu đồ doanh thu và lợi nhuận" />
+    <text name="DetailedInvoiceList" value="Danh sách hóa đơn chi tiết" />
+    <text name="Payment" value="Thanh toán" />
+    <text name="NearExpiryDaysAlert" value="Số ngày cận hạn cảnh báo" />
+    <text name="ReloadData" value="Tải lại số liệu" />
+    <text name="TotalStockQuantity" value="Tổng số lượng trong kho" />
+    <text name="ProductInventoryReport" value="Báo cáo tồn kho sản phẩm" />
+    <text name="ProductName" value="Tên sản phẩm" />
+    <text name="TotalStockValue" value="Tổng giá trị tồn" />
+    <text name="StockStatus" value="Trạng thái kho" />
+    <text name="ExpiryWarningTitle" value="Cảnh báo lô hàng cận hạn &amp; quá hạn" />
+    <text name="BatchStockQuantity" value="Số lượng tồn lô" />
+    <text name="RemainingDays" value="Số ngày còn lại" />
+    <text name="Warning" value="Cảnh báo" />
+    <text name="QuantitySold" value="Số lượng bán" />
+    <text name="LimitTopN" value="Giới hạn Top N" />
+    <text name="TopSellingProductsRanking" value="Bảng xếp hạng sản phẩm bán chạy" />
+    <text name="RevenueShareOfTopProducts" value="Tỉ lệ cơ cấu doanh thu Top sản phẩm" />
+    <text name="NoReportPermission" value="Bạn không có quyền truy cập dữ liệu báo cáo." />
+    <text name="NoDataInThisPeriod" value="Không có dữ liệu trong khoảng thời gian này" />
+    <text name="NoInvoicesCreatedYet" value="Chưa có hóa đơn nào được tạo." />
+    <text name="LoadDashboardError" value="Không thể tải thông tin Dashboard. Vui lòng thử lại!" />
+    <text name="NoExpiringOrExpiredBatches" value="Không có lô hàng cận hạn hoặc quá hạn" />
+    <text name="ExpiredNDays" value="Quá hạn {0} ngày" />
+    <text name="NDays" value="{0} ngày" />
+    <text name="NoData" value="Không có dữ liệu" />
+    <text name="Other" value="Khác" />
+    <text name="LowStock" value="Sắp hết" />
+    <text name="Expired" value="Quá hạn" />
+    <text name="NearExpiry" value="Cận hạn" />
+    <text name="Revenue" value="Doanh thu" />
+    <text name="Profit" value="Lợi nhuận" />
   </texts>
 </localizationDictionary>
 

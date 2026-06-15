@@ -1,0 +1,485 @@
+@using InternProject.Web.Startup
+@{
+    ViewBag.Title = L("Reports");
+    ViewBag.CurrentPageName = PageNames.Reports;
+}
+
+@section scripts
+{
+    <!-- SheetJS (xlsx) for client-side Excel export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBElk90WSUR8ycgHvc9K34cfM9Psl4Gsp14gH7yvGd8S8aA0V+E/pTEdvJomUvdPShTspn9B4A0IQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/view-resources/Views/Reports/Index.js" asp-append-version="true"></script>
+}
+
+<style>
+    .kpi-card-gradient {
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+    }
+    .kpi-card-gradient:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+    }
+    .bg-gradient-primary-soft {
+        background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+        color: white;
+    }
+    .bg-gradient-success-soft {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+    }
+    .bg-gradient-warning-soft {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        color: white;
+    }
+    .bg-gradient-danger-soft {
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        color: white;
+    }
+    .bg-gradient-info-soft {
+        background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+        color: white;
+    }
+    #reportTabs.nav-pills .nav-link {
+        border-radius: 8px;
+        font-weight: 600;
+        color: #4b5563;
+        transition: all 0.2s ease;
+    }
+    #reportTabs.nav-pills .nav-link.active, #reportTabs.nav-pills .show > .nav-link {
+        background-color: #4f46e5;
+        color: white;
+        box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+    }
+    .tab-content {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        margin-top: 15px;
+    }
+    .badge-status-completed {
+        background-color: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 9999px;
+        font-size: 0.8rem;
+    }
+    .badge-status-low {
+        background-color: rgba(245, 158, 11, 0.1);
+        color: #d97706;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 9999px;
+        font-size: 0.8rem;
+    }
+    .badge-status-out {
+        background-color: rgba(239, 68, 68, 0.1);
+        color: #dc2626;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 9999px;
+        font-size: 0.8rem;
+    }
+    .badge-status-normal {
+        background-color: rgba(6, 182, 212, 0.1);
+        color: #0891b2;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 9999px;
+        font-size: 0.8rem;
+    }
+    .filter-card {
+        border-radius: 10px;
+        border: 1px solid rgba(0,0,0,0.05);
+        background-color: #f9fafb;
+    }
+</style>
+
+<div class="content-header text-dark">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 font-weight-bold" style="letter-spacing: -0.5px;">
+                <!-- <i class="fas fa-chart-line text-indigo mr-2"> -->
+                </i> @L("Reports")</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <!-- Navigation Tabs -->
+                <ul class="nav nav-pills p-2 bg-white rounded-lg shadow-sm" id="reportTabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="revenue-tab" href="#revenue-report" role="tab">
+                            <!-- <i class="fas fa-hand-holding-usd mr-1"></i>  -->
+                            @L("ReportRevenueProfit")
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="inventory-tab" href="#inventory-report" role="tab">
+                            <!-- <i class="fas fa-boxes mr-1"></i>  -->
+                            @L("ReportInventory")
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="topselling-tab" href="#topselling-report" role="tab">
+                            <!-- <i class="fas fa-award mr-1"></i>  -->
+                            @L("ReportTopProducts")
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Tab Panes -->
+                <div class="tab-content">
+                    
+                    <!-- TAB 1: DOANH THU & LỢI NHUẬN -->
+                    <div class="tab-pane fade show active" id="revenue-report" role="tabpanel">
+                        <!-- Filters -->
+                        <div class="card filter-card mb-4">
+                            <div class="card-body">
+                                <form id="revenueFilterForm" class="row align-items-end">
+                                    <div class="col-md-3 col-sm-6 mb-2 mb-md-0">
+                                        <label class="form-label text-xs font-weight-bold text-uppercase text-muted">@L("FromDate")</label>
+                                        <input type="date" id="revenueStartDate" class="form-control rounded-lg" required />
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 mb-2 mb-md-0">
+                                        <label class="form-label text-xs font-weight-bold text-uppercase text-muted">@L("ToDate")</label>
+                                        <input type="date" id="revenueEndDate" class="form-control rounded-lg" required />
+                                    </div>
+                                    <div class="col-md-2 col-sm-6 mb-2 mb-md-0">
+                                        <label class="form-label text-xs font-weight-bold text-uppercase text-muted">@L("GroupBy")</label>
+                                        <select id="revenueGroupBy" class="form-control rounded-lg">
+                                            <option value="Day">@L("Day")</option>
+                                            <option value="Month">@L("Month")</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 text-md-right text-left">
+                                        <button type="submit" class="btn btn-primary rounded-lg px-4"><i class="fas fa-filter mr-1"></i> @L("FilterData")</button>
+                                        <!-- <button type="button" id="btnExportRevenue" class="btn btn-success rounded-lg px-4 ml-1"><i class="fas fa-file-excel mr-1"></i> Xuất Excel</button> -->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- KPI Summary Cards -->
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-12 mb-3">
+                                <div class="card kpi-card-gradient bg-gradient-primary-soft">
+                                    <div class="card-body p-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <p class="mb-0 text-sm opacity-8">@L("TotalRevenue")</p>
+                                                <h3 class="mb-0 font-weight-bold" id="revenue-total-val">0 đ</h3>
+                                            </div>
+                                            <!-- <div class="icon-lg opacity-8">
+                                            <i class="fas fa-shopping-cart fa-2x"></i></div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mb-3">
+                                <div class="card kpi-card-gradient bg-gradient-warning-soft">
+                                    <div class="card-body p-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <p class="mb-0 text-sm opacity-8">@L("TotalCost")</p>
+                                                <h3 class="mb-0 font-weight-bold" id="cost-total-val">0 đ</h3>
+                                            </div>
+                                            <!-- <div class="icon-lg opacity-8"><i class="fas fa-tags fa-2x"></i></div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mb-3">
+                                <div class="card kpi-card-gradient bg-gradient-success-soft">
+                                    <div class="card-body p-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <p class="mb-0 text-sm opacity-8">@L("TotalProfit")</p>
+                                                <h3 class="mb-0 font-weight-bold" id="profit-total-val">0 đ</h3>
+                                            </div>
+                                            <!-- <div class="icon-lg opacity-8"><i class="fas fa-hand-holding-usd fa-2x"></i></div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mb-3">
+                                <div class="card kpi-card-gradient bg-gradient-info-soft">
+                                    <div class="card-body p-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <p class="mb-0 text-sm opacity-8">@L("ProfitMargin")</p>
+                                                <h3 class="mb-0 font-weight-bold" id="margin-total-val">0%</h3>
+                                            </div>
+                                            <!-- <div class="icon-lg opacity-8"><i class="fas fa-percentage fa-2x"></i></div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chart section -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header border-0 bg-transparent">
+                                        <h5 class="card-title font-weight-bold">@L("RevenueProfitChart")</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="position-relative" style="height: 300px;">
+                                            <canvas id="revenueReportChart" height="300"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data table -->
+                        <div class="card">
+                            <div class="card-header border-0 bg-transparent">
+                                <h5 class="card-title font-weight-bold">@L("DetailedInvoiceList")</h5>
+                            </div>
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover table-striped text-nowrap m-0 align-middle" id="revenueReportTable">
+                                    <thead>
+                                        <tr>
+                                            <th>@L("InvoiceNumber")</th>
+                                            <th>@L("InvoiceDate")</th>
+                                            <th>@L("Customer")</th>
+                                            <th>@L("Cashier")</th>
+                                            <th class="text-right">@L("TotalRevenue")</th>
+                                            <th class="text-right">@L("CostPrice")</th>
+                                            <th class="text-right">@L("TotalProfit")</th>
+                                            <th>@L("Payment")</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Will be rendered dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: TỒN KHO & CẬN HẠN -->
+                    <div class="tab-pane fade" id="inventory-report" role="tabpanel">
+                        <!-- Filters -->
+                        <div class="card filter-card mb-4">
+                            <div class="card-body">
+                                <form id="inventoryFilterForm" class="row align-items-end">
+                                    <div class="col-md-4 col-sm-6 mb-2 mb-md-0">
+                                        <label class="form-label text-xs font-weight-bold text-uppercase text-muted">@L("NearExpiryDaysAlert")</label>
+                                        <input type="number" id="nearExpiryDays" class="form-control rounded-lg" value="30" min="1" required />
+                                    </div>
+                                    <div class="col-md-8 col-sm-6 text-right">
+                                        <button type="submit" class="btn btn-primary rounded-lg px-4"><i class="fas fa-sync mr-1"></i> @L("ReloadData")</button>
+                                        <!-- <button type="button" id="btnExportInventory" class="btn btn-success rounded-lg px-4 ml-1"><i class="fas fa-file-excel mr-1"></i> Xuất Excel</button> -->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- KPI Summary Cards -->
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-12 mb-3">
+                                <div class="card kpi-card-gradient bg-gradient-info-soft">
+                                    <div class="card-body p-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <p class="mb-0 text-sm opacity-8">@L("InventoryValuation")</p>
+                                                <h3 class="mb-0 font-weight-bold" id="inventory-valuation-val">0 đ</h3>
+                                            </div>
+                                            <!-- <div class="icon-lg opacity-8"><i class="fas fa-money-bill-wave fa-2x"></i></div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mb-3">
+                                <div class="card kpi-card-gradient bg-gradient-primary-soft">
+                                    <div class="card-body p-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <p class="mb-0 text-sm opacity-8">@L("TotalStockQuantity")</p>
+                                                <h3 class="mb-0 font-weight-bold" id="inventory-items-count">0</h3>
+                                            </div>
+                                            <!-- <div class="icon-lg opacity-8"><i class="fas fa-warehouse fa-2x"></i></div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mb-3">
+                                <div class="card kpi-card-gradient bg-gradient-warning-soft">
+                                    <div class="card-body p-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <p class="mb-0 text-sm opacity-8">@L("ExpiringBatches")</p>
+                                                <h3 class="mb-0 font-weight-bold" id="expiring-batches-count">0</h3>
+                                            </div>
+                                            <!-- <div class="icon-lg opacity-8"><i class="fas fa-hourglass-half fa-2x"></i></div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mb-3">
+                                <div class="card kpi-card-gradient bg-gradient-danger-soft">
+                                    <div class="card-body p-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <p class="mb-0 text-sm opacity-8">@L("ExpiredBatches")</p>
+                                                <h3 class="mb-0 font-weight-bold" id="expired-batches-count">0</h3>
+                                            </div>
+                                            <!-- <div class="icon-lg opacity-8"><i class="fas fa-exclamation-triangle fa-2x"></i></div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data table 1: Stock Inventory -->
+                        <div class="card mb-4">
+                            <div class="card-header border-0 bg-transparent">
+                                 <h5 class="card-title font-weight-bold text-indigo">
+                                 <!-- <i class="fas fa-cubes mr-2"></i>  -->
+                                 @L("ProductInventoryReport")</h5>
+                            </div>
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover table-striped text-nowrap m-0 align-middle" id="productInventoryTable">
+                                    <thead>
+                                        <tr>
+                                            <th>@L("Sku")</th>
+                                            <th>@L("ProductName")</th>
+                                            <th>@L("Category")</th>
+                                            <th class="text-right">@L("StockQuantity")</th>
+                                            <th class="text-right">@L("CostPrice")</th>
+                                            <th class="text-right">@L("SalePrice")</th>
+                                            <th class="text-right">@L("TotalStockValue")</th>
+                                            <th>@L("StockStatus")</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Will be rendered dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Data table 2: Expiring Batches -->
+                        <div class="card">
+                            <div class="card-header border-0 bg-transparent">
+                                <h5 class="card-title font-weight-bold text-danger"><i class="fas fa-history mr-2"></i> @L("ExpiryWarningTitle")</h5>
+                            </div>
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover table-striped text-nowrap m-0 align-middle" id="expiringBatchesTable">
+                                    <thead>
+                                        <tr>
+                                            <th>@L("BatchCode")</th>
+                                            <th>@L("ProductName")</th>
+                                            <th>@L("Supplier")</th>
+                                            <th class="text-right">@L("BatchStockQuantity")</th>
+                                            <th class="text-right">@L("ImportPrice")</th>
+                                            <th>@L("ExpiryDate")</th>
+                                            <th class="text-right">@L("RemainingDays")</th>
+                                            <th>@L("Warning")</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Will be rendered dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: SẢN PHẨM BÁN CHẠY -->
+                    <div class="tab-pane fade" id="topselling-report" role="tabpanel">
+                        <!-- Filters -->
+                        <div class="card filter-card mb-4">
+                            <div class="card-body">
+                                <form id="topsellingFilterForm" class="row align-items-end">
+                                    <div class="col-md-3 col-sm-6 mb-2 mb-md-0">
+                                        <label class="form-label text-xs font-weight-bold text-uppercase text-muted">@L("FromDate")</label>
+                                        <input type="date" id="topsellingStartDate" class="form-control rounded-lg" />
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 mb-2 mb-md-0">
+                                        <label class="form-label text-xs font-weight-bold text-uppercase text-muted">@L("ToDate")</label>
+                                        <input type="date" id="topsellingEndDate" class="form-control rounded-lg" />
+                                    </div>
+                                    <div class="col-md-2 col-sm-6 mb-2 mb-md-0">
+                                        <label class="form-label text-xs font-weight-bold text-uppercase text-muted">@L("GroupBy")</label>
+                                        <select id="topsellingSortBy" class="form-control rounded-lg">
+                                            <option value="Quantity">@L("QuantitySold")</option>
+                                            <option value="Revenue">@L("Revenue")</option>
+                                            <option value="Profit">@L("Profit")</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-sm-6 mb-2 mb-md-0">
+                                        <label class="form-label text-xs font-weight-bold text-uppercase text-muted">@L("LimitTopN")</label>
+                                        <input type="number" id="topsellingTopN" class="form-control rounded-lg" value="10" min="1" max="100" />
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 text-right">
+                                        <button type="submit" class="btn btn-primary rounded-lg btn-block"><i class="fas fa-filter mr-1"></i> @L("Filter")</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Content Layout -->
+                        <div class="row">
+                            <!-- Left: Table -->
+                            <div class="col-lg-7 col-12 mb-4">
+                                <div class="card h-100">
+                                    <div class="card-header border-0 bg-transparent d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title font-weight-bold mb-0">@L("TopSellingProductsRanking")</h5>
+                                        <!-- <button type="button" id="btnExportTopSelling" class="btn btn-sm btn-success rounded-lg"><i class="fas fa-file-excel mr-1"></i> Xuất Excel</button> -->
+                                    </div>
+                                    <div class="card-body table-responsive p-0">
+                                        <table class="table table-hover table-striped text-nowrap m-0 align-middle" id="topsellingReportTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Top</th>
+                                                    <th>@L("Sku")</th>
+                                                    <th>@L("ProductName")</th>
+                                                    <th>@L("Category")</th>
+                                                    <th class="text-right">@L("QuantitySold")</th>
+                                                    <th class="text-right">@L("Revenue")</th>
+                                                    <th class="text-right">@L("Profit")</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Will be rendered dynamically -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Right: Chart -->
+                            <div class="col-lg-5 col-12 mb-4">
+                                <div class="card h-100">
+                                    <div class="card-header border-0 bg-transparent">
+                                        <h5 class="card-title font-weight-bold">@L("RevenueShareOfTopProducts")</h5>
+                                    </div>
+                                    <div class="card-body d-flex align-items-center justify-content-center">
+                                        <div class="position-relative" style="height: 350px; width: 100%;">
+                                            <canvas id="topsellingChart" height="350"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

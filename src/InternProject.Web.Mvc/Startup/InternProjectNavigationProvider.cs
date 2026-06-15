@@ -93,6 +93,14 @@ public class InternProjectNavigationProvider : NavigationProvider
                     icon: "fas fa-boxes",
                     permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_StockBatches)
                 )
+            ).AddItem(
+                new MenuItemDefinition(
+                    PageNames.Reports,
+                    L("Reports"),
+                    url: "Reports",
+                    icon: "fas fa-chart-line",
+                    permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_Reports)
+                )
             );
 
             // .AddItem( // Menu items below is just for demonstration!
