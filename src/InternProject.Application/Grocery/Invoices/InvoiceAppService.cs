@@ -77,6 +77,16 @@ public class InvoiceAppService : InternProjectAppServiceBase, IInvoiceAppService
                  (x.CashierUser != null && x.CashierUser.UserName.Contains(input.Keyword))
         );
 
+        query = query.WhereIf(
+            input.PaymentMethod.HasValue,
+            x => x.PaymentMethod == input.PaymentMethod.Value
+        );
+
+        query = query.WhereIf(
+            input.Status.HasValue,
+            x => x.Status == input.Status.Value
+        );
+
         var totalCount = await query.CountAsync();
 
         if (!input.Sorting.IsNullOrWhiteSpace())
