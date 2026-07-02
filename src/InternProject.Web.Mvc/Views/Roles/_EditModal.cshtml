@@ -1,4 +1,4 @@
-﻿@using InternProject.Web.Models.Roles
+@using InternProject.Web.Models.Roles
 @using InternProject.Web.Models.Common.Modals
 @model EditRoleModalViewModel
 @{
@@ -34,8 +34,10 @@
                     @foreach (var permission in Model.Permissions)
                     {
                         <div class="col-md-6">
-                            <input type="checkbox" name="permission" value="@permission.Name" id="@($"permission{permission.Name}")" @(Model.HasPermission(permission) ? "checked" : "") @(Model.Role.IsStatic ? "disabled" : "") />
-                            <label for="@($"permission{permission.Name}")">@permission.DisplayName</label>
+                            <div class="form-check mt-2">
+                                <input type="checkbox" name="permission" value="@permission.Name" id="@($"permission{permission.Name}")" class="form-check-input" @(Model.HasPermission(permission) ? "checked" : "") @(Model.Role.IsStatic ? "disabled" : "") />
+                                <label class="form-check-label" for="@($"permission{permission.Name}")">@permission.DisplayName</label>
+                            </div>
                         </div>
                     }
                 </div>

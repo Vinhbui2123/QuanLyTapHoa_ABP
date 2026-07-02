@@ -370,6 +370,9 @@
     <text name="NearExpiry" value="Near Expiry" />
     <text name="Revenue" value="Revenue" />
     <text name="Profit" value="Profit" />
+    <text name="SearchUsersPlaceholder" value="Search by username, full name, email..." />
+    <text name="SearchRolesPlaceholder" value="Search by role name, display name..." />
+    <text name="Inactive" value="Inactive" />
   </texts>
 </localizationDictionary>
 

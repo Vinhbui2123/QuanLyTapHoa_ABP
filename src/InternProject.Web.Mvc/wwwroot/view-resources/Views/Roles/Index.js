@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
   var _roleService = abp.services.app.role,
     l = abp.localization.getSource("InternProject"),
     _$modal = $("#RoleCreateModal"),
@@ -15,50 +15,31 @@
         return $("#RolesSearchForm").serializeFormToObject(true);
       },
     },
-    buttons: [
-      {
-        name: "refresh",
-        text: '<i class="fas fa-redo-alt"></i>',
-        action: () => _$rolesTable.draw(false),
-      },
-    ],
-    responsive: {
-      details: {
-        type: "column",
-      },
-    },
+    responsive: false,
     columnDefs: [
       {
         targets: 0,
-        className: "control",
-        defaultContent: "",
-        orderable: false,
+        data: "name",
+        render: (data, type, row) => {
+          return `<a href="javascript:;" class="role-name-link edit-role" data-role-id="${row.id}" data-bs-toggle="modal" data-bs-target="#RoleEditModal">${data}</a>`;
+        }
       },
       {
         targets: 1,
-        data: "name",
-      },
-      {
-        targets: 2,
         data: "displayName",
       },
       {
-        targets: 3,
+        targets: 2,
         data: null,
         orderable: false,
-        autoWidth: false,
-        defaultContent: "",
-        render: (data, type, row, meta) => {
+        render: (data, type, row) => {
           return [
-            `   <button type="button" class="btn btn-sm bg-secondary edit-role" data-role-id="${row.id}" data-bs-toggle="modal" data-bs-target="#RoleEditModal">`,
-            `       <i class="fas fa-pencil-alt"></i> ${l("Edit")}`,
-            "   </button>",
-            `   <button type="button" class="btn btn-sm bg-danger delete-role" data-role-id="${row.id}" data-role-name="${row.name}">`,
-            `       <i class="fas fa-trash"></i> ${l("Delete")}`,
-            "   </button>",
-          ].join("");
-        },
-      },
+            `<a href="javascript:;" class="role-action-detail edit-role mr-2" data-role-id="${row.id}" data-bs-toggle="modal" data-bs-target="#RoleEditModal">${l("Edit")}</a>`,
+            `<span class="text-muted">|</span>`,
+            `<a href="javascript:;" class="text-danger ml-2 delete-role" data-role-id="${row.id}" data-role-name="${row.name}">${l("Delete")}</a>`
+          ].join(" ");
+        }
+      }
     ],
   });
 

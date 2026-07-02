@@ -382,6 +382,10 @@
     <text name="NearExpiry" value="Cận hạn" />
     <text name="Revenue" value="Doanh thu" />
     <text name="Profit" value="Lợi nhuận" />
+    <text name="SearchUsersPlaceholder" value="Tìm kiếm theo tên tài khoản, họ tên, email..." />
+    <text name="SearchRolesPlaceholder" value="Tìm kiếm theo tên vai trò, tên hiển thị..." />
+    <text name="Active" value="Đang hoạt động" />
+    <text name="Inactive" value="Tạm khóa" />
   </texts>
 </localizationDictionary>
 

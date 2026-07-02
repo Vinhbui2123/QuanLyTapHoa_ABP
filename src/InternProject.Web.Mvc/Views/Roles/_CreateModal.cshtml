@@ -1,4 +1,4 @@
-﻿@using InternProject.Web.Models.Common.Modals
+@using InternProject.Web.Models.Common.Modals
 @model InternProject.Web.Models.Roles.RoleListViewModel
 @{
     Layout = null;
@@ -34,8 +34,10 @@
                                 @foreach (var permission in Model.Permissions)
                                 {
                                     <div class="col-md-6">
-                                        <input type="checkbox" name="permission" value="@permission.Name" id="permission-@permission.Name" checked="checked" />
-                                        <label for="permission-@permission.Name">@permission.DisplayName</label>
+                                        <div class="form-check mt-2">
+                                            <input type="checkbox" name="permission" value="@permission.Name" id="permission-@permission.Name" class="form-check-input" checked="checked" />
+                                            <label class="form-check-label" for="permission-@permission.Name">@permission.DisplayName</label>
+                                        </div>
                                     </div>
                                 }
                             </div>

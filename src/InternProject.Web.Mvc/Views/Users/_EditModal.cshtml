@@ -1,4 +1,4 @@
-﻿@using Abp.Authorization.Users
+@using Abp.Authorization.Users
 @using InternProject.Web.Models.Common.Modals
 @using InternProject.Web.Models.Users
 @model EditUserModalViewModel
@@ -44,9 +44,12 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="IsActive">@L("IsActive")</label>
+                    <label class="col-md-3 col-form-label">@L("IsActive")</label>
                     <div class="col-md-9">
-                        <input id="IsActive" type="checkbox" name="IsActive" value="true" @(Model.User.IsActive ? "checked" : "") />
+                        <div class="form-check mt-2">
+                            <input id="IsActive" type="checkbox" name="IsActive" class="form-check-input" value="true" @(Model.User.IsActive ? "checked" : "") />
+                            <label class="form-check-label" for="IsActive">@L("Active")</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,8 +58,10 @@
                     @foreach (var role in Model.Roles)
                     {
                         <div class="col-md-6">
-                            <input type="checkbox" name="role" value="@role.NormalizedName" title="@role.Description" class="filled-in" id="@($"role{role.Id}")" @(Model.UserIsInRole(role) ? "checked" : "") />
-                            <label for="@($"role{role.Id}")" title="@role.DisplayName">@role.Name</label>
+                            <div class="form-check mt-2">
+                                <input type="checkbox" name="role" value="@role.NormalizedName" title="@role.Description" class="form-check-input" id="@($"role{role.Id}")" @(Model.UserIsInRole(role) ? "checked" : "") />
+                                <label class="form-check-label" for="@($"role{role.Id}")" title="@role.DisplayName">@role.Name</label>
+                            </div>
                         </div>
                     }
                 </div>

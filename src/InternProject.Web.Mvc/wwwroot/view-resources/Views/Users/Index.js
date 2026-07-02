@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
   var _userService = abp.services.app.user,
     l = abp.localization.getSource("InternProject"),
     _$modal = $("#UserCreateModal"),
@@ -15,62 +15,48 @@
         return $("#UsersSearchForm").serializeFormToObject(true);
       },
     },
-    buttons: [
-      {
-        name: "refresh",
-        text: '<i class="fas fa-redo-alt"></i>',
-        action: () => _$usersTable.draw(false),
-      },
-    ],
-    responsive: {
-      details: {
-        type: "column",
-      },
-    },
+    responsive: false,
     columnDefs: [
       {
         targets: 0,
-        className: "control",
-        defaultContent: "",
-        orderable: false,
+        data: "userName",
+        render: (data, type, row) => {
+          return `<a href="javascript:;" class="user-name-link edit-user" data-user-id="${row.id}" data-bs-toggle="modal" data-bs-target="#UserEditModal">${data}</a>`;
+        }
       },
       {
         targets: 1,
-        data: "userName",
-      },
-      {
-        targets: 2,
         data: "fullName",
         orderable: false,
       },
       {
-        targets: 3,
+        targets: 2,
         data: "emailAddress",
       },
       {
-        targets: 4,
+        targets: 3,
         data: "isActive",
         orderable: false,
-        render: (data) =>
-          `<input type="checkbox" disabled ${data ? "checked" : ""}>`,
+        render: (data) => {
+          if (data) {
+            return `<span class="badge-status badge-status-active"><i class="fas fa-check-circle"></i> ${l("Active")}</span>`;
+          } else {
+            return `<span class="badge-status badge-status-inactive"><i class="fas fa-ban"></i> ${l("Inactive")}</span>`;
+          }
+        }
       },
       {
-        targets: 5,
+        targets: 4,
         data: null,
         orderable: false,
-        autoWidth: false,
-        defaultContent: "",
-        render: (data, type, row, meta) => {
+        render: (data, type, row) => {
           return [
-            `   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-bs-toggle="modal" data-bs-target="#UserEditModal">`,
-            `       <i class="fas fa-pencil-alt"></i> ${l("Edit")}`,
-            "   </button>",
-            `   <button type="button" class="btn btn-sm bg-danger delete-user" data-user-id="${row.id}" data-user-name="${row.name}">`,
-            `       <i class="fas fa-trash"></i> ${l("Delete")}`,
-            "   </button>",
-          ].join("");
-        },
-      },
+            `<a href="javascript:;" class="user-action-detail edit-user mr-2" data-user-id="${row.id}" data-bs-toggle="modal" data-bs-target="#UserEditModal">${l("Edit")}</a>`,
+            `<span class="text-muted">|</span>`,
+            `<a href="javascript:;" class="text-danger ml-2 delete-user" data-user-id="${row.id}" data-user-name="${row.name}">${l("Delete")}</a>`
+          ].join(" ");
+        }
+      }
     ],
   });
 
@@ -176,6 +162,11 @@
     .on("hidden.bs.modal", () => {
       _$form.clearForm();
     });
+
+  // Handle status filter selection change
+  $("#StatusFilter").on("change", function () {
+    _$usersTable.ajax.reload();
+  });
 
   $(".btn-search").on("click", (e) => {
     _$usersTable.ajax.reload();

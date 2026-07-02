@@ -1,4 +1,4 @@
-﻿@using Abp.Authorization.Users
+@using Abp.Authorization.Users
 @using InternProject.Web.Models.Common.Modals
 @using InternProject.Web.Models.Users
 @model UserListViewModel
@@ -58,9 +58,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="CreateUserIsActive">@L("IsActive")</label>
+                                <label class="col-md-3 col-form-label">@L("IsActive")</label>
                                 <div class="col-md-9">
-                                    <input type="checkbox" name="IsActive" value="true" id="CreateUserIsActive" checked />
+                                    <div class="form-check mt-2">
+                                        <input id="CreateUserIsActive" type="checkbox" name="IsActive" class="form-check-input" value="true" checked>
+                                        <label class="form-check-label" for="CreateUserIsActive">@L("Active")</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -69,8 +72,10 @@
                                 @foreach (var role in Model.Roles)
                                 {
                                     <div class="col-md-6">
-                                        <input type="checkbox" name="role" id="role-@role.Id" value="@role.NormalizedName" title="@role.Description" />
-                                        <label for="role-@role.Id" title="@role.DisplayName">@role.Name</label>
+                                        <div class="form-check mt-2">
+                                            <input type="checkbox" name="role" id="role-@role.Id" value="@role.NormalizedName" title="@role.Description" class="form-check-input" />
+                                            <label class="form-check-label" for="role-@role.Id" title="@role.DisplayName">@role.Name</label>
+                                        </div>
                                     </div>
                                 }
                             </div>
