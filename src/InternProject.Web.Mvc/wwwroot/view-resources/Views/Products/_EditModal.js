@@ -64,7 +64,7 @@
                 if (xhr.status === 400 && xhr.responseText) {
                     try {
                         var errObj = JSON.parse(xhr.responseText);
-                        errorMsg = errObj.message || errObj.error?.message || xhr.responseText;
+                        errorMsg = errObj.message || (errObj.error && errObj.error.message) || xhr.responseText;
                     } catch(e) {
                         errorMsg = xhr.responseText;
                     }

@@ -19,6 +19,7 @@ namespace InternProject.Grocery.StockBatches
     [AbpAuthorize(PermissionNames.Pages_StockBatches)]
     public class StockBatchAppService : InternProjectAppServiceBase, IStockBatchAppService
     {
+        // Service quản lý lô hàng: xem tồn theo lô và xử lý hủy hàng hết hạn/hư hỏng.
         private readonly IRepository<StockBatch, Guid> _stockBatchRepository;
         private readonly IRepository<Product, Guid> _productRepository;
         private readonly IRepository<InventoryLog, Guid> _inventoryLogRepository;
@@ -35,6 +36,7 @@ namespace InternProject.Grocery.StockBatches
 
         public async Task<PagedResultDto<StockBatchDto>> GetListAsync(PagedStockBatchResultRequestDto input)
         {
+            // Danh sách lô có thể lọc theo sản phẩm, nhà cung cấp, lô hết hạn và từ khóa.
             System.Linq.IQueryable<StockBatch> query = _stockBatchRepository.GetAll()
                 .Include(x => x.Product)
                 .Include(x => x.Supplier);
@@ -75,6 +77,7 @@ namespace InternProject.Grocery.StockBatches
         [Abp.Domain.Uow.UnitOfWork(System.Transactions.IsolationLevel.Serializable)]
         public async Task DisposeBatchAsync(DisposeBatchInput input)
         {
+            // Hủy lô làm giảm tồn kho nhưng vẫn giữ lịch sử qua InventoryLog, không xóa lô khỏi database.
             var batch = await _stockBatchRepository.FirstOrDefaultAsync(input.StockBatchId);
             if (batch == null)
             {
@@ -98,6 +101,7 @@ namespace InternProject.Grocery.StockBatches
                 throw new UserFriendlyException($"Số lượng hủy ({qtyToDispose}) vượt quá số lượng tồn kho còn lại của lô ({batch.RemainingQuantity}).");
             }
 
+            // Trừ tồn ở cấp lô trước, sau đó trừ tồn tổng của sản phẩm tương ứng.
             batch.RemainingQuantity -= qtyToDispose;
             await _stockBatchRepository.UpdateAsync(batch);
 
@@ -109,6 +113,7 @@ namespace InternProject.Grocery.StockBatches
                 ? $"Hủy hàng hết hạn sử dụng - Lô: {batch.BatchCode}"
                 : $"Hủy hàng - Lô: {batch.BatchCode}. Lý do: {input.Reason}";
 
+            // Ghi log Dispose để báo cáo kho biết số lượng bị loại bỏ và lý do.
             await _inventoryLogRepository.InsertAsync(new InventoryLog
             {
                 ProductId = product.Id,

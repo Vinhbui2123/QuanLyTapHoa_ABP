@@ -4,6 +4,7 @@
         _$table = $("#InvoicesTable"),
         _$modal = $("#InvoiceDetailModal");
 
+    // Lấy số liệu tổng quan của hóa đơn để cập nhật các KPI phía trên bảng.
     function updateKPICounters() {
         _invoiceService.getDashboardStats({}).done(function (stats) {
             $("#kpi-total-revenue").text((stats.totalRevenue || 0).toLocaleString('vi-VN') + " đ");
@@ -12,6 +13,7 @@
         });
     }
 
+    // DataTables chạy server-side: phân trang/tìm kiếm/lọc sẽ gọi InvoiceAppService.GetListAsync.
     var _$invoicesTable = _$table.DataTable({
         paging: true,
         serverSide: true,
@@ -20,7 +22,7 @@
             ajaxFunction: _invoiceService.getList,
             inputFilter: function () {
                 var filter = $("#InvoicesSearchForm").serializeFormToObject(true);
-                // Convert string values to integers if present
+                // Select HTML trả về chuỗi; backend dùng enum int nên cần convert trước khi gửi.
                 if (filter.PaymentMethod) filter.PaymentMethod = parseInt(filter.PaymentMethod);
                 if (filter.Status) filter.Status = parseInt(filter.Status);
                 return filter;
@@ -102,7 +104,7 @@
                     var actions = [];
                     actions.push(`<a href="javascript:;" class="invoice-action-detail view-invoice-details mr-2" data-invoice-id="${row.id}">${l("InvoiceDetails")}</a>`);
                     
-                    // Show cancel action if not cancelled and within 24h
+                    // Chỉ hiện nút hủy nếu hóa đơn chưa hủy, user có quyền và hóa đơn còn trong 24 giờ.
                     if (row.status !== 2 && abp.auth.hasPermission('Pages.Invoices.Cancel')) {
                         var creationTime = new Date(row.creationTime);
                         var now = new Date();
@@ -126,10 +128,11 @@
     });
 
     $("#PaymentMethodFilter, #StatusFilter").on("change", function () {
+        // Đổi filter thì reload bảng, không reload cả trang.
         _$invoicesTable.ajax.reload();
     });
 
-    // Detail click
+    // Lấy HTML partial view chi tiết hóa đơn từ MVC rồi đổ vào modal.
     $(document).on("click", ".view-invoice-details", function (e) {
         var invoiceId = $(this).attr("data-invoice-id");
         e.preventDefault();
@@ -144,7 +147,7 @@
         });
     });
 
-    // Cancel click - Single prompt with input (SweetAlert v2 Promise style)
+    // Hủy hóa đơn: hỏi lý do, gọi backend để đổi trạng thái và hoàn kho.
     $(document).on("click", ".cancel-invoice", function (e) {
         e.preventDefault();
         var invoiceId = $(this).attr("data-invoice-id");
@@ -171,6 +174,7 @@
         }).then(function (inputValue) {
             if (inputValue === null || inputValue === undefined) return;
             
+            // Lý do hủy là bắt buộc để sau này xem lại lịch sử biết vì sao hoàn kho.
             if (inputValue.trim() === "") {
                 swal(l("Error") || "Lỗi", l("CancelInvoiceReasonEmpty") || "Lý do hủy không được để trống!", "error");
                 return;

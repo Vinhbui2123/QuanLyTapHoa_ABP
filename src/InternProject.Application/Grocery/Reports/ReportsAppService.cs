@@ -14,6 +14,8 @@ namespace InternProject.Grocery.Reports
     [AbpAuthorize(PermissionNames.Pages_Reports)]
     public class ReportsAppService : InternProjectAppServiceBase, IReportsAppService
     {
+        // ReportsAppService chỉ đọc dữ liệu để tổng hợp báo cáo, không thay đổi tồn kho/hóa đơn.
+        // Các query dùng AsNoTracking để EF Core không cần theo dõi entity, đọc báo cáo nhanh hơn.
         private readonly IRepository<Invoice, Guid> _invoiceRepository;
         private readonly IRepository<Product, Guid> _productRepository;
         private readonly IRepository<StockBatch, Guid> _stockBatchRepository;
@@ -33,6 +35,7 @@ namespace InternProject.Grocery.Reports
 
         public async Task<DashboardOverviewDto> GetDashboardOverviewAsync()
         {
+            // Dashboard tổng quan lấy số liệu nhanh cho ngày hiện tại và biểu đồ 6 tháng gần nhất.
             var todayStart = DateTime.Today;
             var todayEnd = DateTime.Today.AddDays(1);
 
@@ -43,7 +46,8 @@ namespace InternProject.Grocery.Reports
             var todayInvoicesCount = await todayInvoicesQuery.CountAsync();
             var todayRevenue = await todayInvoicesQuery.SumAsync(x => (decimal?)x.TotalAmount) ?? 0;
 
-            // Calculate profit for today
+            // Giá vốn ưu tiên lấy từ InvoiceItemBatches vì đó là giá nhập thực tế của lô đã bán.
+            // Nếu dữ liệu cũ chưa có batch thì fallback sang Product.CostPrice.
             var todayCogs = await todayInvoicesQuery
                 .SelectMany(x => x.InvoiceItems)
                 .SumAsync(item => 
@@ -54,7 +58,7 @@ namespace InternProject.Grocery.Reports
 
             var todayProfit = todayRevenue - todayCogs;
 
-            // Out of stock and low stock counts
+            // Đếm sản phẩm hết hàng/sắp hết hàng để hiển thị cảnh báo vận hành.
             var outOfStockCount = await _productRepository.GetAll()
                 .AsNoTracking()
                 .CountAsync(p => p.IsActive && p.StockQuantity <= 0);
@@ -63,7 +67,7 @@ namespace InternProject.Grocery.Reports
                 .AsNoTracking()
                 .CountAsync(p => p.IsActive && p.StockQuantity > 0 && p.StockQuantity <= p.MinStock);
 
-            // Recent invoices
+            // Lấy 5 hóa đơn gần nhất cho khu vực hoạt động gần đây trên dashboard.
             var recentInvoices = await _invoiceRepository.GetAll()
                 .AsNoTracking()
                 .OrderByDescending(x => x.CreationTime)
@@ -78,7 +82,7 @@ namespace InternProject.Grocery.Reports
                 })
                 .ToListAsync();
 
-            // Monthly revenue for the last 6 months
+            // Gom doanh thu/lợi nhuận 6 tháng gần nhất để vẽ biểu đồ xu hướng.
             var sixMonthsAgo = DateTime.Today.AddMonths(-5);
             sixMonthsAgo = new DateTime(sixMonthsAgo.Year, sixMonthsAgo.Month, 1);
 
@@ -107,7 +111,7 @@ namespace InternProject.Grocery.Reports
                 .OrderBy(x => x.Month)
                 .ToList();
 
-            // Fill missing months with zero
+            // Bổ sung tháng không có doanh thu bằng 0 để biểu đồ luôn đủ 6 mốc thời gian.
             var finalMonthlyData = new List<MonthlyRevenueDto>();
             for (int i = -5; i <= 0; i++)
             {
@@ -142,6 +146,7 @@ namespace InternProject.Grocery.Reports
 
         public async Task<RevenueReportDto> GetRevenueReportAsync(GetRevenueReportInput input)
         {
+            // EndDate cộng thêm 1 ngày và dùng dấu < để lấy trọn ngày kết thúc.
             var endOfDayLimit = input.EndDate.Date.AddDays(1);
 
             var invoicesQuery = _invoiceRepository.GetAll()
@@ -155,7 +160,7 @@ namespace InternProject.Grocery.Reports
 
             var totalRevenue = await completedInvoicesQuery.SumAsync(x => (decimal?)x.TotalAmount) ?? 0;
 
-            // Calculate cost of goods sold
+            // Tính giá vốn hàng bán: dùng giá vốn theo lô đã xuất để lợi nhuận sát thực tế.
             var totalCost = await completedInvoicesQuery
                 .SelectMany(x => x.InvoiceItems)
                 .SumAsync(item => 
@@ -167,7 +172,7 @@ namespace InternProject.Grocery.Reports
             var totalProfit = totalRevenue - totalCost;
             var profitMargin = totalRevenue > 0 ? (totalProfit / totalRevenue) * 100 : 0;
 
-            // Grouping for chart points
+            // Chuẩn bị dữ liệu biểu đồ theo ngày hoặc theo tháng tùy lựa chọn ở UI.
             var rawChartPoints = await completedInvoicesQuery
                 .Select(x => new {
                     x.CreationTime,
@@ -228,7 +233,7 @@ namespace InternProject.Grocery.Reports
                 .OrderByDescending(x => x.CreationTime)
                 .ToListAsync();
 
-            // Populate TotalProfit
+            // TotalProfit không lấy trực tiếp từ SQL ở bước trước để DTO dễ đọc và thống nhất công thức.
             foreach (var inv in invoicesList)
             {
                 inv.TotalProfit = inv.TotalAmount - inv.TotalCost;
@@ -249,7 +254,8 @@ namespace InternProject.Grocery.Reports
 
         public async Task<InventoryReportDto> GetInventoryReportAsync(GetInventoryReportInput input)
         {
-            // Calculate total valuation based on active StockBatch.RemainingQuantity * ImportPrice
+            // Định giá tồn kho dựa trên số lượng còn lại từng lô * giá nhập của lô.
+            // Cách này chính xác hơn dùng Product.CostPrice trung bình.
             var stockBatches = await _stockBatchRepository.GetAll()
                 .AsNoTracking()
                 .Where(b => b.RemainingQuantity > 0)
@@ -266,7 +272,7 @@ namespace InternProject.Grocery.Reports
 
             var totalStockValuation = stockBatches.Sum(b => b.RemainingQuantity * b.ImportPrice);
 
-            // Detailed product stocks
+            // Lấy danh sách sản phẩm kèm danh mục để tạo bảng chi tiết tồn kho.
             var productsQuery = _productRepository.GetAll()
                 .AsNoTracking()
                 .Include(p => p.Category);
@@ -291,6 +297,7 @@ namespace InternProject.Grocery.Reports
                         ? batchValuations[p.Id] 
                         : (p.StockQuantity * p.CostPrice);
 
+                    // Trạng thái tồn kho dùng MinStock của từng sản phẩm làm ngưỡng cảnh báo.
                     var status = p.StockQuantity <= 0 ? "OutOfStock" : (p.StockQuantity <= p.MinStock ? "LowStock" : "InStock");
 
                     return new InventoryItemDetailDto
@@ -309,7 +316,7 @@ namespace InternProject.Grocery.Reports
                 .OrderBy(x => x.StockQuantity)
                 .ToList();
 
-            // Active batches with expiring check
+            // Tìm các lô còn tồn và có hạn dùng để cảnh báo gần hết hạn/quá hạn.
             var today = DateTime.Today;
 
             var expiringBatchesQuery = _stockBatchRepository.GetAll()
@@ -365,6 +372,7 @@ namespace InternProject.Grocery.Reports
 
         public async Task<List<TopSellingProductDto>> GetTopSellingProductsReportAsync(GetTopSellingProductsInput input)
         {
+            // Top bán chạy chỉ tính hóa đơn Completed, không tính hóa đơn đã hủy.
             var query = _invoiceRepository.GetAll()
                 .AsNoTracking()
                 .Where(x => x.Status == InvoiceStatus.Completed);
@@ -381,6 +389,7 @@ namespace InternProject.Grocery.Reports
 
             var itemsQuery = query.SelectMany(x => x.InvoiceItems);
 
+            // Gom theo sản phẩm để tính tổng số lượng bán, doanh thu và lợi nhuận từng sản phẩm.
             var groupedProducts = await itemsQuery
                 .GroupBy(x => new { 
                     x.ProductId, 

@@ -19,6 +19,7 @@ namespace InternProject.Grocery.PurchaseOrders
     [AbpAuthorize(PermissionNames.Pages_PurchaseOrders)]
     public class PurchaseOrderAppService : InternProjectAppServiceBase, IPurchaseOrderAppService
     {
+        // Service nhập hàng: tạo phiếu nhập, tạo lô tồn kho, cộng tồn sản phẩm và ghi sổ kho.
         private readonly IRepository<PurchaseOrder, Guid> _purchaseOrderRepository;
         private readonly IRepository<PurchaseOrderItem, Guid> _purchaseOrderItemRepository;
         private readonly IRepository<Product, Guid> _productRepository;
@@ -58,6 +59,7 @@ namespace InternProject.Grocery.PurchaseOrders
 
         public async Task<PagedResultDto<PurchaseOrderDto>> GetListAsync(PagedPurchaseOrderResultRequestDto input)
         {
+            // Danh sách phiếu nhập có Include Supplier/User để hiển thị tên nhà cung cấp và người nhập.
             System.Linq.IQueryable<PurchaseOrder> query = _purchaseOrderRepository.GetAll()
                 .Include(x => x.Supplier)
                 .Include(x => x.User);
@@ -97,11 +99,13 @@ namespace InternProject.Grocery.PurchaseOrders
         [Abp.Domain.Uow.UnitOfWork(System.Transactions.IsolationLevel.Serializable)]
         public async Task<PurchaseOrderDto> CreateAsync(CreatePurchaseOrderDto input)
         {
+            // Phiếu nhập phải có ít nhất một dòng hàng; mỗi dòng sau này sẽ tạo một StockBatch.
             if (input.PurchaseOrderItems == null || !input.PurchaseOrderItems.Any())
             {
                 throw new UserFriendlyException("Phiếu nhập phải có ít nhất 1 mặt hàng.");
             }
 
+            // Tạo header phiếu nhập trước: mã phiếu, nhà cung cấp, người nhập, tổng tiền.
             var order = new PurchaseOrder
             {
                 OrderNumber = await GenerateOrderNumberAsync(),
@@ -115,6 +119,7 @@ namespace InternProject.Grocery.PurchaseOrders
 
             foreach (var item in input.PurchaseOrderItems)
             {
+                // Lưu chi tiết nhập hàng: sản phẩm, số lượng, giá nhập, mã lô và hạn sử dụng nếu có.
                 order.PurchaseOrderItems.Add(new PurchaseOrderItem
                 {
                     ProductId = item.ProductId,
@@ -127,14 +132,17 @@ namespace InternProject.Grocery.PurchaseOrders
             }
 
             var orderId = await _purchaseOrderRepository.InsertAndGetIdAsync(order);
+            // SaveChanges để các PurchaseOrderItem có Id, sau đó mới dùng Id đó liên kết StockBatch.
             await CurrentUnitOfWork.SaveChangesAsync();
 
             foreach (var item in order.PurchaseOrderItems)
             {
+                // Nếu người dùng không nhập mã lô, hệ thống tự sinh mã dựa trên phiếu nhập và sản phẩm.
                 var batchCode = string.IsNullOrWhiteSpace(item.BatchId)
                     ? $"BATCH-{order.OrderNumber}-{item.ProductId.ToString().Substring(0, 8).ToUpper()}"
                     : item.BatchId;
 
+                // Mỗi dòng nhập tạo một lô tồn kho riêng để quản lý hạn dùng và giá vốn.
                 var stockBatch = new StockBatch
                 {
                     ProductId = item.ProductId,
@@ -149,10 +157,12 @@ namespace InternProject.Grocery.PurchaseOrders
 
                 var batchId = await _stockBatchRepository.InsertAndGetIdAsync(stockBatch);
 
+                // Cộng tồn tổng trên Product để POS và danh sách sản phẩm đọc nhanh.
                 var product = await _productRepository.GetAsync(item.ProductId);
                 product.StockQuantity += item.Quantity;
                 await _productRepository.UpdateAsync(product);
 
+                // Ghi sổ kho loại Import để truy vết nguồn gốc tăng tồn.
                 await _inventoryLogRepository.InsertAsync(new InventoryLog
                 {
                     ProductId = product.Id,
@@ -176,6 +186,7 @@ namespace InternProject.Grocery.PurchaseOrders
 
         private async Task<string> GenerateOrderNumberAsync()
         {
+            // Mã phiếu nhập theo ngày, ví dụ PO-20260702-0001.
             var todayStr = DateTime.Today.ToString("yyyyMMdd");
             var prefix = $"PO-{todayStr}-";
 
@@ -189,6 +200,7 @@ namespace InternProject.Grocery.PurchaseOrders
 
         private static PurchaseOrderDto MapToDto(PurchaseOrder order)
         {
+            // Map thủ công vì DTO cần thêm SupplierName/UserName/ProductName từ navigation property.
             return new PurchaseOrderDto
             {
                 Id = order.Id,

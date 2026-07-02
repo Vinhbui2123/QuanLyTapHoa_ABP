@@ -8,11 +8,11 @@ $(function () {
     console.warn("abp.services.app.reports is undefined! Please check if your role has 'Pages.Reports' permission.");
   }
 
-  // Charts references
+  // Giữ reference chart để mỗi lần reload dữ liệu có thể destroy chart cũ trước khi vẽ chart mới.
   var revenueChart = null;
   var topsellingChart = null;
 
-  // Initialize Dates
+  // Mặc định lọc báo cáo từ đầu tháng tới hôm nay.
   var today = new Date();
   var startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
   
@@ -21,7 +21,7 @@ $(function () {
   $("#topsellingStartDate").val(formatDate(startOfMonth));
   $("#topsellingEndDate").val(formatDate(today));
 
-  // --- Utility functions ---
+  // --- Hàm tiện ích dùng chung cho các tab báo cáo ---
   function formatDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -39,13 +39,14 @@ $(function () {
     return amount.toLocaleString("vi-VN") + " đ";
   }
 
-  // --- Tab 1: Revenue & Profit ---
+  // --- Tab 1: Báo cáo doanh thu & lợi nhuận ---
   $("#revenueFilterForm").on("submit", function (e) {
     e.preventDefault();
     loadRevenueData();
   });
 
   function loadRevenueData() {
+    // Gọi ReportsAppService.GetRevenueReportAsync để lấy KPI, dữ liệu bảng và điểm biểu đồ.
     if (!_reportsService) {
       abp.notify.warn(l("NoReportPermission"));
       return;
@@ -64,13 +65,13 @@ $(function () {
         groupBy: groupBy,
       })
       .done(function (data) {
-        // Render KPI
+        // Render KPI tổng doanh thu, giá vốn, lợi nhuận và biên lợi nhuận.
         $("#revenue-total-val").text(formatMoney(data.totalRevenue));
         $("#cost-total-val").text(formatMoney(data.totalCost));
         $("#profit-total-val").text(formatMoney(data.totalProfit));
         $("#margin-total-val").text(data.profitMarginPercent.toFixed(1) + "%");
 
-        // Render Table
+        // Render bảng chi tiết từng hóa đơn trong khoảng thời gian lọc.
         var tbody = $("#revenueReportTable tbody");
         tbody.empty();
         if (data.invoices.length === 0) {
@@ -106,7 +107,7 @@ $(function () {
           });
         }
 
-        // Render Chart
+        // Render biểu đồ đường doanh thu/giá vốn/lợi nhuận.
         renderRevenueChart(data.chartPoints);
       })
       .always(function () {
@@ -115,6 +116,7 @@ $(function () {
   }
 
   function renderRevenueChart(points) {
+    // Chuyển chartPoints từ backend thành 3 series cho Chart.js.
     var labels = [];
     var revenues = [];
     var costs = [];
@@ -130,6 +132,7 @@ $(function () {
     var ctx = document.getElementById("revenueReportChart").getContext("2d");
 
     if (revenueChart) {
+      // Destroy chart cũ để tránh Chart.js báo lỗi canvas đã được dùng.
       revenueChart.destroy();
     }
 
@@ -186,13 +189,14 @@ $(function () {
     });
   }
 
-  // --- Tab 2: Inventory & Expiry ---
+  // --- Tab 2: Báo cáo tồn kho & hạn sử dụng ---
   $("#inventoryFilterForm").on("submit", function (e) {
     e.preventDefault();
     loadInventoryData();
   });
 
   function loadInventoryData() {
+    // Gọi ReportsAppService.GetInventoryReportAsync để lấy định giá tồn kho và các lô gần/quá hạn.
     if (!_reportsService) {
       abp.notify.warn(l("NoReportPermission"));
       return;
@@ -205,13 +209,13 @@ $(function () {
         nearExpiryDays: parseInt(nearExpiryDays),
       })
       .done(function (data) {
-        // Render KPI
+        // Render KPI tồn kho: giá trị tồn, tổng số lượng, lô gần hạn và lô quá hạn.
         $("#inventory-valuation-val").text(formatMoney(data.totalStockValuation));
         $("#inventory-items-count").text(data.totalItemsInStock.toLocaleString("vi-VN"));
         $("#expiring-batches-count").text(data.expiringBatchesCount);
         $("#expired-batches-count").text(data.expiredBatchesCount);
 
-        // Render Table 1: Product Stocks
+        // Bảng 1: tồn kho theo sản phẩm, có trạng thái InStock/LowStock/OutOfStock.
         var tbody1 = $("#productInventoryTable tbody");
         tbody1.empty();
         if (data.productStocks.length === 0) {
@@ -242,7 +246,7 @@ $(function () {
           });
         }
 
-        // Render Table 2: Expiring Batches
+        // Bảng 2: các lô còn tồn nhưng gần hết hạn hoặc đã quá hạn.
         var tbody2 = $("#expiringBatchesTable tbody");
         tbody2.empty();
         if (data.expiringBatches.length === 0) {
@@ -280,13 +284,14 @@ $(function () {
       });
   }
 
-  // --- Tab 3: Top Selling ---
+  // --- Tab 3: Sản phẩm bán chạy ---
   $("#topsellingFilterForm").on("submit", function (e) {
     e.preventDefault();
     loadTopSellingData();
   });
 
   function loadTopSellingData() {
+    // Gọi ReportsAppService.GetTopSellingProductsReportAsync để xếp hạng sản phẩm theo số lượng/doanh thu/lợi nhuận.
     if (!_reportsService) {
       abp.notify.warn(l("NoReportPermission"));
       return;
@@ -319,6 +324,7 @@ $(function () {
         }
 
         data.forEach(function (prod, idx) {
+          // Badge top 1/2/3 giúp bảng dễ nhìn khi trình bày báo cáo.
           var indexBadge = `<span class="badge bg-light text-dark">${idx + 1}</span>`;
           if (idx === 0) indexBadge = `<span class="badge bg-warning text-white"><i class="fas fa-crown"></i> 1</span>`;
           else if (idx === 1) indexBadge = `<span class="badge bg-secondary text-white">2</span>`;
@@ -345,6 +351,7 @@ $(function () {
   }
 
   function renderTopSellingChart(data) {
+    // Biểu đồ doughnut chỉ lấy top 5, phần còn lại gom vào "Other" để chart không quá rối.
     var labels = [];
     var revenues = [];
 
@@ -353,7 +360,7 @@ $(function () {
       revenues.push(prod.totalRevenue);
     });
 
-    // If there are more than 5 products, sum up the rest as 'Other'
+    // Nếu có hơn 5 sản phẩm thì gom phần còn lại vào nhóm Other.
     if (data.length > 5) {
       var otherRevenue = 0;
       data.slice(5).forEach(function (prod) {
@@ -366,6 +373,7 @@ $(function () {
     var ctx = document.getElementById("topsellingChart").getContext("2d");
 
     if (topsellingChart) {
+      // Destroy chart cũ trước khi vẽ lại.
       topsellingChart.destroy();
     }
 
@@ -408,7 +416,8 @@ $(function () {
     });
   }
 
-    // --- Excel Exporters using SheetJS ---
+    // --- Xuất Excel bằng SheetJS ---
+    // Các đoạn dưới đang comment lại; nếu bật lên thì sẽ xuất bảng hiện tại ra file .xlsx.
     // $("#btnExportRevenue").on("click", function () {
     //   var wb = XLSX.utils.table_to_book(document.getElementById("revenueReportTable"), {
     //     sheet: "Báo cáo Doanh thu",
@@ -436,23 +445,23 @@ $(function () {
     //   XLSX.writeFile(wb, "BaoCaoSanPhamBanChay_" + formatDate(new Date()) + ".xlsx");
     // });
 
-    // --- Initial Page Load ---
+    // --- Tải dữ liệu lần đầu khi mở trang ---
     loadRevenueData();
 
-  // --- Manual Tab Switcher (Bootstrap 4/5 Version Independent) ---
+  // --- Tự xử lý chuyển tab để chạy ổn với cả Bootstrap 4/5 ---
   $('#reportTabs .nav-link').on('click', function (e) {
     e.preventDefault();
     var target = $(this).attr('href');
 
-    // Toggle tab active state
+    // Đổi trạng thái active của tab.
     $('#reportTabs .nav-link').removeClass('active');
     $(this).addClass('active');
 
-    // Toggle pane active state
+    // Hiện đúng nội dung tab được chọn.
     $('.tab-content .tab-pane').removeClass('show active');
     $(target).addClass('show active');
 
-    // Load data based on tab
+    // Mỗi tab gọi endpoint riêng, chỉ load khi người dùng mở tab đó.
     if (target === '#inventory-report') {
       loadInventoryData();
     } else if (target === '#topselling-report') {

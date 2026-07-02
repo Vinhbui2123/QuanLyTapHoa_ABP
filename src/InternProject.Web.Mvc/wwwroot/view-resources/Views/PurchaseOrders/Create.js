@@ -7,12 +7,13 @@
 
   var rowIdCounter = 0;
 
-  // Add new row function
+  // Thêm một dòng sản phẩm vào phiếu nhập. Mỗi dòng này khi lưu sẽ tạo một PurchaseOrderItem
+  // và backend sẽ tạo tiếp một StockBatch tương ứng.
   function addRow() {
     rowIdCounter++;
     var rowId = "item-row-" + rowIdCounter;
     
-    // Copy options from product template
+    // Copy danh sách sản phẩm từ template ẩn trong Razor view để không phải render lại bằng JS.
     var selectHtml = `<select name="items[${rowId}][ProductId]" class="form-select form-select-sm product-select" required>` + _$productTemplate.html() + "</select>";
 
     var html = `
@@ -40,7 +41,7 @@
     calculateTotalAmount();
   }
 
-  // Calculate total amount
+  // Tính tổng tiền phiếu nhập ở client để người dùng kiểm tra nhanh trước khi lưu.
   function calculateTotalAmount() {
     var total = 0;
     _$tableBody.find("tr").each(function () {
@@ -52,15 +53,15 @@
     $("#po-total-amount").text(total.toLocaleString('vi-VN') + " đ");
   }
 
-  // Initialize with one row
+  // Mở form là có sẵn một dòng để người dùng nhập nhanh.
   addRow();
 
-  // Add Item Row Event
+  // Bấm thêm dòng sản phẩm.
   $("#BtnAddItem").on("click", function () {
     addRow();
   });
 
-  // Helper to remove accents/diacritics and keep uppercase alphanumeric
+  // Chuẩn hóa tên/SKU để ghép vào mã lô tự sinh, tránh dấu tiếng Việt và ký tự đặc biệt.
   function cleanProductName(name) {
     if (!name) return "";
     var str = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -68,7 +69,7 @@
     return str.toUpperCase();
   }
 
-  // Get current date in YYYYMMDD format
+  // Ngày hiện tại dùng trong mã lô tự sinh: BATCH-PO-yyyyMMdd-....
   function getFormattedDate() {
     var today = new Date();
     var yyyy = today.getFullYear();
@@ -77,12 +78,12 @@
     return yyyy + mm + dd;
   }
 
-  // Generate random 4-digit sequence
+  // Thêm 4 số ngẫu nhiên để giảm khả năng trùng mã lô trong cùng ngày.
   function getRandomSeq() {
     return String(Math.floor(1000 + Math.random() * 9000));
   }
 
-  // Product Selection Change -> Auto-fill default cost price and batch number
+  // Khi chọn sản phẩm: tự điền giá nhập mặc định và tự sinh mã lô nếu ô mã lô đang trống.
   $(document).on("change", ".product-select", function () {
     var selectedOption = $(this).find("option:selected");
     var defaultPrice = parseFloat(selectedOption.attr("data-price")) || 0;
@@ -90,7 +91,7 @@
     
     $row.find(".price-input").val(defaultPrice);
 
-    // Auto-generate batch code if empty
+    // Tự sinh mã lô từ SKU/tên sản phẩm để người dùng không phải nhập thủ công.
     var $batchInput = $row.find("input[name*='[BatchId]']");
     if (!$batchInput.val()) {
       var sku = selectedOption.attr("data-sku") || "";
@@ -109,12 +110,12 @@
     calculateTotalAmount();
   });
 
-  // Inputs Change -> Recalculate total amount
+  // Đổi số lượng/giá thì tính lại tổng tiền.
   $(document).on("change keyup", ".qty-input, .price-input", function () {
     calculateTotalAmount();
   });
 
-  // Delete Row Event
+  // Xóa dòng; vẫn giữ tối thiểu một dòng để phiếu nhập không bị rỗng.
   $(document).on("click", ".btn-delete-row", function () {
     if (_$tableBody.find("tr").length <= 1) {
       abp.message.warn("Phiếu nhập phải có ít nhất 1 sản phẩm.");
@@ -124,7 +125,7 @@
     calculateTotalAmount();
   });
 
-  // Submit form
+  // Submit form: validate dữ liệu, gom các dòng thành DTO rồi gọi PurchaseOrderAppService.CreateAsync.
   _$form.on("submit", function (e) {
     e.preventDefault();
 
@@ -141,6 +142,7 @@
     var items = [];
     var hasError = false;
 
+    // Duyệt từng dòng trong bảng để tạo mảng purchaseOrderItems gửi về backend.
     _$tableBody.find("tr").each(function () {
       var productId = $(this).find(".product-select").val();
       var quantity = parseInt($(this).find(".qty-input").val()) || 0;
@@ -160,7 +162,7 @@
         return false;
       }
 
-      // Auto-generate batch code if empty on submit
+      // Nếu người dùng xóa mã lô trước khi lưu thì vẫn tự sinh lại để StockBatch có BatchCode.
       if (!batchId) {
         var selectedOption = $(this).find(".product-select option:selected");
         var sku = selectedOption.attr("data-sku") || "";
@@ -189,6 +191,7 @@
     }
 
     var order = {
+      // Backend sẽ lấy user hiện tại từ AbpSession, JS chỉ gửi nhà cung cấp, ghi chú và chi tiết hàng nhập.
       supplierId: supplierId,
       note: $("#Note").val(),
       purchaseOrderItems: items

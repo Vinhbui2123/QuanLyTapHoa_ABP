@@ -86,6 +86,8 @@ public class CategoryAppService : InternProjectAppServiceBase, ICategoryAppServi
     [AbpAuthorize(PermissionNames.Pages_Categories_Delete)]
     public async Task DeleteAsync(EntityDto<Guid> input)
     {
+        // Không cho xóa danh mục nếu vẫn còn sản phẩm thuộc danh mục đó.
+        // Đây là ràng buộc nghiệp vụ để tránh sản phẩm bị "mồ côi" hoặc báo cáo bị sai nhóm.
         var hasProduct = await _productRepository.GetAll().AnyAsync(x=>x.CategoryId == input.Id);
         if (hasProduct)
         {

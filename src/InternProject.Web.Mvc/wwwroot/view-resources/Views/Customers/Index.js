@@ -5,7 +5,7 @@
     _$form = _$modal.find("form"),
     _$table = $("#CustomersTable");
 
-  // Function to load and update overview KPI counters dynamically from backend
+  // Lấy KPI khách hàng từ backend để các thẻ tổng quan luôn khớp dữ liệu mới nhất.
   function updateKPICounters() {
     _customerService.getDashboardStats({}).done(function (stats) {
       $("#kpi-total-customers").text(stats.totalCount.toLocaleString('vi-VN'));
@@ -14,9 +14,10 @@
     });
   }
 
+  // DataTables server-side: lọc, phân trang, sắp xếp đều gọi CustomerAppService.GetListAsync.
   var _$customersTable = _$table.DataTable({
     paging: true,
-    serverSide: true, // Use server-side processing to leverage existing backend filters
+    serverSide: true,
     processing: true,
     listAction: {
       ajaxFunction: _customerService.getList,
@@ -75,21 +76,21 @@
     ],
   });
 
-  // Load KPI cards on start
+  // Tải KPI khi mở trang.
   updateKPICounters();
 
-  // Prevent form submission which reloads the page
+  // Chặn submit form mặc định để trang không reload; chỉ reload lại DataTable.
   $("#CustomersSearchForm").on("submit", function (e) {
     e.preventDefault();
     _$customersTable.ajax.reload();
   });
 
-  // Handle status filter selection change
+  // Đổi trạng thái active/inactive thì tải lại danh sách.
   $("#StatusFilter").on("change", function () {
     _$customersTable.ajax.reload();
   });
 
-  // Form Validation
+  // Validate form tạo mới trước khi gọi CustomerAppService.CreateAsync.
   _$form.validate({
     rules: {
       Name: {
@@ -98,7 +99,7 @@
     },
   });
 
-  // Save Customer Event
+  // Lưu khách hàng mới từ modal tạo.
   _$form.find(".save-button").on("click", function (e) {
     e.preventDefault();
 
@@ -107,6 +108,7 @@
     }
 
     var customer = _$form.serializeFormToObject();
+    // Checkbox không tự serialize đúng kiểu bool nên đọc thủ công.
     customer.IsActive = $("#customer-is-active").is(":checked");
 
     abp.ui.setBusy(_$modal);
@@ -124,7 +126,7 @@
       });
   });
 
-  // Delete Customer click handler
+  // Click xóa: lấy id/tên từ data attribute rồi gọi hàm xác nhận.
   $(document).on("click", ".delete-customer", function () {
     var customerId = $(this).attr("data-customer-id");
     var customerName = $(this).attr("data-customer-name");
@@ -132,7 +134,7 @@
     deleteCustomer(customerId, customerName);
   });
 
-  // Edit Customer click handler (triggers partial view load in Edit Modal)
+  // Click sửa: gọi MVC action trả về partial view và nhúng vào modal edit.
   $(document).on("click", ".edit-customer", function (e) {
     var customerId = $(this).attr("data-customer-id");
 
@@ -149,11 +151,13 @@
   });
 
   abp.event.on("customer.edited", (data) => {
+    // Modal edit phát event này sau khi lưu; trang danh sách nghe event để reload KPI/bảng.
     updateKPICounters();
     _$customersTable.ajax.reload();
   });
 
   function deleteCustomer(customerId, customerName) {
+    // Xác nhận trước khi xóa để tránh thao tác nhầm.
     abp.message.confirm(
       abp.utils.formatString(l("AreYouSureWantToDelete"), customerName),
       null,
@@ -173,9 +177,11 @@
 
   _$modal
     .on("shown.bs.modal", () => {
+      // Khi modal mở, focus ô đầu tiên cho thao tác nhập liệu nhanh.
       _$modal.find("input:not([type=hidden]):first").focus();
     })
     .on("hidden.bs.modal", () => {
+      // Khi đóng modal tạo mới, reset form về trạng thái mặc định.
       _$form.clearForm();
       $("#customer-is-active").prop("checked", true);
     });

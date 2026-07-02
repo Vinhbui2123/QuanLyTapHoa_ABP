@@ -17,6 +17,8 @@ namespace InternProject.Grocery.Products;
 [AbpAuthorize(PermissionNames.Pages_Products)]
 public class ProductAppService : InternProjectAppServiceBase, IProductAppService
 {
+    // ProductAppService quản lý thông tin sản phẩm. Tồn kho không cho sửa trực tiếp ở đây,
+    // mà được tăng/giảm qua nhập hàng, bán hàng, hủy lô để lịch sử kho luôn có dấu vết.
     private readonly IRepository<Product, Guid> _productRepository;
     private readonly IRepository<Category, Guid> _categoryRepository;
 
@@ -44,6 +46,7 @@ public class ProductAppService : InternProjectAppServiceBase, IProductAppService
 
     public async Task<PagedResultDto<ProductDto>> GetListAsync(PagedProductResultRequestDto input)
     {
+        // Include Category để DTO/list có tên danh mục, không phải gọi thêm từng sản phẩm.
         var query = _productRepository.GetAll()
             .Include(x => x.Category)
             .WhereIf(
@@ -80,7 +83,8 @@ public class ProductAppService : InternProjectAppServiceBase, IProductAppService
     public async Task CreateAsync(CreateUpdateProductDto input)
     {
         var product = ObjectMapper.Map<Product>(input);
-        product.StockQuantity = 0; // Force stock quantity to 0 on creation
+        // Sản phẩm mới luôn bắt đầu tồn kho = 0; tồn kho chỉ tăng khi lập phiếu nhập.
+        product.StockQuantity = 0;
         await _productRepository.InsertAsync(product);
     }
 
@@ -89,10 +93,11 @@ public class ProductAppService : InternProjectAppServiceBase, IProductAppService
     {
         var product = await _productRepository.GetAsync(input.Id);
         var oldImageUrl = product.ImageUrl;
-        var currentStockQuantity = product.StockQuantity; // Keep current stock quantity
+        // Giữ lại tồn kho hiện tại để người dùng không thể sửa số lượng bằng form thông tin sản phẩm.
+        var currentStockQuantity = product.StockQuantity;
 
         ObjectMapper.Map(input, product);
-        product.StockQuantity = currentStockQuantity; // Restore current stock quantity to ignore updates from input DTO
+        product.StockQuantity = currentStockQuantity;
         await _productRepository.UpdateAsync(product);
 
         if (oldImageUrl != product.ImageUrl)
@@ -115,6 +120,7 @@ public class ProductAppService : InternProjectAppServiceBase, IProductAppService
 
     private void TryDeleteProductImage(string imageUrl)
     {
+        // Chỉ xóa file do hệ thống upload trong thư mục sản phẩm, tránh xóa nhầm URL ngoài.
         if (string.IsNullOrEmpty(imageUrl) || !imageUrl.StartsWith("/uploads/products/"))
         {
             return;

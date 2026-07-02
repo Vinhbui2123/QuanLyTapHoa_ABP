@@ -3,7 +3,8 @@
         _invoiceService = abp.services.app.invoice,
         l = abp.localization.getSource("InternProject");
 
-    // Local Caches & State
+    // Cache và state của màn hình POS:
+    // productsCache/categoriesCache giúp lọc nhanh trên trình duyệt, cart là giỏ hàng hiện tại.
     var productsCache = [];
     var categoriesCache = [];
     var cart = [];
@@ -11,7 +12,7 @@
     var searchKeyword = "";
     var activePaymentMethod = 1; // 1 = Cash, 2 = Transfer, 3 = MoMo
 
-    // DOM Elements
+    // Gom các DOM element hay dùng để tránh query jQuery lặp lại nhiều lần.
     var _$searchInput = $("#PosSearchInput"),
         _$categoryTabs = $("#PosCategoryTabs"),
         _$productGrid = $("#PosProductGrid"),
@@ -25,11 +26,11 @@
         _$cashFields = $("#CashPaymentFields"),
         _$validationHint = $("#CheckoutValidationHint");
 
-    // Initialization
+    // Khởi tạo màn hình POS: tải dữ liệu, render danh mục/sản phẩm và đăng ký sự kiện.
     function init() {
         abp.ui.setBusy(_$productGrid);
         
-        // Parallel load of Categories and Products
+        // Tải danh mục và sản phẩm song song để màn hình mở nhanh hơn.
         $.when(
             loadCategories(),
             loadProducts()
@@ -44,7 +45,7 @@
         _$searchInput.focus();
     }
 
-    // Load Data
+    // Các hàm load dữ liệu gọi tới Application Service proxy do ABP sinh ra.
     function loadCategories() {
         return _productService.getCategoryLookup().done(function (result) {
             categoriesCache = result.items || [];
@@ -60,7 +61,7 @@
         });
     }
 
-    // Render Category Tabs
+    // Render tab danh mục; khi click tab thì chỉ lọc lại cache phía client.
     function renderCategories() {
         var html = '<div class="category-tab active" data-category-id="">Tất cả</div>';
         categoriesCache.forEach(function (cat) {
@@ -69,15 +70,15 @@
         _$categoryTabs.html(html);
     }
 
-    // Render Catalog Product Grid based on filters
+    // Render lưới sản phẩm theo danh mục/từ khóa đang chọn.
     function renderProductGrid() {
-        // Filter locally
+        // Lọc tại client từ productsCache, không gọi server lại mỗi lần gõ.
         var filtered = productsCache.filter(function (p) {
-            // Category filter
+            // Lọc theo danh mục.
             if (activeCategoryId && p.categoryId !== activeCategoryId) {
                 return false;
             }
-            // Keyword filter (searches Name and Sku)
+            // Lọc theo tên hoặc SKU.
             if (searchKeyword) {
                 var kw = searchKeyword.toLowerCase();
                 var nameMatch = p.name && p.name.toLowerCase().indexOf(kw) > -1;
@@ -99,7 +100,7 @@
 
         var html = "";
         filtered.forEach(function (p) {
-            // Stock badge status
+            // Badge tồn kho giúp thu ngân biết sản phẩm còn hàng/sắp hết/hết hàng.
             var stockBadgeClass = "stock-badge-normal";
             var stockText = (l("StockFormat") || "Kho: {0} {1}").replace("{0}", p.stockQuantity).replace("{1}", p.unit || "cái");
             if (p.stockQuantity <= 0) {
@@ -136,15 +137,15 @@
 
         _$productGrid.html(html);
 
-        // Bind data objects directly to cards
+        // Gắn object sản phẩm vào card để click thêm giỏ mà không cần query lại.
         filtered.forEach(function (p) {
             $(`#prod-card-${p.id}`).data("product-data", p);
         });
     }
 
-    // Event Registrations
+    // Đăng ký toàn bộ sự kiện thao tác trên màn hình POS.
     function registerEvents() {
-        // Category tab filter click
+        // Chọn danh mục để lọc sản phẩm.
         $(document).on("click", ".category-tab", function () {
             $(".category-tab").removeClass("active");
             $(this).addClass("active");
@@ -152,13 +153,13 @@
             renderProductGrid();
         });
 
-        // Autocomplete search input
+        // Gõ từ khóa thì render lại catalog theo cache hiện có.
         _$searchInput.on("input", function () {
             searchKeyword = $(this).val().trim();
             renderProductGrid();
         });
 
-        // Scan barcode search box Enter
+        // Máy quét barcode thường nhập SKU rồi Enter; đoạn này thử thêm sản phẩm trực tiếp vào giỏ.
         _$searchInput.on("keypress", function (e) {
             if (e.which === 13) {
                 e.preventDefault();
@@ -176,7 +177,7 @@
             }
         });
 
-        // Click card to add product to cart
+        // Click card sản phẩm để thêm vào giỏ.
         $(document).on("click", ".product-card", function () {
             var product = $(this).data("product-data");
             if (product) {
@@ -184,7 +185,7 @@
             }
         });
 
-        // Quantity manipulation +/-
+        // Tăng/giảm số lượng trong giỏ, luôn chặn vượt quá tồn kho đang cache.
         $(document).on("click", ".cart-qty-minus", function (e) {
             e.stopPropagation();
             var id = $(this).data("id");
@@ -222,14 +223,14 @@
             }
         });
 
-        // Delete item click
+        // Xóa một dòng sản phẩm khỏi giỏ.
         $(document).on("click", ".cart-item-del-btn", function (e) {
             e.stopPropagation();
             var id = $(this).data("id");
             removeFromCart(id);
         });
 
-        // Toggle Payment Method
+        // Đổi phương thức thanh toán: tiền mặt cần nhập tiền khách đưa, chuyển khoản/ví thì mặc định đủ tiền.
         $(".payment-method-btn").on("click", function () {
             $(".payment-method-btn").removeClass("active");
             $(this).addClass("active");
@@ -241,7 +242,7 @@
                 calculateChange();
             } else {
                 _$cashFields.hide();
-                // Transfer or Momo sets cash received equal to total
+                // Chuyển khoản/ví điện tử xem như đã nhận đủ đúng tổng tiền.
                 var total = getTotalCartAmount();
                 _$amountPaid.val(total.toLocaleString("vi-VN")).prop("disabled", true);
                 _$changeDisplay.text("0 đ").removeClass("text-danger").addClass("text-primary");
@@ -249,7 +250,7 @@
             updateCheckoutButtonState();
         });
 
-        // Paid Cash Input Auto Format
+        // Format tiền khách đưa theo vi-VN khi nhập, rồi tính lại tiền thối.
         _$amountPaid.on("input", function () {
             var val = $(this).val().replace(/\D/g, "");
             if (val) {
@@ -261,7 +262,7 @@
             updateCheckoutButtonState();
         });
 
-        // Fast cash selection
+        // Các nút chọn nhanh mệnh giá tiền mặt.
         $(".cash-option-btn").on("click", function () {
             var valType = $(this).data("val");
             var total = getTotalCartAmount();
@@ -276,12 +277,12 @@
             updateCheckoutButtonState();
         });
 
-        // Checkout Trigger
+        // Bấm thanh toán.
         _$checkoutBtn.on("click", function () {
             submitCheckout();
         });
 
-        // Hotkeys Configuration
+        // Phím tắt cho thao tác bán hàng nhanh: F9 tìm kiếm, F10 thanh toán, Esc xóa giỏ.
         $(document).on("keydown", function (e) {
             if (e.which === 120) { // F9: Focus search
                 e.preventDefault();
@@ -312,7 +313,8 @@
         });
     }
 
-    // Business POS Methods
+    // Các hàm nghiệp vụ phía client của POS.
+    // Backend vẫn kiểm tra lại tồn kho/thanh toán khi tạo hóa đơn, nên JS chỉ là lớp hỗ trợ thao tác nhanh.
     function addProductBySku(skuKeyword) {
         var p = productsCache.find(x => x.sku && x.sku.toLowerCase() === skuKeyword.toLowerCase());
         if (p) {
@@ -324,6 +326,7 @@
     }
 
     function addToCart(product) {
+        // Client chặn nhanh sản phẩm hết hàng; backend vẫn là lớp kiểm tra cuối cùng.
         if (product.stockQuantity <= 0) {
             abp.notify.error((l("OutOfStock") || "Hết hàng") + ": " + product.name);
             return;
@@ -367,10 +370,11 @@
     }
 
     function getTotalCartAmount() {
+        // Tổng tiền giỏ hàng = giá bán hiện tại * số lượng từng dòng.
         return cart.reduce((sum, item) => sum + (item.salePrice * item.quantity), 0);
     }
 
-    // Render Side Cart Panel
+    // Render panel giỏ hàng bên phải và cập nhật tổng tiền/trạng thái nút thanh toán.
     function renderCart() {
         if (cart.length === 0) {
             _$cartList.html(`
@@ -425,6 +429,7 @@
     }
 
     function calculateChange() {
+        // Chỉ tiền mặt mới cần tính tiền thối; các phương thức khác luôn hiển thị 0 đồng.
         var total = getTotalCartAmount();
         var paidStr = _$amountPaid.val().replace(/\D/g, "");
         var paid = parseInt(paidStr) || 0;
@@ -442,7 +447,7 @@
         }
     }
 
-    // Checkout Form Validator
+    // Bật/tắt nút thanh toán dựa vào giỏ hàng và số tiền khách đưa.
     function updateCheckoutButtonState() {
         var isCartEmpty = cart.length === 0;
         var total = getTotalCartAmount();
@@ -466,7 +471,7 @@
         }
     }
 
-    // Submit POS payment request
+    // Gửi yêu cầu tạo hóa đơn xuống InvoiceAppService.CreateAsync.
     function submitCheckout() {
         var total = getTotalCartAmount();
         var paidStr = _$amountPaid.val().replace(/\D/g, "");
@@ -486,12 +491,13 @@
             paid = total; // Automatically set paid amount for transfer/e-wallets
         }
 
-        // 1. Immediately disable checkout button to prevent double-click
+        // Khóa nút ngay khi gửi để tránh double-click tạo trùng hóa đơn.
         _$checkoutBtn.prop("disabled", true).html(`<i class="fas fa-spinner fa-spin mr-2"></i> ${l("PleaseWait") || "Đang xử lý..."}`);
 
         var customerId = _$customerSelect.val() || null;
         var note = _$note.val().trim() || null;
 
+        // Payload chỉ gửi thông tin cần thiết; backend tự lấy giá bán, tồn kho và thu ngân hiện tại.
         var payload = {
             customerId: customerId,
             amountPaid: paid,
@@ -505,37 +511,37 @@
 
         _invoiceService.create(payload)
             .done(function (result) {
-                // 2. Success toast feedback
+                // Thành công nghĩa là backend đã tạo hóa đơn, trừ kho và trả về mã hóa đơn/tiền thừa.
                 var successDetail = (l("CheckoutSuccessDetail") || "Hóa đơn {0} đã được tạo thành công. Tiền thừa: {1}").replace("{0}", result.invoiceNumber).replace("{1}", result.changeAmount.toLocaleString('vi-VN') + " đ");
                 abp.notify.success(
                     successDetail,
                     l("CheckoutSuccess") || "Thanh toán thành công"
                 );
 
-                // 3. Reset form and cart
+                // Reset giỏ hàng/form để chuẩn bị giao dịch tiếp theo.
                 cart = [];
                 renderCart();
                 _$customerSelect.val("");
                 _$amountPaid.val("");
                 _$note.val("");
-                // Reset payment selection back to cash (default)
+                // Đưa phương thức thanh toán về tiền mặt mặc định.
                 $(".payment-method-btn").removeClass("active");
                 $('[data-method="1"]').addClass("active");
                 activePaymentMethod = 1;
                 _$cashFields.show();
                 
-                // Refresh local product stock quantities from DB so grid stays correct
+                // Tải lại sản phẩm để số tồn trên catalog khớp với database sau khi trừ kho.
                 loadProducts().done(function () {
                     renderProductGrid();
                 });
 
-                // 4. Prompt print modal
+                // Hỏi in hóa đơn; lấy lại HTML chi tiết hóa đơn từ MVC để in.
                 abp.message.confirm(
                     l("PrintConfirm") || "Đã hoàn tất thanh toán. Bạn có muốn in hóa đơn không?",
                     l("CheckoutSuccess") || "Hóa đơn đã tạo",
                     function (confirmed) {
                         if (confirmed) {
-                            // Fetch invoice detail modal HTML and trigger printing cleanly in an iframe/window
+                            // Mở cửa sổ in riêng để không ảnh hưởng màn hình POS.
                             abp.ajax({
                                 url: abp.appPath + "Invoices/DetailModal?invoiceId=" + result.id,
                                 type: "POST",
@@ -558,14 +564,14 @@
                     }
                 );
 
-                // 5. Refocus search box for next transaction
+                // Focus lại ô tìm kiếm cho giao dịch tiếp theo.
                 _$searchInput.focus();
             })
             .fail(function (err) {
-                // Fail automatically shown by sweetalert from ABP, but we still need to enable checkout button
+                // ABP tự hiển thị lỗi từ backend; always bên dưới sẽ mở lại nút thanh toán.
             })
             .always(function () {
-                // 6. Enable checkout button back in finally block
+                // Luôn mở lại nút, kể cả khi backend báo lỗi.
                 _$checkoutBtn.prop("disabled", false).html('<i class="fas fa-money-bill-wave"></i> ' + l("Checkout"));
                 updateCheckoutButtonState();
             });

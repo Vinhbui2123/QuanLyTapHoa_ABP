@@ -5,6 +5,7 @@
     _$form = _$modal.find("form"),
     _$table = $("#BatchesTable");
 
+  // DataTables server-side: mỗi lần lọc/phân trang gọi StockBatchAppService.GetListAsync.
   var _$batchesTable = _$table.DataTable({
     paging: true,
     serverSide: true,
@@ -61,6 +62,7 @@
         data: null,
         orderable: false,
         render: (data, type, row) => {
+          // Trạng thái hiển thị tính ngay trên UI dựa vào tồn còn lại và ngày hết hạn của lô.
           if (row.remainingQuantity <= 0) {
             return `<span class="badge-status badge-status-inactive"><i class="fas fa-check-circle"></i> ${l("BatchStatusOutOfStock")}</span>`;
           }
@@ -86,6 +88,7 @@
         data: null,
         orderable: false,
         render: (data, type, row) => {
+          // Chỉ cho hủy nếu lô vẫn còn số lượng tồn.
           if (row.remainingQuantity > 0) {
             return `<a href="javascript:;" class="btn btn-sm btn-danger dispose-batch-btn" data-batch-id="${row.id}" data-batch-code="${row.batchCode}" data-batch-qty="${row.remainingQuantity}"><i class="fas fa-trash-alt"></i> ${l("Dispose")}</a>`;
           }
@@ -95,12 +98,12 @@
     ],
   });
 
-  // Reload on change/keyup
+  // Đổi bộ lọc thì reload bảng, không reload cả trang.
   $("#ProductFilter, #SupplierFilter, #ExpiredFilter").on("change", function () {
     _$batchesTable.ajax.reload();
   });
 
-  // Realtime search with debounce 350ms
+  // Tìm kiếm realtime có debounce để tránh gọi server quá nhiều khi đang gõ.
   var _searchTimer = null;
   $(".txt-search").on("input", function () {
     clearTimeout(_searchTimer);
@@ -109,14 +112,14 @@
     }, 350);
   });
 
-  // Prevent form submission on enter & reload table
+  // Nhấn Enter trong form tìm kiếm chỉ reload DataTable, không submit cả trang.
   $("#BatchesSearchForm").on("submit", function (e) {
     e.preventDefault();
     clearTimeout(_searchTimer);
     _$batchesTable.ajax.reload();
   });
 
-  // Dispose button click
+  // Mở modal hủy lô và đổ sẵn mã lô/số lượng còn lại để người dùng xác nhận.
   $(document).on("click", ".dispose-batch-btn", function () {
     var id = $(this).attr("data-batch-id");
     var code = $(this).attr("data-batch-code");
@@ -131,7 +134,7 @@
     _$modal.modal("show");
   });
 
-  // Submit dispose form
+  // Submit hủy lô: gọi StockBatchAppService.DisposeBatchAsync để trừ tồn và ghi InventoryLog.
   _$form.on("submit", function (e) {
     e.preventDefault();
 
@@ -152,6 +155,6 @@
     });
   });
 
-  // Form Validation
+  // Bật validation jQuery cho form modal.
   _$form.validate();
 })(jQuery);

@@ -17,6 +17,8 @@ namespace InternProject.Grocery.Suppliers;
 [AbpAuthorize(PermissionNames.Pages_Suppliers)]
 public class SupplierAppService : InternProjectAppServiceBase, ISupplierAppService
 {
+    // Application Service là nơi UI/JS gọi vào để thực hiện use case về nhà cung cấp.
+    // Repository của ABP che bớt chi tiết EF Core, giúp thao tác CRUD trên entity Supplier.
     private readonly IRepository<Supplier, Guid> _supplierRepository;
 
     public SupplierAppService(IRepository<Supplier, Guid> supplierRepository)
@@ -31,6 +33,7 @@ public class SupplierAppService : InternProjectAppServiceBase, ISupplierAppServi
     }
     public async Task<PagedResultDto<SupplierDto>> GetListAsync(PagedSupplierResultRequestDto input)
     {
+        // Tạo query dạng IQueryable để ghép điều kiện lọc, sắp xếp và phân trang trước khi chạy SQL.
         var query = _supplierRepository.GetAll()
             .WhereIf(
                 !input.Keyword.IsNullOrWhiteSpace(),
@@ -42,6 +45,7 @@ public class SupplierAppService : InternProjectAppServiceBase, ISupplierAppServi
 
         var totalCount = await query.CountAsync();
 
+        // DataTables gửi Sorting lên server; nếu không có thì mặc định hiện bản ghi mới nhất trước.
         if (!input.Sorting.IsNullOrWhiteSpace())
         {
             query = query.OrderBy(input.Sorting);
@@ -65,6 +69,7 @@ public class SupplierAppService : InternProjectAppServiceBase, ISupplierAppServi
     [AbpAuthorize(PermissionNames.Pages_Suppliers_Create)]
     public async Task CreateAsync(CreateUpdateSupplierDto input)
     {
+        // ObjectMapper chuyển DTO từ form sang entity Supplier rồi repository lưu xuống database.
         var supplier = ObjectMapper.Map<Supplier>(input);
         await _supplierRepository.InsertAsync(supplier);
     }
@@ -84,6 +89,7 @@ public class SupplierAppService : InternProjectAppServiceBase, ISupplierAppServi
 
     public async Task<SupplierDashboardStatsDto> GetDashboardStatsAsync()
     {
+        // Các số liệu nhỏ này dùng cho KPI ở màn hình danh sách nhà cung cấp.
         var query = _supplierRepository.GetAll();
         return new SupplierDashboardStatsDto
         {

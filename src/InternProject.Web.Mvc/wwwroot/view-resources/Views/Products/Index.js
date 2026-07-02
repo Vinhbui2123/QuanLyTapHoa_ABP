@@ -5,6 +5,7 @@
     _$form = _$modal.find("form"),
     _$table = $("#ProductsTable");
 
+  // Lấy KPI sản phẩm: tổng sản phẩm, sắp hết hàng, đang active.
   function updateKPICounters() {
     _productService.getDashboardStats({}).done(function (stats) {
       $("#kpi-total-products").text(stats.totalCount.toLocaleString('vi-VN'));
@@ -13,6 +14,7 @@
     });
   }
 
+  // DataTables server-side: lọc theo danh mục/trạng thái/từ khóa sẽ gọi ProductAppService.GetListAsync.
   var _$productsTable = _$table.DataTable({
     paging: true,
     serverSide: true,
@@ -34,6 +36,7 @@
         targets: 1,
         data: "name",
         render: (data, type, row) => {
+          // Hiển thị ảnh thumbnail nếu có; nếu ảnh lỗi thì chuyển sang placeholder.
           var imgHtml = "";
           if (row.imageUrl) {
             var imgUrl = abp.appPath + row.imageUrl.replace(/^\//, "");
@@ -77,6 +80,7 @@
         data: "stockQuantity",
         className: "text-end",
         render: (data, type, row) => {
+          // StockStatus được tính từ entity Product dựa trên StockQuantity và MinStock.
           var qty = (data || 0).toLocaleString('vi-VN');
           switch (row.stockStatus) {
             case 2: // OutOfStock
@@ -109,6 +113,7 @@
         data: null,
         orderable: false,
         render: (data, type, row) => {
+          // Chỉ hiện action nếu user có quyền tương ứng.
           var actions = [];
           if (abp.auth.hasPermission('Pages.Products.Edit')) {
             actions.push(`<a href="javascript:;" class="product-action-detail edit-product mr-2" data-product-id="${row.id}" data-bs-toggle="modal" data-bs-target="#ProductEditModal">${l("Edit")}</a>`);
@@ -128,14 +133,17 @@
   updateKPICounters();
 
   $("#ProductsSearchForm").on("submit", function (e) {
+    // Chặn submit mặc định, chỉ reload bảng theo filter hiện tại.
     e.preventDefault();
     _$productsTable.ajax.reload();
   });
 
   $("#CategoryFilter, #StatusFilter").on("change", function () {
+    // Đổi filter thì reload DataTable.
     _$productsTable.ajax.reload();
   });
 
+  // Validate form tạo mới trước khi gọi ProductAppService.CreateAsync.
   _$form.validate({
     rules: {
       Name: {
@@ -154,7 +162,8 @@
     var product = _$form.serializeFormToObject();
     product.IsActive = $("#product-is-active").is(":checked");
     
-    // Parse numeric fields properly
+    // Form serialize ra chuỗi; chuyển các trường tiền/số lượng về number trước khi gửi backend.
+    // Backend vẫn ép StockQuantity = 0 khi tạo, tồn kho thực tế được tăng qua phiếu nhập.
     product.CostPrice = parseFloat(product.CostPrice) || 0;
     product.SalePrice = parseFloat(product.SalePrice) || 0;
     product.StockQuantity = parseInt(product.StockQuantity) || 0;
@@ -183,6 +192,7 @@
   });
 
   $(document).on("click", ".edit-product", function (e) {
+    // Lấy partial view edit từ MVC rồi nhúng vào modal.
     var productId = $(this).attr("data-product-id");
 
     e.preventDefault();
@@ -198,11 +208,13 @@
   });
 
   abp.event.on("product.edited", (data) => {
+    // Modal edit phát event này sau khi lưu; trang danh sách nghe event để reload KPI/bảng.
     updateKPICounters();
     _$productsTable.ajax.reload();
   });
 
   function deleteProduct(productId, productName) {
+    // Xác nhận trước khi xóa sản phẩm.
     abp.message.confirm(
       abp.utils.formatString(l("AreYouSureWantToDelete"), productName),
       null,
@@ -220,7 +232,7 @@
     );
   }
 
-  // Handle Product Image Upload
+  // Upload ảnh sản phẩm bằng AJAX FormData; controller trả về imageUrl để lưu vào Product.
   $("#product-image-file").on("change", function () {
     var files = this.files;
     if (files.length === 0) {
@@ -240,6 +252,7 @@
       contentType: false,
       processData: false,
       headers: {
+        // Gửi anti-forgery token vì đây là POST ngoài form MVC thông thường.
         "X-XSRF-TOKEN": abp.security.antiForgery.getToken()
       },
       success: function (response) {
@@ -256,7 +269,7 @@
         if (xhr.status === 400 && xhr.responseText) {
           try {
             var errObj = JSON.parse(xhr.responseText);
-            errorMsg = errObj.message || errObj.error?.message || xhr.responseText;
+            errorMsg = errObj.message || (errObj.error && errObj.error.message) || xhr.responseText;
           } catch(e) {
             errorMsg = xhr.responseText;
           }
@@ -270,7 +283,7 @@
     });
   });
 
-  // Handle Remove Image button click
+  // Xóa ảnh khỏi form hiện tại; file cũ sẽ được backend dọn khi update nếu URL thay đổi.
   $("#btn-remove-product-image").on("click", function () {
     $("#product-image-url").val("");
     $("#product-image-preview").attr("src", "").hide();
@@ -281,9 +294,11 @@
 
   _$modal
     .on("shown.bs.modal", () => {
+      // Khi modal mở, focus ô đầu tiên cho thao tác nhập nhanh.
       _$modal.find("input:not([type=hidden]):first").focus();
     })
     .on("hidden.bs.modal", () => {
+      // Khi đóng modal tạo mới, reset toàn bộ form và preview ảnh.
       _$form.clearForm();
       $("#product-is-active").prop("checked", true);
       $("#product-cost-price").val(0);
