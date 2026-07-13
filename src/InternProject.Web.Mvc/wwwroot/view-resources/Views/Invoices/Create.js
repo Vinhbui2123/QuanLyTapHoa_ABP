@@ -1,6 +1,7 @@
 (function ($) {
     var _productService = abp.services.app.product,
         _invoiceService = abp.services.app.invoice,
+        _customerService = abp.services.app.customer,
         l = abp.localization.getSource("InternProject");
 
     // Cache và state của màn hình POS:
@@ -24,7 +25,9 @@
         _$note = $("#PosNote"),
         _$checkoutBtn = $("#BtnCheckout"),
         _$cashFields = $("#CashPaymentFields"),
-        _$validationHint = $("#CheckoutValidationHint");
+        _$validationHint = $("#CheckoutValidationHint"),
+        _$quickCustomerModal = $("#QuickAddCustomerModal"),
+        _$quickCustomerForm = $("#QuickAddCustomerForm");
 
     // Khởi tạo màn hình POS: tải dữ liệu, render danh mục/sản phẩm và đăng ký sự kiện.
     function init() {
@@ -145,6 +148,46 @@
 
     // Đăng ký toàn bộ sự kiện thao tác trên màn hình POS.
     function registerEvents() {
+        $("#BtnQuickAddCustomer").on("click", function () {
+            _$quickCustomerForm[0].reset();
+            _$quickCustomerModal.modal("show");
+        });
+
+        _$quickCustomerForm.on("submit", function (e) {
+            e.preventDefault();
+            if (!_$quickCustomerForm.valid()) {
+                return;
+            }
+
+            abp.ui.setBusy(_$quickCustomerModal);
+            _customerService.create({
+                name: $("#QuickCustomerName").val().trim(),
+                phone: $("#QuickCustomerPhone").val().trim() || null,
+                isActive: true
+            }).done(function (result) {
+                var customer = result || {};
+                // CreateAsync currently returns no DTO, so reload the lookup and select by name/phone.
+                var name = $("#QuickCustomerName").val().trim();
+                var phone = $("#QuickCustomerPhone").val().trim();
+                _customerService.getList({ maxResultCount: 1000, isActive: true }).done(function (list) {
+                    _$customerSelect.find("option:not(:first)").remove();
+                    (list.items || []).forEach(function (item) {
+                        _$customerSelect.append($("<option>", { value: item.id, text: item.name }));
+                    });
+                    var selected = (list.items || []).find(function (item) {
+                        return item.name === name && (!phone || item.phone === phone);
+                    });
+                    if (selected) {
+                        _$customerSelect.val(selected.id);
+                    }
+                    _$quickCustomerModal.modal("hide");
+                    abp.notify.success(l("SavedSuccessfully"));
+                });
+            }).always(function () {
+                abp.ui.clearBusy(_$quickCustomerModal);
+            });
+        });
+
         // Chọn danh mục để lọc sản phẩm.
         $(document).on("click", ".category-tab", function () {
             $(".category-tab").removeClass("active");

@@ -118,7 +118,7 @@
   // Xóa dòng; vẫn giữ tối thiểu một dòng để phiếu nhập không bị rỗng.
   $(document).on("click", ".btn-delete-row", function () {
     if (_$tableBody.find("tr").length <= 1) {
-      abp.message.warn("Phiếu nhập phải có ít nhất 1 sản phẩm.");
+      abp.message.warn(l("PurchaseOrderMustHaveItem"));
       return;
     }
     $(this).closest("tr").remove();

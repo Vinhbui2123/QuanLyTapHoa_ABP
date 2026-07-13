@@ -13,7 +13,6 @@
         product.IsActive = $('#ProductEditIsActive').is(':checked');
 
         // Parse numeric fields properly
-        product.CostPrice = parseFloat(product.CostPrice) || 0;
         product.SalePrice = parseFloat(product.SalePrice) || 0;
         product.StockQuantity = parseInt(product.StockQuantity) || 0;
         product.MinStock = parseInt(product.MinStock) || 0;

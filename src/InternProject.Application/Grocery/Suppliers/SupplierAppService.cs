@@ -20,10 +20,14 @@ public class SupplierAppService : InternProjectAppServiceBase, ISupplierAppServi
     // Application Service là nơi UI/JS gọi vào để thực hiện use case về nhà cung cấp.
     // Repository của ABP che bớt chi tiết EF Core, giúp thao tác CRUD trên entity Supplier.
     private readonly IRepository<Supplier, Guid> _supplierRepository;
+    private readonly IRepository<PurchaseOrder, Guid> _purchaseOrderRepository;
 
-    public SupplierAppService(IRepository<Supplier, Guid> supplierRepository)
+    public SupplierAppService(
+        IRepository<Supplier, Guid> supplierRepository,
+        IRepository<PurchaseOrder, Guid> purchaseOrderRepository)
     {
         _supplierRepository = supplierRepository;
+        _purchaseOrderRepository = purchaseOrderRepository;
     }
 
     public async Task<SupplierDto> GetAsync(EntityDto<Guid> input)
@@ -69,6 +73,9 @@ public class SupplierAppService : InternProjectAppServiceBase, ISupplierAppServi
     [AbpAuthorize(PermissionNames.Pages_Suppliers_Create)]
     public async Task CreateAsync(CreateUpdateSupplierDto input)
     {
+        input.Code = input.Code?.Trim() ?? string.Empty;
+        input.Name = input.Name?.Trim() ?? string.Empty;
+        await ValidateSupplierCodeAsync(input.Code, null);
         // ObjectMapper chuyển DTO từ form sang entity Supplier rồi repository lưu xuống database.
         var supplier = ObjectMapper.Map<Supplier>(input);
         await _supplierRepository.InsertAsync(supplier);
@@ -77,6 +84,14 @@ public class SupplierAppService : InternProjectAppServiceBase, ISupplierAppServi
     [AbpAuthorize(PermissionNames.Pages_Suppliers_Edit)]
     public async Task UpdateAsync(UpdateSupplierDto input)
     {
+        input.Code = input.Code?.Trim();
+        input.Name = input.Name?.Trim() ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(input.Code))
+        {
+            throw new Abp.UI.UserFriendlyException(L("SupplierCodeRequired"));
+        }
+
+        await ValidateSupplierCodeAsync(input.Code, input.Id);
         var supplier = await _supplierRepository.GetAsync(input.Id);
         ObjectMapper.Map(input, supplier);
         await _supplierRepository.UpdateAsync(supplier);
@@ -84,6 +99,11 @@ public class SupplierAppService : InternProjectAppServiceBase, ISupplierAppServi
     [AbpAuthorize(PermissionNames.Pages_Suppliers_Delete)]
     public async Task DeleteAsync(EntityDto<Guid> input)
     {
+        if (await _purchaseOrderRepository.GetAll().AnyAsync(x => x.SupplierId == input.Id))
+        {
+            throw new Abp.UI.UserFriendlyException(L("SupplierHasPurchaseOrders"));
+        }
+
         await _supplierRepository.DeleteAsync(input.Id);
     }
 
@@ -97,6 +117,20 @@ public class SupplierAppService : InternProjectAppServiceBase, ISupplierAppServi
             ActiveCount = await query.CountAsync(x => x.IsActive),
             InactiveCount = await query.CountAsync(x => !x.IsActive)
         };
+    }
+
+    private async Task ValidateSupplierCodeAsync(string code, Guid? excludedId)
+    {
+        if (string.IsNullOrWhiteSpace(code))
+        {
+            throw new Abp.UI.UserFriendlyException(L("SupplierCodeRequired"));
+        }
+
+        if (await _supplierRepository.GetAll().AnyAsync(x =>
+                x.Code == code && (!excludedId.HasValue || x.Id != excludedId.Value)))
+        {
+            throw new Abp.UI.UserFriendlyException(L("SupplierCodeAlreadyExists"));
+        }
     }
 }
 

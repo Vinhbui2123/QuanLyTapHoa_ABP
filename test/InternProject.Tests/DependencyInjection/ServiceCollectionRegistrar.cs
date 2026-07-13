@@ -4,6 +4,7 @@ using InternProject.Identity;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor.MsDependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -22,7 +23,9 @@ public static class ServiceCollectionRegistrar
         var serviceProvider = WindsorRegistrationHelper.CreateServiceProvider(iocManager.IocContainer, services);
 
         var builder = new DbContextOptionsBuilder<InternProjectDbContext>();
-        builder.UseInMemoryDatabase(Guid.NewGuid().ToString()).UseInternalServiceProvider(serviceProvider);
+        builder.UseInMemoryDatabase(Guid.NewGuid().ToString())
+            .ConfigureWarnings(warnings => warnings.Ignore(InMemoryEventId.TransactionIgnoredWarning))
+            .UseInternalServiceProvider(serviceProvider);
 
         iocManager.IocContainer.Register(
             Component

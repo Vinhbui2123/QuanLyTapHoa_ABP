@@ -12,7 +12,7 @@
         </div>
         <div class="col-md-6">
             <p class="mb-1"><strong>Ngày tạo:</strong> @Model.CreationTime.ToString("dd/MM/yyyy HH:mm")</p>
-            <p class="mb-1"><strong>@L("Note"):</strong> @(string.IsNullOrWhiteSpace(Model.Note) ? "Không có" : Model.Note)</p>
+            <p class="mb-1"><strong>@L("Note"):</strong> @(string.IsNullOrWhiteSpace(Model.Note) ? L("NotAvailable") : Model.Note)</p>
         </div>
     </div>
 

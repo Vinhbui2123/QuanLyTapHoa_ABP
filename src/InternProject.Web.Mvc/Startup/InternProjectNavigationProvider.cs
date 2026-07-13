@@ -95,6 +95,14 @@ public class InternProjectNavigationProvider : NavigationProvider
                 )
             ).AddItem(
                 new MenuItemDefinition(
+                    PageNames.InventoryLogs,
+                    L("InventoryLogs"),
+                    url: "InventoryLogs",
+                    icon: "fas fa-clipboard-list",
+                    permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_InventoryLogs)
+                )
+            ).AddItem(
+                new MenuItemDefinition(
                     PageNames.Reports,
                     L("Reports"),
                     url: "Reports",

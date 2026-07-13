@@ -61,19 +61,8 @@
             </div>
         </div>
 
-        <!-- Row 3: Cost Price & Sale Price -->
+        <!-- Row 3: Sale Price -->
         <div class="row">
-            <div class="col-md-6">
-                <div class="form-group row mb-3">
-                    <label class="col-md-12 col-form-label" for="ProductEditCostPrice">@L("CostPrice")</label>
-                    <div class="col-md-12">
-                        <div class="input-group">
-                            <input id="ProductEditCostPrice" type="number" class="form-control" name="CostPrice" value="@Model.Product.CostPrice" min="0" step="any">
-                            <span class="input-group-text">đ</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="col-md-6">
                 <div class="form-group row mb-3">
                     <label class="col-md-12 col-form-label" for="ProductEditSalePrice">@L("SalePrice")</label>
@@ -93,7 +82,8 @@
                 <div class="form-group row mb-3">
                     <label class="col-md-12 col-form-label" for="ProductEditStockQuantity">@L("StockQuantity")</label>
                     <div class="col-md-12">
-                        <input id="ProductEditStockQuantity" type="number" class="form-control" name="StockQuantity" value="@Model.Product.StockQuantity" min="0">
+                        <input id="ProductEditStockQuantity" type="number" class="form-control" name="StockQuantity" value="@Model.Product.StockQuantity" min="0" readonly aria-describedby="product-edit-stock-help">
+                        <small id="product-edit-stock-help" class="form-text text-muted">@L("StockManagedByTransactions")</small>
                     </div>
                 </div>
             </div>

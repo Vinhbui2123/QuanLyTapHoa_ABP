@@ -66,6 +66,12 @@ public class CustomerAppService : InternProjectAppServiceBase, ICustomerAppServi
     [AbpAuthorize(PermissionNames.Pages_Customers_Create)]
     public async Task CreateAsync(CreateCustomerDto input)
     {
+        input.Phone = input.Phone?.Trim();
+        if (!string.IsNullOrWhiteSpace(input.Phone) && await PhoneExistsAsync(input.Phone, null))
+        {
+            throw new Abp.UI.UserFriendlyException(L("CustomerPhoneAlreadyExists"));
+        }
+
         var customer = ObjectMapper.Map<Customer>(input);
         await _customerRepository.InsertAsync(customer);
     }
@@ -73,6 +79,12 @@ public class CustomerAppService : InternProjectAppServiceBase, ICustomerAppServi
     [AbpAuthorize(PermissionNames.Pages_Customers_Edit)]
     public async Task UpdateAsync(UpdateCustomerDto input)
     {
+        input.Phone = input.Phone?.Trim();
+        if (!string.IsNullOrWhiteSpace(input.Phone) && await PhoneExistsAsync(input.Phone, input.Id))
+        {
+            throw new Abp.UI.UserFriendlyException(L("CustomerPhoneAlreadyExists"));
+        }
+
         var customer = await _customerRepository.GetAsync(input.Id);
         ObjectMapper.Map(input,customer);
         await _customerRepository.UpdateAsync(customer);
@@ -94,4 +106,12 @@ public class CustomerAppService : InternProjectAppServiceBase, ICustomerAppServi
             InactiveCount = await query.CountAsync(x => !x.IsActive)
         };
     }
+
+    private async Task<bool> PhoneExistsAsync(string phone, Guid? excludedId)
+    {
+        var normalizedPhone = phone.Trim();
+        return await _customerRepository.GetAll().AnyAsync(x =>
+            x.Phone == normalizedPhone && (!excludedId.HasValue || x.Id != excludedId.Value));
+    }
+
 }

@@ -386,6 +386,54 @@
     <text name="SearchRolesPlaceholder" value="Tìm kiếm theo tên vai trò, tên hiển thị..." />
     <text name="Active" value="Đang hoạt động" />
     <text name="Inactive" value="Tạm khóa" />
+    <text name="AdminPassword" value="Mật khẩu quản trị" />
+    <text name="CreateNewCustomer" value="Thêm khách hàng mới" />
+    <text name="403PageHeader" value="Không có quyền truy cập" />
+    <text name="403PageDescription" value="Bạn không có quyền thực hiện thao tác này." />
+    <text name="403PageButton" value="Về trang chủ" />
+    <text name="InventoryLogs" value="Nhật ký kho" />
+    <text name="InventoryLogsSubtitle" value="Tra cứu toàn bộ biến động tồn kho và chứng từ liên quan" />
+    <text name="SearchInventoryLogsPlaceholder" value="Tìm theo sản phẩm, lô hoặc chứng từ..." />
+    <text name="AllInventoryLogTypes" value="Tất cả loại biến động" />
+    <text name="InventoryLogDate" value="Thời gian" />
+    <text name="InventoryLogType" value="Loại biến động" />
+    <text name="InventoryLogImport" value="Nhập kho" />
+    <text name="InventoryLogExport" value="Xuất kho" />
+    <text name="InventoryLogDispose" value="Hủy" />
+    <text name="InventoryLogAdjust" value="Điều chỉnh" />
+    <text name="ReferenceDocument" value="Chứng từ liên quan" />
+    <text name="ProductNameRequired" value="Tên sản phẩm không được để trống." />
+    <text name="ProductValuesMustBeNonNegative" value="Giá và tồn tối thiểu không được âm." />
+    <text name="ProductSkuAlreadyExists" value="Mã SKU sản phẩm đã tồn tại." />
+    <text name="CategoryNameRequired" value="Tên danh mục không được để trống." />
+    <text name="CategoryNameAlreadyExists" value="Tên danh mục đã tồn tại." />
+    <text name="CategoryHasProducts" value="Không thể xóa danh mục vì đang có sản phẩm thuộc danh mục." />
+    <text name="CustomerPhoneAlreadyExists" value="Số điện thoại khách hàng đã tồn tại." />
+    <text name="SupplierCodeRequired" value="Mã nhà cung cấp không được để trống." />
+    <text name="SupplierCodeAlreadyExists" value="Mã nhà cung cấp đã tồn tại." />
+    <text name="SupplierHasPurchaseOrders" value="Không thể xóa nhà cung cấp vì đã có phiếu nhập hàng." />
+    <text name="OnlyExpiredBatchesCanBeDisposed" value="Chỉ được hủy lô đã hết hạn." />
+    <text name="PurchaseOrderMustHaveItem" value="Phiếu nhập phải có ít nhất một mặt hàng." />
+    <text name="SupplierRequired" value="Nhà cung cấp là bắt buộc." />
+    <text name="PurchaseOrderItemInvalid" value="Mỗi mặt hàng phải có sản phẩm, số lượng dương và đơn giá không âm." />
+    <text name="ImportedProductsList" value="Danh sách sản phẩm nhập" />
+    <text name="AddRow" value="Thêm dòng" />
+    <text name="QuantityShort" value="SL" />
+    <text name="UnitPriceShort" value="Đơn giá" />
+    <text name="ExpiryDateShort" value="HSD" />
+    <text name="InvoiceMustHaveItem" value="Hóa đơn phải có ít nhất một sản phẩm." />
+    <text name="InvalidPaymentMethod" value="Phương thức thanh toán không hợp lệ." />
+    <text name="QuantityMustBePositive" value="Số lượng phải lớn hơn 0." />
+    <text name="ProductQuantityMustBePositive" value="Số lượng sản phẩm {0} phải lớn hơn 0." />
+    <text name="ProductNotFoundOrInactive" value="Sản phẩm không tồn tại hoặc đã ngừng kinh doanh." />
+    <text name="NotAvailable" value="Không có" />
+    <text name="Uncategorized" value="Chưa phân loại" />
+    <text name="LoggedInUserNotFound" value="Không tìm thấy người dùng đang đăng nhập." />
+    <text name="InvoiceAlreadyCancelled" value="Hóa đơn này đã được hủy trước đó." />
+    <text name="InvoiceCancellationWindowExpired" value="Chỉ được hủy hóa đơn trong vòng 24 giờ." />
+    <text name="BatchAlreadyEmpty" value="Lô hàng này không còn tồn kho." />
+    <text name="DisposeQuantityExceedsStock" value="Số lượng hủy ({0}) vượt quá tồn kho còn lại ({1})." />
+    <text name="StockManagedByTransactions" value="Tồn kho được cập nhật qua nhập hàng, bán hàng và xử lý lô." />
+    <text name="NotYetImported" value="Chưa nhập hàng" />
   </texts>
 </localizationDictionary>
-

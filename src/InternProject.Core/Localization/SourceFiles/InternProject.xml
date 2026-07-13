@@ -373,6 +373,51 @@
     <text name="SearchUsersPlaceholder" value="Search by username, full name, email..." />
     <text name="SearchRolesPlaceholder" value="Search by role name, display name..." />
     <text name="Inactive" value="Inactive" />
+    <text name="QuickAddCustomer" value="Quick add customer" />
+    <text name="CustomerDirectory" value="Customer directory" />
+    <text name="InventoryLogs" value="Inventory logs" />
+    <text name="InventoryLogsSubtitle" value="Trace all stock movements and related documents" />
+    <text name="SearchInventoryLogsPlaceholder" value="Search product, batch or document..." />
+    <text name="AllInventoryLogTypes" value="All movement types" />
+    <text name="InventoryLogDate" value="Date" />
+    <text name="InventoryLogType" value="Movement type" />
+    <text name="InventoryLogImport" value="Import" />
+    <text name="InventoryLogExport" value="Export" />
+    <text name="InventoryLogDispose" value="Dispose" />
+    <text name="InventoryLogAdjust" value="Adjustment" />
+    <text name="ReferenceDocument" value="Reference document" />
+    <text name="ProductNameRequired" value="Product name is required." />
+    <text name="ProductValuesMustBeNonNegative" value="Prices and minimum stock must not be negative." />
+    <text name="ProductSkuAlreadyExists" value="The product SKU already exists." />
+    <text name="CategoryNameRequired" value="Category name is required." />
+    <text name="CategoryNameAlreadyExists" value="The category name already exists." />
+    <text name="CategoryHasProducts" value="The category cannot be deleted because products are assigned to it." />
+    <text name="CustomerPhoneAlreadyExists" value="The customer phone number already exists." />
+    <text name="SupplierCodeRequired" value="Supplier code is required." />
+    <text name="SupplierCodeAlreadyExists" value="The supplier code already exists." />
+    <text name="SupplierHasPurchaseOrders" value="The supplier cannot be deleted because purchase orders exist." />
+    <text name="OnlyExpiredBatchesCanBeDisposed" value="Only expired batches can be disposed." />
+    <text name="PurchaseOrderMustHaveItem" value="The purchase order must contain at least one item." />
+    <text name="SupplierRequired" value="A supplier is required." />
+    <text name="PurchaseOrderItemInvalid" value="Each purchase order item must have a product, a positive quantity and a non-negative unit price." />
+    <text name="ImportedProductsList" value="Imported products" />
+    <text name="AddRow" value="Add row" />
+    <text name="QuantityShort" value="Qty" />
+    <text name="UnitPriceShort" value="Unit price" />
+    <text name="ExpiryDateShort" value="Expiry" />
+    <text name="InvoiceMustHaveItem" value="The invoice must contain at least one product." />
+    <text name="InvalidPaymentMethod" value="The payment method is invalid." />
+    <text name="QuantityMustBePositive" value="The quantity must be greater than zero." />
+    <text name="ProductQuantityMustBePositive" value="The quantity for product {0} must be greater than zero." />
+    <text name="ProductNotFoundOrInactive" value="The product does not exist or is inactive." />
+    <text name="NotAvailable" value="Not available" />
+    <text name="Uncategorized" value="Uncategorized" />
+    <text name="LoggedInUserNotFound" value="The logged-in user could not be found." />
+    <text name="InvoiceAlreadyCancelled" value="This invoice has already been cancelled." />
+    <text name="InvoiceCancellationWindowExpired" value="An invoice can only be cancelled within 24 hours." />
+    <text name="BatchAlreadyEmpty" value="This batch has no remaining stock." />
+    <text name="DisposeQuantityExceedsStock" value="The dispose quantity ({0}) exceeds the remaining stock ({1})." />
+    <text name="StockManagedByTransactions" value="Stock is updated through purchasing, sales, and batch handling." />
+    <text name="NotYetImported" value="Not imported yet" />
   </texts>
 </localizationDictionary>
-

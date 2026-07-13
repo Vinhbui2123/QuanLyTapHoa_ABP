@@ -6,6 +6,12 @@
     ]
   },
   {
+    "outputFileName": "wwwroot/view-resources/Views/Invoices/Create.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Invoices/Create.js"
+    ]
+  },
+  {
     "outputFileName": "wwwroot/view-resources/Views/Categories/Index.min.js",
     "inputFiles": [
       "wwwroot/view-resources/Views/Categories/Index.js"
@@ -33,6 +39,12 @@
     "outputFileName": "wwwroot/view-resources/Views/StockBatches/Index.min.js",
     "inputFiles": [
       "wwwroot/view-resources/Views/StockBatches/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/InventoryLogs/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/InventoryLogs/Index.js"
     ]
   },
   {

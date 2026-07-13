@@ -89,7 +89,8 @@
         orderable: false,
         render: (data, type, row) => {
           // Chỉ cho hủy nếu lô vẫn còn số lượng tồn.
-          if (row.remainingQuantity > 0) {
+          var isExpired = row.expiryDate && new Date(row.expiryDate) < new Date();
+          if (row.remainingQuantity > 0 && isExpired) {
             return `<a href="javascript:;" class="btn btn-sm btn-danger dispose-batch-btn" data-batch-id="${row.id}" data-batch-code="${row.batchCode}" data-batch-qty="${row.remainingQuantity}"><i class="fas fa-trash-alt"></i> ${l("Dispose")}</a>`;
           }
           return "---";

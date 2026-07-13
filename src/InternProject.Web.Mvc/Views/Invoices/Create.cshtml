@@ -1,6 +1,6 @@
 @using InternProject.Web.Startup
 @{
-    ViewBag.Title = "Bán hàng (POS)";
+    ViewBag.Title = L("POS");
     ViewBag.CurrentPageName = PageNames.Invoices;
 }
 @section scripts
@@ -534,7 +534,7 @@
                 <div class="col-4">
                     <span class="label text-muted font-weight-bold" style="font-size: 12px;">@L("Customer"):</span>
                 </div>
-                <div class="col-8">
+                <div class="col-7">
                     <select id="CustomerSelect" class="form-select form-select-sm" style="border-radius: 8px; font-size: 13px; font-weight: 500;">
                         <option value="">-- @L("Guest") --</option>
                         @foreach (var cust in ViewBag.Customers)
@@ -542,6 +542,11 @@
                             <option value="@cust.Id">@cust.Name</option>
                         }
                     </select>
+                </div>
+                <div class="col-1 px-0 text-end">
+                    <button type="button" id="BtnQuickAddCustomer" class="btn btn-sm btn-outline-primary" title="@L("QuickAddCustomer")">
+                        <i class="fas fa-plus"></i>
+                    </button>
                 </div>
             </div>
 
@@ -612,6 +617,33 @@
                 <!-- <i class="fas fa-money-bill-wave"></i>  -->
                 @L("Checkout")
             </button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="QuickAddCustomerModal" tabindex="-1" role="dialog" aria-labelledby="QuickAddCustomerModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="QuickAddCustomerForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="QuickAddCustomerModalLabel">@L("QuickAddCustomer")</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@L("Close")"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label" for="QuickCustomerName">@L("Name")</label>
+                        <input id="QuickCustomerName" name="Name" class="form-control" maxlength="128" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="QuickCustomerPhone">@L("Phone")</label>
+                        <input id="QuickCustomerPhone" name="Phone" class="form-control" maxlength="32" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@L("Cancel")</button>
+                    <button type="submit" class="btn btn-primary">@L("Save")</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

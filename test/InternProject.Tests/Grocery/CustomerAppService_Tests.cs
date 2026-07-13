@@ -7,6 +7,7 @@ using Shouldly;
 using System;
 using System.Threading.Tasks;
 using Xunit;
+using Abp.UI;
 
 namespace InternProject.Tests.Grocery;
 
@@ -82,5 +83,24 @@ public class CustomerAppService_Tests : InternProjectTestBase
             customer.ShouldNotBeNull();
             customer.IsDeleted.ShouldBeTrue();
         });
+    }
+
+    [Fact]
+    public async Task CreateCustomer_WithDuplicatePhone_ShouldFail()
+    {
+        await _customerAppService.CreateAsync(new CreateCustomerDto
+        {
+            Name = "First Customer",
+            Phone = "0909000999",
+            IsActive = true
+        });
+
+        await Should.ThrowAsync<UserFriendlyException>(() =>
+            _customerAppService.CreateAsync(new CreateCustomerDto
+            {
+                Name = "Second Customer",
+                Phone = " 0909000999 ",
+                IsActive = true
+            }));
     }
 }

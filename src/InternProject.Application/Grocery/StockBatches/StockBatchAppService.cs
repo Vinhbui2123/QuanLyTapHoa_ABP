@@ -48,7 +48,9 @@ namespace InternProject.Grocery.StockBatches
             )
             .WhereIf(input.ProductId.HasValue, x => x.ProductId == input.ProductId)
             .WhereIf(input.SupplierId.HasValue, x => x.SupplierId == input.SupplierId)
-            .WhereIf(input.IsExpiredOnly == true, x => x.ExpiryDate.HasValue && x.ExpiryDate.Value < DateTime.Now);
+            .WhereIf(input.IsExpiredOnly.HasValue, x => input.IsExpiredOnly.Value
+                ? x.ExpiryDate.HasValue && x.ExpiryDate.Value < DateTime.Now
+                : !x.ExpiryDate.HasValue || x.ExpiryDate.Value >= DateTime.Now);
 
             var totalCount = await query.CountAsync();
 
@@ -86,19 +88,24 @@ namespace InternProject.Grocery.StockBatches
 
             if (batch.RemainingQuantity <= 0)
             {
-                throw new UserFriendlyException("Lô hàng này đã hết tồn kho, không thể hủy thêm.");
+                throw new UserFriendlyException(L("BatchAlreadyEmpty"));
+            }
+
+            if (!batch.ExpiryDate.HasValue || batch.ExpiryDate.Value >= DateTime.Now)
+            {
+                throw new UserFriendlyException(L("OnlyExpiredBatchesCanBeDisposed"));
             }
 
             int qtyToDispose = input.Quantity ?? batch.RemainingQuantity;
 
             if (qtyToDispose <= 0)
             {
-                throw new UserFriendlyException("Số lượng hủy phải lớn hơn 0.");
+                throw new UserFriendlyException(L("QuantityMustBePositive"));
             }
 
             if (qtyToDispose > batch.RemainingQuantity)
             {
-                throw new UserFriendlyException($"Số lượng hủy ({qtyToDispose}) vượt quá số lượng tồn kho còn lại của lô ({batch.RemainingQuantity}).");
+                throw new UserFriendlyException(L("DisposeQuantityExceedsStock", qtyToDispose, batch.RemainingQuantity));
             }
 
             // Trừ tồn ở cấp lô trước, sau đó trừ tồn tổng của sản phẩm tương ứng.

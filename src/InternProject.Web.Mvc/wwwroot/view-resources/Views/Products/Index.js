@@ -62,7 +62,9 @@
         data: "costPrice",
         className: "text-end",
         render: (data) => {
-          if (data === null || data === undefined) return "0 đ";
+          if (data === null || data === undefined || Number(data) <= 0) {
+            return `<span class="text-muted">${l("NotYetImported")}</span>`;
+          }
           return `${data.toLocaleString('vi-VN')} đ`;
         }
       },
@@ -164,7 +166,6 @@
     
     // Form serialize ra chuỗi; chuyển các trường tiền/số lượng về number trước khi gửi backend.
     // Backend vẫn ép StockQuantity = 0 khi tạo, tồn kho thực tế được tăng qua phiếu nhập.
-    product.CostPrice = parseFloat(product.CostPrice) || 0;
     product.SalePrice = parseFloat(product.SalePrice) || 0;
     product.StockQuantity = parseInt(product.StockQuantity) || 0;
     product.MinStock = parseInt(product.MinStock) || 0;
@@ -301,7 +302,6 @@
       // Khi đóng modal tạo mới, reset toàn bộ form và preview ảnh.
       _$form.clearForm();
       $("#product-is-active").prop("checked", true);
-      $("#product-cost-price").val(0);
       $("#product-sale-price").val(0);
       $("#product-stock-qty").val(0);
       $("#product-min-stock").val(10);

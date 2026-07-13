@@ -71,6 +71,18 @@ public class CategoryAppService : InternProjectAppServiceBase, ICategoryAppServi
     [AbpAuthorize(PermissionNames.Pages_Categories_Create)]
     public async Task CreateAsync(CreateUpdateCategoryDto input)
     {
+        var normalizedName = input.Name?.Trim();
+        if (string.IsNullOrWhiteSpace(normalizedName))
+        {
+            throw new UserFriendlyException(L("CategoryNameRequired"));
+        }
+
+        if (await _categoryRepository.GetAll().AnyAsync(x => x.Name == normalizedName))
+        {
+            throw new UserFriendlyException(L("CategoryNameAlreadyExists"));
+        }
+
+        input.Name = normalizedName;
         var category = ObjectMapper.Map<Category>(input);
         await _categoryRepository.InsertAsync(category);
     }
@@ -78,6 +90,18 @@ public class CategoryAppService : InternProjectAppServiceBase, ICategoryAppServi
     [AbpAuthorize(PermissionNames.Pages_Categories_Edit)]
     public async Task UpdateAsync(UpdateCategoryDto input)
     {
+        var normalizedName = input.Name?.Trim();
+        if (string.IsNullOrWhiteSpace(normalizedName))
+        {
+            throw new UserFriendlyException(L("CategoryNameRequired"));
+        }
+
+        if (await _categoryRepository.GetAll().AnyAsync(x => x.Name == normalizedName && x.Id != input.Id))
+        {
+            throw new UserFriendlyException(L("CategoryNameAlreadyExists"));
+        }
+
+        input.Name = normalizedName;
         var category = await _categoryRepository.GetAsync(input.Id);
         ObjectMapper.Map(input, category);
         await _categoryRepository.UpdateAsync(category);
@@ -91,7 +115,7 @@ public class CategoryAppService : InternProjectAppServiceBase, ICategoryAppServi
         var hasProduct = await _productRepository.GetAll().AnyAsync(x=>x.CategoryId == input.Id);
         if (hasProduct)
         {
-            throw new UserFriendlyException("Không thể xoá danh mục vì đang có sản phẩm thuộc danh mục");
+            throw new UserFriendlyException(L("CategoryHasProducts"));
         }
         await _categoryRepository.DeleteAsync(input.Id);
     }

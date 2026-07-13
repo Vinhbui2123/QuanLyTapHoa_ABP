@@ -102,7 +102,17 @@ namespace InternProject.Grocery.PurchaseOrders
             // Phiếu nhập phải có ít nhất một dòng hàng; mỗi dòng sau này sẽ tạo một StockBatch.
             if (input.PurchaseOrderItems == null || !input.PurchaseOrderItems.Any())
             {
-                throw new UserFriendlyException("Phiếu nhập phải có ít nhất 1 mặt hàng.");
+                throw new UserFriendlyException(L("PurchaseOrderMustHaveItem"));
+            }
+
+            if (input.SupplierId == Guid.Empty)
+            {
+                throw new UserFriendlyException(L("SupplierRequired"));
+            }
+
+            if (input.PurchaseOrderItems.Any(x => x.ProductId == Guid.Empty || x.Quantity <= 0 || x.UnitPrice < 0))
+            {
+                throw new UserFriendlyException(L("PurchaseOrderItemInvalid"));
             }
 
             // Tạo header phiếu nhập trước: mã phiếu, nhà cung cấp, người nhập, tổng tiền.
@@ -110,7 +120,7 @@ namespace InternProject.Grocery.PurchaseOrders
             {
                 OrderNumber = await GenerateOrderNumberAsync(),
                 SupplierId = input.SupplierId,
-                UserId = AbpSession.UserId ?? throw new UserFriendlyException("Không tìm thấy thông tin người dùng đăng nhập."),
+                UserId = AbpSession.UserId ?? throw new UserFriendlyException(L("LoggedInUserNotFound")),
                 TotalAmount = input.PurchaseOrderItems.Sum(x => x.Quantity * x.UnitPrice),
                 Status = PurchaseOrderStatus.Completed,
                 Note = input.Note,
@@ -158,8 +168,11 @@ namespace InternProject.Grocery.PurchaseOrders
                 var batchId = await _stockBatchRepository.InsertAndGetIdAsync(stockBatch);
 
                 // Cộng tồn tổng trên Product để POS và danh sách sản phẩm đọc nhanh.
+                // Product.CostPrice là giá nhập gần nhất để hiển thị/tham chiếu;
+                // giá vốn giao dịch chính xác vẫn được lưu và tính theo từng StockBatch.
                 var product = await _productRepository.GetAsync(item.ProductId);
                 product.StockQuantity += item.Quantity;
+                product.CostPrice = item.UnitPrice;
                 await _productRepository.UpdateAsync(product);
 
                 // Ghi sổ kho loại Import để truy vết nguồn gốc tăng tồn.

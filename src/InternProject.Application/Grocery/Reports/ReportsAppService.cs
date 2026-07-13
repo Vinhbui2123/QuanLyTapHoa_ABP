@@ -282,7 +282,7 @@ namespace InternProject.Grocery.Reports
                     p.Id,
                     p.Sku,
                     ProductName = p.Name,
-                    CategoryName = p.Category != null ? p.Category.Name : "Chưa phân loại",
+                    CategoryName = p.Category != null ? p.Category.Name : null,
                     p.StockQuantity,
                     p.CostPrice,
                     p.SalePrice,
@@ -305,7 +305,7 @@ namespace InternProject.Grocery.Reports
                         Id = p.Id,
                         Sku = p.Sku,
                         ProductName = p.ProductName,
-                        CategoryName = p.CategoryName,
+                        CategoryName = p.CategoryName ?? L("Uncategorized"),
                         StockQuantity = p.StockQuantity,
                         CostPrice = p.CostPrice,
                         SalePrice = p.SalePrice,
@@ -395,7 +395,7 @@ namespace InternProject.Grocery.Reports
                     x.ProductId, 
                     x.ProductName, 
                     x.Sku, 
-                    CategoryName = x.Product.Category != null ? x.Product.Category.Name : "Chưa phân loại" 
+                    CategoryName = x.Product.Category != null ? x.Product.Category.Name : "__UNCATEGORIZED__"
                 })
                 .Select(g => new {
                     g.Key.Sku,
@@ -416,7 +416,7 @@ namespace InternProject.Grocery.Reports
                 {
                     Sku = x.Sku,
                     ProductName = x.ProductName,
-                    CategoryName = x.CategoryName,
+                    CategoryName = x.CategoryName == "__UNCATEGORIZED__" ? L("Uncategorized") : x.CategoryName,
                     SoldQuantity = x.SoldQuantity,
                     TotalRevenue = x.TotalRevenue,
                     TotalProfit = x.TotalRevenue - x.TotalCost

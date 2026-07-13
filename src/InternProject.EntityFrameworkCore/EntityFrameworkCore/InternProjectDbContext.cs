@@ -40,6 +40,7 @@ public class InternProjectDbContext : AbpZeroDbContext<Tenant, Role, User, Inter
             b.Property(x => x.Address).HasMaxLength(512);
 
             b.HasIndex(x => x.Code).IsUnique().HasFilter("[Code] IS NOT NULL");
+            b.HasIndex(x => x.Phone).IsUnique().HasFilter("[Phone] IS NOT NULL");
         });
 
         modelBuilder.Entity<Category>(b =>

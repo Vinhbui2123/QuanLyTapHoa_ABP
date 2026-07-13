@@ -119,11 +119,32 @@ public class InvoiceAppService : InternProjectAppServiceBase, IInvoiceAppService
         // Serializable giúp hạn chế rủi ro 2 thu ngân cùng bán vượt quá số lượng tồn tại cùng thời điểm.
         if (input.InvoiceItems == null || !input.InvoiceItems.Any())
         {
-            throw new UserFriendlyException("Hóa đơn phải có ít nhất 1 sản phẩm.");
+            throw new UserFriendlyException(L("InvoiceMustHaveItem"));
         }
 
+        if (!Enum.IsDefined(typeof(PaymentMethod), input.PaymentMethod))
+        {
+            throw new UserFriendlyException(L("InvalidPaymentMethod"));
+        }
+
+        if (input.InvoiceItems.Any(x => x.Quantity <= 0))
+        {
+            throw new UserFriendlyException(L("QuantityMustBePositive"));
+        }
+
+        // Một sản phẩm có thể được click nhiều lần ở POS hoặc gửi lặp từ client.
+        // Gộp trước khi kiểm tra tồn để tổng số lượng không thể vượt kho.
+        var requestedItems = input.InvoiceItems
+            .GroupBy(x => x.ProductId)
+            .Select(group => new CreateInvoiceItemDto
+            {
+                ProductId = group.Key,
+                Quantity = checked(group.Sum(x => x.Quantity))
+            })
+            .ToList();
+
         // Load một lần toàn bộ sản phẩm trong hóa đơn để tránh query lặp từng dòng.
-        var productIds = input.InvoiceItems.Select(x => x.ProductId).Distinct().ToList();
+        var productIds = requestedItems.Select(x => x.ProductId).ToList();
         var products = await _productRepository.GetAll()
             .Where(p => productIds.Contains(p.Id) && p.IsActive)
             .ToListAsync();
@@ -137,14 +158,14 @@ public class InvoiceAppService : InternProjectAppServiceBase, IInvoiceAppService
         var items = new List<InvoiceItem>();
         decimal totalAmount = 0;
 
-        foreach (var line in input.InvoiceItems)
+        foreach (var line in requestedItems)
         {
             var p = products.FirstOrDefault(x => x.Id == line.ProductId)
-                ?? throw new UserFriendlyException("Sản phẩm không tồn tại hoặc đã ngừng kinh doanh.");
+                ?? throw new UserFriendlyException(L("ProductNotFoundOrInactive"));
 
             if (line.Quantity <= 0)
             {
-                throw new UserFriendlyException($"Số lượng mua phải lớn hơn 0 ({p.Name}).");
+                throw new UserFriendlyException(L("ProductQuantityMustBePositive", p.Name));
             }
 
             var productBatches = batches.Where(b => b.ProductId == p.Id).ToList();
@@ -158,12 +179,12 @@ public class InvoiceAppService : InternProjectAppServiceBase, IInvoiceAppService
 
             if (line.Quantity > totalStock)
             {
-                throw new UserFriendlyException($"Sản phẩm '{p.Name}' trong kho không đủ số lượng bán.");
+                throw new UserFriendlyException(L("ProductOutOfStockWarning", p.Name));
             }
 
             if (line.Quantity > availableUnexpiredStock)
             {
-                throw new UserFriendlyException($"Sản phẩm '{p.Name}' có hàng tồn kho nhưng đã quá hạn sử dụng, vui lòng báo Admin thực hiện Hủy lô hết hạn.");
+                throw new UserFriendlyException(L("ProductExpiredWarning", p.Name));
             }
 
             var subtotal = p.SalePrice * line.Quantity;
@@ -183,7 +204,7 @@ public class InvoiceAppService : InternProjectAppServiceBase, IInvoiceAppService
         // Kiểm tra tiền khách đưa sau khi đã tính tổng tiền từ giá bán hiện tại.
         if (input.AmountPaid < totalAmount)
         {
-            throw new UserFriendlyException("Số tiền khách đưa không đủ.");
+            throw new UserFriendlyException(L("InsufficientAmount"));
         }
 
         // Tạo hóa đơn ở trạng thái Completed vì POS thanh toán xong mới ghi nhận hóa đơn.
@@ -191,7 +212,7 @@ public class InvoiceAppService : InternProjectAppServiceBase, IInvoiceAppService
         {
             InvoiceNumber = await GenerateInvoiceNumberAsync(),
             CustomerId = input.CustomerId,
-            CashierUserId = AbpSession.UserId ?? throw new UserFriendlyException("Không tìm thấy thông tin Thu ngân đăng nhập."),
+            CashierUserId = AbpSession.UserId ?? throw new UserFriendlyException(L("LoggedInUserNotFound")),
             TotalAmount = totalAmount,
             AmountPaid = input.AmountPaid,
             ChangeAmount = input.AmountPaid - totalAmount,
@@ -282,13 +303,13 @@ public class InvoiceAppService : InternProjectAppServiceBase, IInvoiceAppService
 
         if (invoice.Status == InvoiceStatus.Cancelled)
         {
-            throw new UserFriendlyException("Hóa đơn này đã được hủy trước đó.");
+            throw new UserFriendlyException(L("InvoiceAlreadyCancelled"));
         }
 
         // Chỉ cho hủy trong 24 giờ để tránh hoàn kho các giao dịch quá cũ làm sai báo cáo.
         if (invoice.CreationTime < DateTime.Now.AddDays(-1))
         {
-            throw new UserFriendlyException("Hóa đơn đã quá hạn 24 giờ, không thể hủy.");
+            throw new UserFriendlyException(L("InvoiceCancellationWindowExpired"));
         }
 
         // Hóa đơn không bị xóa; chỉ đổi trạng thái để vẫn giữ lịch sử bán hàng và lý do hủy.

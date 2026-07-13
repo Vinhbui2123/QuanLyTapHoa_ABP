@@ -67,6 +67,8 @@ public class TenantRoleAndUserBuilder
             _context.SaveChanges();
         }
 
+        CreateCashierRole();
+
         // Admin user
 
         var adminUser = _context.Users.IgnoreQueryFilters().FirstOrDefault(u => u.TenantId == _tenantId && u.UserName == AbpUserBase.AdminUserName);
@@ -84,5 +86,54 @@ public class TenantRoleAndUserBuilder
             _context.UserRoles.Add(new UserRole(_tenantId, adminUser.Id, adminRole.Id));
             _context.SaveChanges();
         }
+    }
+
+    private void CreateCashierRole()
+    {
+        var cashierRole = _context.Roles.IgnoreQueryFilters()
+            .FirstOrDefault(r => r.TenantId == _tenantId && r.Name == StaticRoleNames.Tenants.Cashier);
+
+        if (cashierRole == null)
+        {
+            cashierRole = _context.Roles.Add(new Role(
+                _tenantId,
+                StaticRoleNames.Tenants.Cashier,
+                StaticRoleNames.Tenants.Cashier)
+            {
+                IsStatic = true
+            }).Entity;
+            _context.SaveChanges();
+        }
+
+        var cashierPermissions = new[]
+        {
+            PermissionNames.Pages_Products,
+            PermissionNames.Pages_Customers,
+            PermissionNames.Pages_Customers_Create,
+            PermissionNames.Pages_Invoices,
+            PermissionNames.Pages_Invoices_Create,
+            PermissionNames.Pages_Invoices_Cancel
+        };
+
+        var grantedPermissions = _context.Permissions.IgnoreQueryFilters()
+            .OfType<RolePermissionSetting>()
+            .Where(p => p.TenantId == _tenantId && p.RoleId == cashierRole.Id)
+            .Select(p => p.Name)
+            .ToList();
+
+        var missingPermissions = cashierPermissions.Except(grantedPermissions).ToList();
+        if (!missingPermissions.Any())
+        {
+            return;
+        }
+
+        _context.Permissions.AddRange(missingPermissions.Select(permission => new RolePermissionSetting
+        {
+            TenantId = _tenantId,
+            Name = permission,
+            IsGranted = true,
+            RoleId = cashierRole.Id
+        }));
+        _context.SaveChanges();
     }
 }
